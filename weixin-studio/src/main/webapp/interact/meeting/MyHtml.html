@@ -1,0 +1,1006 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="renderer" content="webkit">
+
+<meta charset="utf-8">
+<script type="text/javascript">
+
+</script>
+<title>微信公众平台</title>
+<link href="https://res.wx.qq.com/mpres/htmledition/images/favicon218877.ico" rel="Shortcut Icon">
+<link onerror="wx_loaderror(this)" rel="stylesheet" type="text/css" href="https://res.wx.qq.com/mpres/htmledition/style/base/layout_head2880f5.css"/>
+<link onerror="wx_loaderror(this)" rel="stylesheet" type="text/css" href="https://res.wx.qq.com/mpres/htmledition/style/base/base2968da.css"/>
+<link onerror="wx_loaderror(this)" rel="stylesheet" type="text/css" href="https://res.wx.qq.com/mpres/htmledition/style/base/lib2968da.css"/>           
+<link onerror="wx_loaderror(this)" rel="stylesheet" href="https://res.wx.qq.com/mpres/htmledition/style/page/page_user27ab39.css">
+<link rel="stylesheet" type="text/css" href="https://res.wx.qq.com/c/=/mpres/htmledition/style/widget/emoji218878.css,/mpres/htmledition/style/biz_web/widget/dropdown218878.css,/mpres/htmledition/style/widget/rich_buddy27898a.css,/mpres/htmledition/style/widget/pagination218878.css" />
+
+    </head>
+    <body class="zh_CN">
+        <div class="head" id="header">
+            <script type="text/javascript">
+    //上报测速 --css加载完成点
+    window._points&&(window._points[1]=+new Date());
+</script>
+<div class="head_box">
+   <!-- 头部信息 -->
+   <!--  <div class="inner wrp">
+        <h1 class="logo"><a href="/" title="微信公众平台"></a></h1>
+                                <div class="account">
+                        <div class="account_meta account_info account_meta_primary">
+                                <a href="/cgi-bin/settingpage?t=setting/index&action=index&token=653645996&lang=zh_CN" class="nickname">i聚</a>
+                                <span class="type_wrp">
+                                        <a href="/cgi-bin/settingpage?t=setting/index&action=index&token=653645996&lang=zh_CN" class="type icon_service_label">服务号</a>
+                                        
+                                        <a href="/merchant/store?action=detail&t=wxverify/detail&info=verify&lang=zh_CN&token=653645996" class="type icon_verify_label success">已认证</a>
+                                        
+                </span>
+                                <a href="/cgi-bin/settingpage?t=setting/index&action=index&token=653645996&lang=zh_CN"><img src="/misc/getheadimg?fakeid=3223017457&token=653645996&lang=zh_CN" class="avatar"></a>
+                            </div>
+            <div id="accountArea" class="account_meta account_inbox account_meta_primary">
+                                <a href="/cgi-bin/frame?t=notification/index_frame&lang=zh_CN&token=653645996" class="account_inbox_switch">
+                                        <i class="icon_inbox">通知</i>&nbsp;
+                                    </a>
+                            </div>
+                <div class="account_meta account_logout account_meta_primary"><a id="logout" href="/cgi-bin/logout?t=wxm-logout&lang=zh_CN&token=653645996">退出</a></div>
+                                </div>
+                    </div> -->
+</div>
+
+        </div>
+        <div id="body" class="body page_user">
+            <div id="js_container_box" class="container_box cell_layout side_l">
+      
+      <!-- 左侧导航栏           -->
+<!--                                 <div class="col_side">
+                    <div class="menu_box" id="menuBar">
+<dl class="menu no_extra">
+    <dt class="menu_title">
+        <i class="icon_menu" style="background:url(
+        https://res.wx.qq.com/mpres/htmledition/images/icon/menu/icon_menu_function.png
+        ) no-repeat;">
+    </i>功能
+                </dt> 
+
+				<dd class="menu_item "><a data-id="10005" href="/cgi-bin/masssendpage?t=mass/send&token=653645996&lang=zh_CN" >群发功能        </a></dd>
+					<dd class="menu_item "><a data-id="10006" href="/advanced/autoreply?t=ivr/reply&action=beadded&token=653645996&lang=zh_CN" >自动回复        </a></dd>
+					<dd class="menu_item "><a data-id="10007" href="/advanced/selfmenu?action=index&t=advanced/menu-setting&token=653645996&lang=zh_CN" >自定义菜单        </a></dd>
+					<dd class="menu_item "><a data-id="10032" href="/merchant/entityshop?action=list&token=653645996&lang=zh_CN" >门店管理        </a></dd>
+					<dd class="menu_item "><a data-id="10038" href="/cgi-bin/newoperatevote?action=list&token=653645996&lang=zh_CN" >投票管理        </a></dd>
+				    <dd class='menu_plugins'><a class='btn_plugins_add'  data-id='10025' href="/cgi-bin/plugincenter?t=service/plugins&act=all&token=653645996&lang=zh_CN">添加功能插件</a></dd>
+		</dl>
+<dl class="menu ">
+    <dt class="menu_title clickable">
+        <a href="/cgi-bin/frame?nav=10010&t=business/index_frame&iframe=%2Fpaymch%2Fbusiness%3Faction%3Dfirstentry&token=653645996&lang=zh_CN">
+        <i class="icon_menu" style="background:url(
+        https://res.wx.qq.com/mpres/htmledition/images/icon/menu/icon_menu_wxpay_v2.png
+        ) no-repeat;">
+    </i>微信支付
+            </a>
+        </dt> 
+
+	</dl>
+<dl class="menu ">
+    <dt class="menu_title">
+        <i class="icon_menu" style="background:url(
+        https://res.wx.qq.com/mpres/htmledition/images/icon/menu/icon_menu_management.png
+        ) no-repeat;">
+    </i>管理
+                </dt> 
+
+				<dd class="menu_item "><a data-id="10012" href="/cgi-bin/message?t=message/list&count=20&day=7&token=653645996&lang=zh_CN" >消息管理        </a></dd>
+					<dd class="menu_item selected"><a data-id="10013" href="/cgi-bin/contactmanage?t=user/index&pageidx=0&type=0&token=653645996&lang=zh_CN" >用户管理        </a></dd>
+					<dd class="menu_item "><a data-id="10014" href="/cgi-bin/appmsg?begin=0&count=10&t=media/appmsg_list&type=11&action=list&token=653645996&lang=zh_CN" >素材管理        </a></dd>
+		</dl>
+<dl class="menu ">
+    <dt class="menu_title">
+        <i class="icon_menu" style="background:url(
+        https://res.wx.qq.com/mpres/htmledition/images/icon/menu/icon_menu_ad.png
+        ) no-repeat;">
+    </i>推广
+                </dt> 
+
+				<dd class="menu_item "><a data-id="10026" href="/merchant/ad_client_index?t=ad_system/client_index&token=653645996&lang=zh_CN" >广告主        </a></dd>
+					<dd class="menu_item "><a data-id="10027" href="/merchant/ad_host_index?t=ad_system/host_index&token=653645996&lang=zh_CN" >流量主        </a></dd>
+		</dl>
+<dl class="menu ">
+    <dt class="menu_title">
+        <i class="icon_menu" style="background:url(
+        https://res.wx.qq.com/mpres/htmledition/images/icon/menu/icon_menu_statistics.png
+        ) no-repeat;">
+    </i>统计
+                </dt> 
+
+				<dd class="menu_item "><a data-id="10015" href="/misc/useranalysis?&token=653645996&lang=zh_CN" >用户分析        </a></dd>
+					<dd class="menu_item "><a data-id="10016" href="/misc/appmsganalysis?action=all&order_direction=2&token=653645996&lang=zh_CN" >图文分析        </a></dd>
+					<dd class="menu_item "><a data-id="10017" href="/misc/messageanalysis?type=daily&t=statistics/msg&token=653645996&lang=zh_CN" >消息分析        </a></dd>
+					<dd class="menu_item "><a data-id="10018" href="/misc/interfaceanalysis?type=daily&token=653645996&lang=zh_CN" >接口分析        </a></dd>
+		</dl>
+<dl class="menu ">
+    <dt class="menu_title">
+        <i class="icon_menu" style="background:url(
+        https://res.wx.qq.com/mpres/htmledition/images/icon/menu/icon_menu_setup.png
+        ) no-repeat;">
+    </i>设置
+                </dt> 
+
+				<dd class="menu_item "><a data-id="10019" href="/cgi-bin/settingpage?t=setting/index&action=index&token=653645996&lang=zh_CN" >公众号设置        </a></dd>
+					<dd class="menu_item "><a data-id="10020" href="/merchant/store?action=detail&t=wxverify/detail&info=verify&token=653645996&lang=zh_CN" >微信认证        </a></dd>
+					<dd class="menu_item "><a data-id="10022" href="/cgi-bin/safecenterstatus?action=view&t=setting/safe-index&token=653645996&lang=zh_CN" >安全中心        </a></dd>
+					<dd class="menu_item "><a data-id="10045" href="/cgi-bin/illegalrecord?count=10&token=653645996&lang=zh_CN" >违规记录        </a></dd>
+		</dl>
+<dl class="menu ">
+    <dt class="menu_title clickable">
+        <a href="/advanced/advanced?action=dev&t=advanced/dev&token=653645996&lang=zh_CN">
+        <i class="icon_menu" style="background:url(
+        https://res.wx.qq.com/mpres/htmledition/images/icon/menu/icon_menu_developer.png
+        ) no-repeat;">
+    </i>开发者中心
+            </a>
+        </dt> 
+
+	</dl>
+</div>
+
+<script type="text/javascript">
+    var _new_comment_num=""||0;
+</script>
+                </div> -->
+                                
+                <div class="col_main">
+                    
+<div class="main_hd">
+    <h2>用户管理</h2>
+    <div class="title_tab" id="topTab"></div>
+</div>
+<div class="main_bd">
+
+    <div class="global_mod user_global_opr float_layout">
+        <div class="global_info">
+            <div class="search_bar" id="searchBar">
+                
+            </div>
+        </div>
+        <div class="global_extra">
+                            <a href="javascript:;" data-y="3" class="btn btn_primary btn_add" id="js_groupAdd"><i class="icon14_common add_white"></i>新建分组</a>
+                    </div>
+    </div>
+
+
+    <div class="inner_container_box side_r cell_layout ">
+        <div class="inner_main">
+            <div class="bd">
+                
+                                <div class="global_mod user_group_opr">
+                    <span class="group_name" id="js_groupName"></span>
+                                    </div>
+                <div class="table_wrp user_list">
+                    <table class="table" cellspacing="0">
+                        <thead class="thead">
+                            <tr>
+                                <th class="table_cell user no_extra" colspan="2">
+                                    <div class="group_select">
+                                        <label for="selectAll" class="group_select_label frm_checkbox_label">
+                                            <i class="icon_checkbox"></i>
+                                            <input type="checkbox" class="frm_checkbox" id="selectAll">
+                                            全选                                        </label>&nbsp;
+                                        <div id="allGroup" class="dropdown_wrp dropdown_menu"><a href="javascript:;" class="btn dropdown_switch jsDropdownBt"><label class="jsBtLabel">添加到</label><i class="arrow"></i></a>
+<div class="dropdown_data_container jsDropdownList" style="display: none;">
+    <ul class="dropdown_data_list">
+        
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="0" data-index="0" data-name="默认组">默认组</a>
+            </li>
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="2" data-index="1" data-name="星标组">星标组</a>
+            </li>
+                    
+        
+    </ul>
+</div>
+</div>
+                                        <a class="btn btn_default js_allToBlackList_btn" data-gid="0" href="javascript:;">加入黑名单</a>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="tbody" id="userGroups">
+
+<tr>
+    <td class="table_cell user">
+        <div class="user_info">  <!--个人信息区-->
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=218008695&amp;token=653645996&amp;lang=zh_CN" class="remark_name" data-fakeid="218008695">谷军岭</a>
+            <span class="nick_name" data-fakeid="218008695"></span>
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=218008695&amp;token=653645996&amp;lang=zh_CN" class="avatar">
+                <img src="/misc/getheadimg?fakeid=218008695&amp;token=653645996&amp;lang=zh_CN" data-fakeid="218008695" class="js_msgSenderAvatar">
+            </a>
+            <label for="check218008695" class="frm_checkbox_label selected"><i class="icon_checkbox"></i><input class="frm_checkbox js_select" type="checkbox" value="218008695" id="check218008695" checked="checked"></label> 
+        </div>
+    </td>
+    <td class="table_cell user_opr">
+        <div id="selectArea218008695" class="js_selectArea dropdown_menu" data-gid="0" data-fid="218008695"><a href="javascript:;" class="btn dropdown_switch jsDropdownBt"><label class="jsBtLabel">默认组</label><i class="arrow"></i></a>
+<div class="dropdown_data_container jsDropdownList" style="display: none;">
+    <ul class="dropdown_data_list">
+        
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="0" data-index="0" data-name="默认组">默认组</a>
+            </li>
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="2" data-index="1" data-name="星标组">星标组</a>
+            </li>
+                    
+        
+    </ul>
+</div>
+</div>
+        
+        <!-- <a class="btn btn_default dn js_deleteToBlackList_btn" data-gid="1" data-fakeid="218008695" href="javascript:;" style="display:none;">移出黑名单</a> -->
+        <a class="btn remark js_msgSenderRemark" data-fakeid="218008695">修改备注</a>
+    </td>
+</tr>
+
+<tr>
+    <td class="table_cell user">
+        <div class="user_info">  <!--个人信息区-->
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=2537078029&amp;token=653645996&amp;lang=zh_CN" class="remark_name" data-fakeid="2537078029">雷</a>
+            <span class="nick_name" data-fakeid="2537078029"></span>
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=2537078029&amp;token=653645996&amp;lang=zh_CN" class="avatar">
+                <img src="/misc/getheadimg?fakeid=2537078029&amp;token=653645996&amp;lang=zh_CN" data-fakeid="2537078029" class="js_msgSenderAvatar">
+            </a>
+            <label for="check2537078029" class="frm_checkbox_label"><i class="icon_checkbox"></i><input class="frm_checkbox js_select" type="checkbox" value="2537078029" id="check2537078029"></label> 
+        </div>
+    </td>
+    <td class="table_cell user_opr">
+        <div id="selectArea2537078029" class="js_selectArea dropdown_menu" data-gid="0" data-fid="2537078029"><a href="javascript:;" class="btn dropdown_switch jsDropdownBt"><label class="jsBtLabel">默认组</label><i class="arrow"></i></a>
+<div class="dropdown_data_container jsDropdownList" style="display: none;">
+    <ul class="dropdown_data_list">
+        
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="0" data-index="0" data-name="默认组">默认组</a>
+            </li>
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="2" data-index="1" data-name="星标组">星标组</a>
+            </li>
+                    
+        
+    </ul>
+</div>
+</div>
+        
+        <!-- <a class="btn btn_default dn js_deleteToBlackList_btn" data-gid="1" data-fakeid="2537078029" href="javascript:;" style="display:none;">移出黑名单</a> -->
+        <a class="btn remark js_msgSenderRemark" data-fakeid="2537078029">修改备注</a>
+    </td>
+</tr>
+
+<tr>
+    <td class="table_cell user">
+        <div class="user_info">  <!--个人信息区-->
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=1190549940&amp;token=653645996&amp;lang=zh_CN" class="remark_name" data-fakeid="1190549940">瑞子</a>
+            <span class="nick_name" data-fakeid="1190549940"></span>
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=1190549940&amp;token=653645996&amp;lang=zh_CN" class="avatar">
+                <img src="/misc/getheadimg?fakeid=1190549940&amp;token=653645996&amp;lang=zh_CN" data-fakeid="1190549940" class="js_msgSenderAvatar">
+            </a>
+            <label for="check1190549940" class="frm_checkbox_label"><i class="icon_checkbox"></i><input class="frm_checkbox js_select" type="checkbox" value="1190549940" id="check1190549940"></label> 
+        </div>
+    </td>
+    <td class="table_cell user_opr">
+        <div id="selectArea1190549940" class="js_selectArea dropdown_menu" data-gid="0" data-fid="1190549940"><a href="javascript:;" class="btn dropdown_switch jsDropdownBt"><label class="jsBtLabel">默认组</label><i class="arrow"></i></a>
+<div class="dropdown_data_container jsDropdownList" style="display: none;">
+    <ul class="dropdown_data_list">
+        
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="0" data-index="0" data-name="默认组">默认组</a>
+            </li>
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="2" data-index="1" data-name="星标组">星标组</a>
+            </li>
+                    
+        
+    </ul>
+</div>
+</div>
+        
+        <!-- <a class="btn btn_default dn js_deleteToBlackList_btn" data-gid="1" data-fakeid="1190549940" href="javascript:;" style="display:none;">移出黑名单</a> -->
+        <a class="btn remark js_msgSenderRemark" data-fakeid="1190549940">修改备注</a>
+    </td>
+</tr>
+
+<tr>
+    <td class="table_cell user">
+        <div class="user_info">  <!--个人信息区-->
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=2096113641&amp;token=653645996&amp;lang=zh_CN" class="remark_name" data-fakeid="2096113641">小唯<span class="emoji emoji1f4e1"></span><span class="emoji emoji1f361"></span></a>
+            <span class="nick_name" data-fakeid="2096113641"></span>
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=2096113641&amp;token=653645996&amp;lang=zh_CN" class="avatar">
+                <img src="/misc/getheadimg?fakeid=2096113641&amp;token=653645996&amp;lang=zh_CN" data-fakeid="2096113641" class="js_msgSenderAvatar">
+            </a>
+            <label for="check2096113641" class="frm_checkbox_label"><i class="icon_checkbox"></i><input class="frm_checkbox js_select" type="checkbox" value="2096113641" id="check2096113641"></label> 
+        </div>
+    </td>
+    <td class="table_cell user_opr">
+        <div id="selectArea2096113641" class="js_selectArea dropdown_menu" data-gid="0" data-fid="2096113641"><a href="javascript:;" class="btn dropdown_switch jsDropdownBt"><label class="jsBtLabel">默认组</label><i class="arrow"></i></a>
+<div class="dropdown_data_container jsDropdownList" style="display: none;">
+    <ul class="dropdown_data_list">
+        
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="0" data-index="0" data-name="默认组">默认组</a>
+            </li>
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="2" data-index="1" data-name="星标组">星标组</a>
+            </li>
+                    
+        
+    </ul>
+</div>
+</div>
+        
+        <!-- <a class="btn btn_default dn js_deleteToBlackList_btn" data-gid="1" data-fakeid="2096113641" href="javascript:;" style="display:none;">移出黑名单</a> -->
+        <a class="btn remark js_msgSenderRemark" data-fakeid="2096113641">修改备注</a>
+    </td>
+</tr>
+
+<tr>
+    <td class="table_cell user">
+        <div class="user_info">  <!--个人信息区-->
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=1045579322&amp;token=653645996&amp;lang=zh_CN" class="remark_name" data-fakeid="1045579322">地精植物</a>
+            <span class="nick_name" data-fakeid="1045579322"></span>
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=1045579322&amp;token=653645996&amp;lang=zh_CN" class="avatar">
+                <img src="/misc/getheadimg?fakeid=1045579322&amp;token=653645996&amp;lang=zh_CN" data-fakeid="1045579322" class="js_msgSenderAvatar">
+            </a>
+            <label for="check1045579322" class="frm_checkbox_label"><i class="icon_checkbox"></i><input class="frm_checkbox js_select" type="checkbox" value="1045579322" id="check1045579322"></label> 
+        </div>
+    </td>
+    <td class="table_cell user_opr">
+        <div id="selectArea1045579322" class="js_selectArea dropdown_menu" data-gid="0" data-fid="1045579322"><a href="javascript:;" class="btn dropdown_switch jsDropdownBt"><label class="jsBtLabel">默认组</label><i class="arrow"></i></a>
+<div class="dropdown_data_container jsDropdownList" style="display: none;">
+    <ul class="dropdown_data_list">
+        
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="0" data-index="0" data-name="默认组">默认组</a>
+            </li>
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="2" data-index="1" data-name="星标组">星标组</a>
+            </li>
+                    
+        
+    </ul>
+</div>
+</div>
+        
+        <!-- <a class="btn btn_default dn js_deleteToBlackList_btn" data-gid="1" data-fakeid="1045579322" href="javascript:;" style="display:none;">移出黑名单</a> -->
+        <a class="btn remark js_msgSenderRemark" data-fakeid="1045579322">修改备注</a>
+    </td>
+</tr>
+
+<tr>
+    <td class="table_cell user">
+        <div class="user_info">  <!--个人信息区-->
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=1304763740&amp;token=653645996&amp;lang=zh_CN" class="remark_name" data-fakeid="1304763740">黄睿明</a>
+            <span class="nick_name" data-fakeid="1304763740"></span>
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=1304763740&amp;token=653645996&amp;lang=zh_CN" class="avatar">
+                <img src="/misc/getheadimg?fakeid=1304763740&amp;token=653645996&amp;lang=zh_CN" data-fakeid="1304763740" class="js_msgSenderAvatar">
+            </a>
+            <label for="check1304763740" class="frm_checkbox_label"><i class="icon_checkbox"></i><input class="frm_checkbox js_select" type="checkbox" value="1304763740" id="check1304763740"></label> 
+        </div>
+    </td>
+    <td class="table_cell user_opr">
+        <div id="selectArea1304763740" class="js_selectArea dropdown_menu" data-gid="0" data-fid="1304763740"><a href="javascript:;" class="btn dropdown_switch jsDropdownBt"><label class="jsBtLabel">默认组</label><i class="arrow"></i></a>
+<div class="dropdown_data_container jsDropdownList" style="display: none;">
+    <ul class="dropdown_data_list">
+        
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="0" data-index="0" data-name="默认组">默认组</a>
+            </li>
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="2" data-index="1" data-name="星标组">星标组</a>
+            </li>
+                    
+        
+    </ul>
+</div>
+</div>
+        
+        <!-- <a class="btn btn_default dn js_deleteToBlackList_btn" data-gid="1" data-fakeid="1304763740" href="javascript:;" style="display:none;">移出黑名单</a> -->
+        <a class="btn remark js_msgSenderRemark" data-fakeid="1304763740">修改备注</a>
+    </td>
+</tr>
+
+<tr>
+    <td class="table_cell user">
+        <div class="user_info">  <!--个人信息区-->
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=2611880764&amp;token=653645996&amp;lang=zh_CN" class="remark_name" data-fakeid="2611880764">刘井元</a>
+            <span class="nick_name" data-fakeid="2611880764"></span>
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=2611880764&amp;token=653645996&amp;lang=zh_CN" class="avatar">
+                <img src="/misc/getheadimg?fakeid=2611880764&amp;token=653645996&amp;lang=zh_CN" data-fakeid="2611880764" class="js_msgSenderAvatar">
+            </a>
+            <label for="check2611880764" class="frm_checkbox_label"><i class="icon_checkbox"></i><input class="frm_checkbox js_select" type="checkbox" value="2611880764" id="check2611880764"></label> 
+        </div>
+    </td>
+    <td class="table_cell user_opr">
+        <div id="selectArea2611880764" class="js_selectArea dropdown_menu" data-gid="0" data-fid="2611880764"><a href="javascript:;" class="btn dropdown_switch jsDropdownBt"><label class="jsBtLabel">默认组</label><i class="arrow"></i></a>
+<div class="dropdown_data_container jsDropdownList" style="display: none;">
+    <ul class="dropdown_data_list">
+        
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="0" data-index="0" data-name="默认组">默认组</a>
+            </li>
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="2" data-index="1" data-name="星标组">星标组</a>
+            </li>
+                    
+        
+    </ul>
+</div>
+</div>
+        
+        <!-- <a class="btn btn_default dn js_deleteToBlackList_btn" data-gid="1" data-fakeid="2611880764" href="javascript:;" style="display:none;">移出黑名单</a> -->
+        <a class="btn remark js_msgSenderRemark" data-fakeid="2611880764">修改备注</a>
+    </td>
+</tr>
+
+<tr>
+    <td class="table_cell user">
+        <div class="user_info">  <!--个人信息区-->
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=1738122015&amp;token=653645996&amp;lang=zh_CN" class="remark_name" data-fakeid="1738122015">常胜</a>
+            <span class="nick_name" data-fakeid="1738122015"></span>
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=1738122015&amp;token=653645996&amp;lang=zh_CN" class="avatar">
+                <img src="/misc/getheadimg?fakeid=1738122015&amp;token=653645996&amp;lang=zh_CN" data-fakeid="1738122015" class="js_msgSenderAvatar">
+            </a>
+            <label for="check1738122015" class="frm_checkbox_label"><i class="icon_checkbox"></i><input class="frm_checkbox js_select" type="checkbox" value="1738122015" id="check1738122015"></label> 
+        </div>
+    </td>
+    <td class="table_cell user_opr">
+        <div id="selectArea1738122015" class="js_selectArea dropdown_menu" data-gid="0" data-fid="1738122015"><a href="javascript:;" class="btn dropdown_switch jsDropdownBt"><label class="jsBtLabel">默认组</label><i class="arrow"></i></a>
+<div class="dropdown_data_container jsDropdownList" style="display: none;">
+    <ul class="dropdown_data_list">
+        
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="0" data-index="0" data-name="默认组">默认组</a>
+            </li>
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="2" data-index="1" data-name="星标组">星标组</a>
+            </li>
+                    
+        
+    </ul>
+</div>
+</div>
+        
+        <!-- <a class="btn btn_default dn js_deleteToBlackList_btn" data-gid="1" data-fakeid="1738122015" href="javascript:;" style="display:none;">移出黑名单</a> -->
+        <a class="btn remark js_msgSenderRemark" data-fakeid="1738122015">修改备注</a>
+    </td>
+</tr>
+
+<tr>
+    <td class="table_cell user">
+        <div class="user_info">  <!--个人信息区-->
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=240356495&amp;token=653645996&amp;lang=zh_CN" class="remark_name" data-fakeid="240356495">臭臭</a>
+            <span class="nick_name" data-fakeid="240356495"></span>
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=240356495&amp;token=653645996&amp;lang=zh_CN" class="avatar">
+                <img src="/misc/getheadimg?fakeid=240356495&amp;token=653645996&amp;lang=zh_CN" data-fakeid="240356495" class="js_msgSenderAvatar">
+            </a>
+            <label for="check240356495" class="frm_checkbox_label"><i class="icon_checkbox"></i><input class="frm_checkbox js_select" type="checkbox" value="240356495" id="check240356495"></label> 
+        </div>
+    </td>
+    <td class="table_cell user_opr">
+        <div id="selectArea240356495" class="js_selectArea dropdown_menu" data-gid="0" data-fid="240356495"><a href="javascript:;" class="btn dropdown_switch jsDropdownBt"><label class="jsBtLabel">默认组</label><i class="arrow"></i></a>
+<div class="dropdown_data_container jsDropdownList" style="display: none;">
+    <ul class="dropdown_data_list">
+        
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="0" data-index="0" data-name="默认组">默认组</a>
+            </li>
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="2" data-index="1" data-name="星标组">星标组</a>
+            </li>
+                    
+        
+    </ul>
+</div>
+</div>
+        
+        <!-- <a class="btn btn_default dn js_deleteToBlackList_btn" data-gid="1" data-fakeid="240356495" href="javascript:;" style="display:none;">移出黑名单</a> -->
+        <a class="btn remark js_msgSenderRemark" data-fakeid="240356495">修改备注</a>
+    </td>
+</tr>
+
+<tr>
+    <td class="table_cell user">
+        <div class="user_info">  <!--个人信息区-->
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=1502853583&amp;token=653645996&amp;lang=zh_CN" class="remark_name" data-fakeid="1502853583">郭思笛</a>
+            <span class="nick_name" data-fakeid="1502853583"></span>
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=1502853583&amp;token=653645996&amp;lang=zh_CN" class="avatar">
+                <img src="/misc/getheadimg?fakeid=1502853583&amp;token=653645996&amp;lang=zh_CN" data-fakeid="1502853583" class="js_msgSenderAvatar">
+            </a>
+            <label for="check1502853583" class="frm_checkbox_label"><i class="icon_checkbox"></i><input class="frm_checkbox js_select" type="checkbox" value="1502853583" id="check1502853583"></label> 
+        </div>
+    </td>
+    <td class="table_cell user_opr">
+        <div id="selectArea1502853583" class="js_selectArea dropdown_menu" data-gid="0" data-fid="1502853583"><a href="javascript:;" class="btn dropdown_switch jsDropdownBt"><label class="jsBtLabel">默认组</label><i class="arrow"></i></a>
+<div class="dropdown_data_container jsDropdownList" style="display: none;">
+    <ul class="dropdown_data_list">
+        
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="0" data-index="0" data-name="默认组">默认组</a>
+            </li>
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="2" data-index="1" data-name="星标组">星标组</a>
+            </li>
+                    
+        
+    </ul>
+</div>
+</div>
+        
+        <!-- <a class="btn btn_default dn js_deleteToBlackList_btn" data-gid="1" data-fakeid="1502853583" href="javascript:;" style="display:none;">移出黑名单</a> -->
+        <a class="btn remark js_msgSenderRemark" data-fakeid="1502853583">修改备注</a>
+    </td>
+</tr>
+
+<tr>
+    <td class="table_cell user">
+        <div class="user_info">  <!--个人信息区-->
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=2406815561&amp;token=653645996&amp;lang=zh_CN" class="remark_name" data-fakeid="2406815561">赫英成</a>
+            <span class="nick_name" data-fakeid="2406815561"></span>
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=2406815561&amp;token=653645996&amp;lang=zh_CN" class="avatar">
+                <img src="/misc/getheadimg?fakeid=2406815561&amp;token=653645996&amp;lang=zh_CN" data-fakeid="2406815561" class="js_msgSenderAvatar">
+            </a>
+            <label for="check2406815561" class="frm_checkbox_label"><i class="icon_checkbox"></i><input class="frm_checkbox js_select" type="checkbox" value="2406815561" id="check2406815561"></label> 
+        </div>
+    </td>
+    <td class="table_cell user_opr">
+        <div id="selectArea2406815561" class="js_selectArea dropdown_menu" data-gid="0" data-fid="2406815561"><a href="javascript:;" class="btn dropdown_switch jsDropdownBt"><label class="jsBtLabel">默认组</label><i class="arrow"></i></a>
+<div class="dropdown_data_container jsDropdownList" style="display: none;">
+    <ul class="dropdown_data_list">
+        
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="0" data-index="0" data-name="默认组">默认组</a>
+            </li>
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="2" data-index="1" data-name="星标组">星标组</a>
+            </li>
+                    
+        
+    </ul>
+</div>
+</div>
+        
+        <!-- <a class="btn btn_default dn js_deleteToBlackList_btn" data-gid="1" data-fakeid="2406815561" href="javascript:;" style="display:none;">移出黑名单</a> -->
+        <a class="btn remark js_msgSenderRemark" data-fakeid="2406815561">修改备注</a>
+    </td>
+</tr>
+
+<tr>
+    <td class="table_cell user">
+        <div class="user_info">  <!--个人信息区-->
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=1312936884&amp;token=653645996&amp;lang=zh_CN" class="remark_name" data-fakeid="1312936884">Demon</a>
+            <span class="nick_name" data-fakeid="1312936884"></span>
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=1312936884&amp;token=653645996&amp;lang=zh_CN" class="avatar">
+                <img src="/misc/getheadimg?fakeid=1312936884&amp;token=653645996&amp;lang=zh_CN" data-fakeid="1312936884" class="js_msgSenderAvatar">
+            </a>
+            <label for="check1312936884" class="frm_checkbox_label"><i class="icon_checkbox"></i><input class="frm_checkbox js_select" type="checkbox" value="1312936884" id="check1312936884"></label> 
+        </div>
+    </td>
+    <td class="table_cell user_opr">
+        <div id="selectArea1312936884" class="js_selectArea dropdown_menu" data-gid="0" data-fid="1312936884"><a href="javascript:;" class="btn dropdown_switch jsDropdownBt"><label class="jsBtLabel">默认组</label><i class="arrow"></i></a>
+<div class="dropdown_data_container jsDropdownList" style="display: none;">
+    <ul class="dropdown_data_list">
+        
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="0" data-index="0" data-name="默认组">默认组</a>
+            </li>
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="2" data-index="1" data-name="星标组">星标组</a>
+            </li>
+                    
+        
+    </ul>
+</div>
+</div>
+        
+        <!-- <a class="btn btn_default dn js_deleteToBlackList_btn" data-gid="1" data-fakeid="1312936884" href="javascript:;" style="display:none;">移出黑名单</a> -->
+        <a class="btn remark js_msgSenderRemark" data-fakeid="1312936884">修改备注</a>
+    </td>
+</tr>
+
+<tr>
+    <td class="table_cell user">
+        <div class="user_info">  <!--个人信息区-->
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=1029066312&amp;token=653645996&amp;lang=zh_CN" class="remark_name" data-fakeid="1029066312">向玮</a>
+            <span class="nick_name" data-fakeid="1029066312"></span>
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=1029066312&amp;token=653645996&amp;lang=zh_CN" class="avatar">
+                <img src="/misc/getheadimg?fakeid=1029066312&amp;token=653645996&amp;lang=zh_CN" data-fakeid="1029066312" class="js_msgSenderAvatar">
+            </a>
+            <label for="check1029066312" class="frm_checkbox_label"><i class="icon_checkbox"></i><input class="frm_checkbox js_select" type="checkbox" value="1029066312" id="check1029066312"></label> 
+        </div>
+    </td>
+    <td class="table_cell user_opr">
+        <div id="selectArea1029066312" class="js_selectArea dropdown_menu" data-gid="0" data-fid="1029066312"><a href="javascript:;" class="btn dropdown_switch jsDropdownBt"><label class="jsBtLabel">默认组</label><i class="arrow"></i></a>
+<div class="dropdown_data_container jsDropdownList" style="display: none;">
+    <ul class="dropdown_data_list">
+        
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="0" data-index="0" data-name="默认组">默认组</a>
+            </li>
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="2" data-index="1" data-name="星标组">星标组</a>
+            </li>
+                    
+        
+    </ul>
+</div>
+</div>
+        
+        <!-- <a class="btn btn_default dn js_deleteToBlackList_btn" data-gid="1" data-fakeid="1029066312" href="javascript:;" style="display:none;">移出黑名单</a> -->
+        <a class="btn remark js_msgSenderRemark" data-fakeid="1029066312">修改备注</a>
+    </td>
+</tr>
+
+<tr>
+    <td class="table_cell user">
+        <div class="user_info">  <!--个人信息区-->
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=2018905261&amp;token=653645996&amp;lang=zh_CN" class="remark_name" data-fakeid="2018905261">此三火</a>
+            <span class="nick_name" data-fakeid="2018905261"></span>
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=2018905261&amp;token=653645996&amp;lang=zh_CN" class="avatar">
+                <img src="/misc/getheadimg?fakeid=2018905261&amp;token=653645996&amp;lang=zh_CN" data-fakeid="2018905261" class="js_msgSenderAvatar">
+            </a>
+            <label for="check2018905261" class="frm_checkbox_label"><i class="icon_checkbox"></i><input class="frm_checkbox js_select" type="checkbox" value="2018905261" id="check2018905261"></label> 
+        </div>
+    </td>
+    <td class="table_cell user_opr">
+        <div id="selectArea2018905261" class="js_selectArea dropdown_menu" data-gid="0" data-fid="2018905261"><a href="javascript:;" class="btn dropdown_switch jsDropdownBt"><label class="jsBtLabel">默认组</label><i class="arrow"></i></a>
+<div class="dropdown_data_container jsDropdownList" style="display: none;">
+    <ul class="dropdown_data_list">
+        
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="0" data-index="0" data-name="默认组">默认组</a>
+            </li>
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="2" data-index="1" data-name="星标组">星标组</a>
+            </li>
+                    
+        
+    </ul>
+</div>
+</div>
+        
+        <!-- <a class="btn btn_default dn js_deleteToBlackList_btn" data-gid="1" data-fakeid="2018905261" href="javascript:;" style="display:none;">移出黑名单</a> -->
+        <a class="btn remark js_msgSenderRemark" data-fakeid="2018905261">修改备注</a>
+    </td>
+</tr>
+
+<tr>
+    <td class="table_cell user">
+        <div class="user_info">  <!--个人信息区-->
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=1204049429&amp;token=653645996&amp;lang=zh_CN" class="remark_name" data-fakeid="1204049429">依依</a>
+            <span class="nick_name" data-fakeid="1204049429"></span>
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=1204049429&amp;token=653645996&amp;lang=zh_CN" class="avatar">
+                <img src="/misc/getheadimg?fakeid=1204049429&amp;token=653645996&amp;lang=zh_CN" data-fakeid="1204049429" class="js_msgSenderAvatar">
+            </a>
+            <label for="check1204049429" class="frm_checkbox_label"><i class="icon_checkbox"></i><input class="frm_checkbox js_select" type="checkbox" value="1204049429" id="check1204049429"></label> 
+        </div>
+    </td>
+    <td class="table_cell user_opr">
+        <div id="selectArea1204049429" class="js_selectArea dropdown_menu" data-gid="0" data-fid="1204049429"><a href="javascript:;" class="btn dropdown_switch jsDropdownBt"><label class="jsBtLabel">默认组</label><i class="arrow"></i></a>
+<div class="dropdown_data_container jsDropdownList" style="display: none;">
+    <ul class="dropdown_data_list">
+        
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="0" data-index="0" data-name="默认组">默认组</a>
+            </li>
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="2" data-index="1" data-name="星标组">星标组</a>
+            </li>
+                    
+        
+    </ul>
+</div>
+</div>
+        
+        <!-- <a class="btn btn_default dn js_deleteToBlackList_btn" data-gid="1" data-fakeid="1204049429" href="javascript:;" style="display:none;">移出黑名单</a> -->
+        <a class="btn remark js_msgSenderRemark" data-fakeid="1204049429">修改备注</a>
+    </td>
+</tr>
+
+<tr>
+    <td class="table_cell user">
+        <div class="user_info">  <!--个人信息区-->
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=339264575&amp;token=653645996&amp;lang=zh_CN" class="remark_name" data-fakeid="339264575">Nothing</a>
+            <span class="nick_name" data-fakeid="339264575"></span>
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=339264575&amp;token=653645996&amp;lang=zh_CN" class="avatar">
+                <img src="/misc/getheadimg?fakeid=339264575&amp;token=653645996&amp;lang=zh_CN" data-fakeid="339264575" class="js_msgSenderAvatar">
+            </a>
+            <label for="check339264575" class="frm_checkbox_label"><i class="icon_checkbox"></i><input class="frm_checkbox js_select" type="checkbox" value="339264575" id="check339264575"></label> 
+        </div>
+    </td>
+    <td class="table_cell user_opr">
+        <div id="selectArea339264575" class="js_selectArea dropdown_menu" data-gid="0" data-fid="339264575"><a href="javascript:;" class="btn dropdown_switch jsDropdownBt"><label class="jsBtLabel">默认组</label><i class="arrow"></i></a>
+<div class="dropdown_data_container jsDropdownList" style="display: none;">
+    <ul class="dropdown_data_list">
+        
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="0" data-index="0" data-name="默认组">默认组</a>
+            </li>
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="2" data-index="1" data-name="星标组">星标组</a>
+            </li>
+                    
+        
+    </ul>
+</div>
+</div>
+        
+        <!-- <a class="btn btn_default dn js_deleteToBlackList_btn" data-gid="1" data-fakeid="339264575" href="javascript:;" style="display:none;">移出黑名单</a> -->
+        <a class="btn remark js_msgSenderRemark" data-fakeid="339264575">修改备注</a>
+    </td>
+</tr>
+
+<tr>
+    <td class="table_cell user">
+        <div class="user_info">  <!--个人信息区-->
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=6149455&amp;token=653645996&amp;lang=zh_CN" class="remark_name" data-fakeid="6149455">李岩</a>
+            <span class="nick_name" data-fakeid="6149455"></span>
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=6149455&amp;token=653645996&amp;lang=zh_CN" class="avatar">
+                <img src="/misc/getheadimg?fakeid=6149455&amp;token=653645996&amp;lang=zh_CN" data-fakeid="6149455" class="js_msgSenderAvatar">
+            </a>
+            <label for="check6149455" class="frm_checkbox_label"><i class="icon_checkbox"></i><input class="frm_checkbox js_select" type="checkbox" value="6149455" id="check6149455"></label> 
+        </div>
+    </td>
+    <td class="table_cell user_opr">
+        <div id="selectArea6149455" class="js_selectArea dropdown_menu" data-gid="0" data-fid="6149455"><a href="javascript:;" class="btn dropdown_switch jsDropdownBt"><label class="jsBtLabel">默认组</label><i class="arrow"></i></a>
+<div class="dropdown_data_container jsDropdownList" style="display: none;">
+    <ul class="dropdown_data_list">
+        
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="0" data-index="0" data-name="默认组">默认组</a>
+            </li>
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="2" data-index="1" data-name="星标组">星标组</a>
+            </li>
+                    
+        
+    </ul>
+</div>
+</div>
+        
+        <!-- <a class="btn btn_default dn js_deleteToBlackList_btn" data-gid="1" data-fakeid="6149455" href="javascript:;" style="display:none;">移出黑名单</a> -->
+        <a class="btn remark js_msgSenderRemark" data-fakeid="6149455">修改备注</a>
+    </td>
+</tr>
+
+<tr>
+    <td class="table_cell user">
+        <div class="user_info">  <!--个人信息区-->
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=2858113980&amp;token=653645996&amp;lang=zh_CN" class="remark_name" data-fakeid="2858113980">paul</a>
+            <span class="nick_name" data-fakeid="2858113980"></span>
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=2858113980&amp;token=653645996&amp;lang=zh_CN" class="avatar">
+                <img src="/misc/getheadimg?fakeid=2858113980&amp;token=653645996&amp;lang=zh_CN" data-fakeid="2858113980" class="js_msgSenderAvatar">
+            </a>
+            <label for="check2858113980" class="frm_checkbox_label"><i class="icon_checkbox"></i><input class="frm_checkbox js_select" type="checkbox" value="2858113980" id="check2858113980"></label> 
+        </div>
+    </td>
+    <td class="table_cell user_opr">
+        <div id="selectArea2858113980" class="js_selectArea dropdown_menu" data-gid="0" data-fid="2858113980"><a href="javascript:;" class="btn dropdown_switch jsDropdownBt"><label class="jsBtLabel">默认组</label><i class="arrow"></i></a>
+<div class="dropdown_data_container jsDropdownList" style="display: none;">
+    <ul class="dropdown_data_list">
+        
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="0" data-index="0" data-name="默认组">默认组</a>
+            </li>
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="2" data-index="1" data-name="星标组">星标组</a>
+            </li>
+                    
+        
+    </ul>
+</div>
+</div>
+        
+        <!-- <a class="btn btn_default dn js_deleteToBlackList_btn" data-gid="1" data-fakeid="2858113980" href="javascript:;" style="display:none;">移出黑名单</a> -->
+        <a class="btn remark js_msgSenderRemark" data-fakeid="2858113980">修改备注</a>
+    </td>
+</tr>
+
+<tr>
+    <td class="table_cell user">
+        <div class="user_info">  <!--个人信息区-->
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=2155103280&amp;token=653645996&amp;lang=zh_CN" class="remark_name" data-fakeid="2155103280">麻书城</a>
+            <span class="nick_name" data-fakeid="2155103280"></span>
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=2155103280&amp;token=653645996&amp;lang=zh_CN" class="avatar">
+                <img src="/misc/getheadimg?fakeid=2155103280&amp;token=653645996&amp;lang=zh_CN" data-fakeid="2155103280" class="js_msgSenderAvatar">
+            </a>
+            <label for="check2155103280" class="frm_checkbox_label"><i class="icon_checkbox"></i><input class="frm_checkbox js_select" type="checkbox" value="2155103280" id="check2155103280"></label> 
+        </div>
+    </td>
+    <td class="table_cell user_opr">
+        <div id="selectArea2155103280" class="js_selectArea dropdown_menu" data-gid="0" data-fid="2155103280"><a href="javascript:;" class="btn dropdown_switch jsDropdownBt"><label class="jsBtLabel">默认组</label><i class="arrow"></i></a>
+<div class="dropdown_data_container jsDropdownList" style="display: none;">
+    <ul class="dropdown_data_list">
+        
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="0" data-index="0" data-name="默认组">默认组</a>
+            </li>
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="2" data-index="1" data-name="星标组">星标组</a>
+            </li>
+                    
+        
+    </ul>
+</div>
+</div>
+        
+        <!-- <a class="btn btn_default dn js_deleteToBlackList_btn" data-gid="1" data-fakeid="2155103280" href="javascript:;" style="display:none;">移出黑名单</a> -->
+        <a class="btn remark js_msgSenderRemark" data-fakeid="2155103280">修改备注</a>
+    </td>
+</tr>
+
+<tr>
+    <td class="table_cell user">
+        <div class="user_info">  <!--个人信息区-->
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=819054900&amp;token=653645996&amp;lang=zh_CN" class="remark_name" data-fakeid="819054900">menga</a>
+            <span class="nick_name" data-fakeid="819054900"></span>
+            
+            <a target="_blank" href="/cgi-bin/singlesendpage?t=message/send&amp;action=index&amp;tofakeid=819054900&amp;token=653645996&amp;lang=zh_CN" class="avatar">
+                <img src="/misc/getheadimg?fakeid=819054900&amp;token=653645996&amp;lang=zh_CN" data-fakeid="819054900" class="js_msgSenderAvatar">
+            </a>
+            <label for="check819054900" class="frm_checkbox_label"><i class="icon_checkbox"></i><input class="frm_checkbox js_select" type="checkbox" value="819054900" id="check819054900"></label> 
+        </div>
+    </td>
+    <td class="table_cell user_opr">
+        <div id="selectArea819054900" class="js_selectArea dropdown_menu" data-gid="0" data-fid="819054900"><a href="javascript:;" class="btn dropdown_switch jsDropdownBt"><label class="jsBtLabel">默认组</label><i class="arrow"></i></a>
+<div class="dropdown_data_container jsDropdownList" style="display: none;">
+    <ul class="dropdown_data_list">
+        
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="0" data-index="0" data-name="默认组">默认组</a>
+            </li>
+            
+            <li class="dropdown_data_item ">  
+                <a onclick="return false;" href="javascript:;" class="jsDropdownItem" data-value="2" data-index="1" data-name="星标组">星标组</a>
+            </li>
+                    
+        
+    </ul>
+</div>
+</div>
+        
+        <!-- <a class="btn btn_default dn js_deleteToBlackList_btn" data-gid="1" data-fakeid="819054900" href="javascript:;" style="display:none;">移出黑名单</a> -->
+        <a class="btn remark js_msgSenderRemark" data-fakeid="819054900">修改备注</a>
+    </td>
+</tr>
+
+
+</tbody>
+                    </table>
+                </div>
+                <div class="tool_area">
+                    <div class="pagination_wrp js_pageNavigator"></div>
+                </div>
+                            </div>
+        </div>
+                <div class="inner_side">
+            <div class="bd">
+                <div class="group_list">
+                    <div class="inner_menu_box" id="groupsList"></div>
+                </div>
+            </div>
+        </div>
+            </div>
+</div>
+
+                </div>
+            </div>
+            
+                                    <div class="faq">
+                <ul class="links">
+                                        <li class="links_item"><a href="http://kf.qq.com/faq/120911VrYVrA1509086vyumm.html" target="_blank">客服中心</a></li>
+                    <li class="links_item"><a href="/acct/infringement?action=getmanual&t=infringement/manual&type=1&lang=zh_CN&token=653645996" target="_blank">侵权投诉</a></li>
+                </ul>
+                <p class="tail">反馈官号weixingongzhong</p>
+
+            </div>
+                                    
+        </div>
+        <div class="foot" id="footer">
+	<ul class="links ft">
+					<li class="links_item no_extra"><a href="http://www.tencent.com/zh-cn/index.shtml" target="_blank">关于腾讯</a></li>
+			<li class="links_item"><a href="/cgi-bin/readtemplate?t=home/agreement_tmpl&type=info&lang=zh_CN&token=653645996" target="_blank">服务协议</a></li>
+			<li class="links_item"><a href="/cgi-bin/readtemplate?t=business/faq_operation_tmpl&type=info&lang=zh_CN&token=653645996" target="_blank">运营规范</a></li>
+			<li class="links_item"><a href="/cgi-bin/opshowpage?action=dispelinfo&lang=zh_CN&begin=1&count=9" target="_blank">辟谣中心</a></li>
+			<li class="links_item"><a href="http://kf.qq.com/faq/120911VrYVrA1509086vyumm.html" target="_blank">客服中心</a></li>
+                        			<li class="links_item"><a href="mailto:weixinmp@qq.com" target="_blank">联系邮箱</a></li>
+            				<li class="links_item"><p class="copyright">Copyright &copy; 2012-2015 Tencent. All Rights Reserved.</p> </li>
+	</ul>
+    
+	
+</div>
+<script type="text/javascript">
+  
+</script>
+
+
+    </body>
+</html>
+
+

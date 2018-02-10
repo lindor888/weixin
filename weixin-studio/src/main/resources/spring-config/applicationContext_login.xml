@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+	
+
+	 <!-- mapper -->
+	<bean id="loginMapper" class="org.mybatis.spring.MapperFactoryBean">
+		<property name="mapperInterface" value="com.ctvit.dao.LoginMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
+    </bean>
+ 
+    
+    <!-- impl -->
+	<bean id="loginService" class="com.ctvit.service.LoginService">
+	  <property name="loginMapper" ref="loginMapper"/>
+     <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+      <property name="KeyGenerator" ref="KeyGenerator"/>  
+    </bean>
+
+	 
+	
+	<!-- action-->
+	<bean name="loginAction" class="com.ctvit.action.LoginAction" scope="prototype">
+		<property name="loginService" ref="loginService"></property>
+		<property name="roleService" ref="RoleService"></property>
+		<property name="menuService" ref="menuService"></property>
+		<property name="accountService" ref="accountService"></property>
+		<property name="accountRelationService" ref="accountRelationService"></property>
+		<property name="waccountService" ref="waccountService"></property>
+	</bean>
+
+</beans>

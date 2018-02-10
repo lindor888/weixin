@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>栏目建议</title>
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1,maximum-scale=1, user-scalable=no">
+  <link href="style/style.css" rel="stylesheet"/>
+  <script src="js/jquery-1.4.1.min.js" type="text/javascript"></script>
+ </head>
+ <body id="body">
+ <div class="column_wrapper">
+	<header class="header">
+		<a class="title t_01"><i>栏目建议</i></a>
+		<a href="" class="user_btn"><img id="userInfo_img" src="" style="display:none;"></a>
+	</header>
+	<section class="fazhi" style="display:none;">
+		<div class="md">
+			<div class="fazhi_box">
+				<!-- <h3 class="title" id="huati_title"></h3>
+				<hr> -->
+				<div class="vspace"></div>
+				<div class="content">
+					<p id="huati_content"></p>
+				</div>
+				<div class="vspace"></div>
+				<textarea class="textArea" id="comment_Content" placeholder="我想说..."></textarea>
+                                <input type="hidden" id="itemtype" name="itemtype" value="" />
+				<div class="vspace"></div>
+			</div>
+			<div class="submit_box" style="margin-top:20px;">
+				<div class="submit" onClick="sub_comment();">
+					<a class="commit_btn" >完成</a>
+				</div>
+			</div>
+			<div class="commnet_box" id="comment_box">
+				
+			</div>
+			<div class="vspace" style="clear:both;"></div>
+			<div class="vspace" style="clear:both;"></div>
+		</div>
+	</section>
+	<script type="text/javascript">
+	<!--
+		// 主体id
+		var zhutiId = "";
+		var pageUrl = window.location.href;
+		if (pageUrl.indexOf("zhutiId=") != -1)
+		{
+			var strTemp = pageUrl.substr(pageUrl.indexOf("zhutiId=")+8,pageUrl.length);
+			if (strTemp.indexOf("&")!=-1)
+			{
+				zhutiId = strTemp.substr(0,strTemp.indexOf("&"))
+			}else{
+				zhutiId = strTemp
+			}
+		}
+		// 用户id
+		var openId = "o8VcbwPAC9a24fGErCBCsm4UNd7I";
+		if (pageUrl.indexOf("openId=") != -1)
+		{
+			openId = "o8VcbwPAC9a24fGErCBCsm4UNd7I";//pageUrl.substr(pageUrl.indexOf("openId=")+7,pageUrl.length);
+		}
+		
+		// 1、获得主体信息
+		var getHuatiZhuti = function(){
+			$.ajax({
+				url:"http://www.4uplus.com/btvinteract/api/index.php/Front/Comment/getCommentobjInfo/id/"+zhutiId+"/jsoncallback/123",
+				dataType:"jsonp",
+				jsonp:"jsoncallback",
+				error:function(){
+					
+				},
+				success:function(data){
+					// 展示评论主体
+					showPinglunZhuti(data);
+				}
+			});
+		}
+
+		// 1.2、展示主体信息
+		function showPinglunZhuti(data){
+			//$("#huati_title").html(data.title);
+			$("#huati_content").html(data.content);
+			$(".fazhi").css("display","block");
+		}
+
+		// 2、获得评论列表
+		function getCommentList(){
+			$.ajax({
+				url:"http://www.4uplus.com/btvinteract/api/index.php/Front/Comment/getCommentInfo/parentid/"+zhutiId+"/jsoncallback/123",
+				dataType:"jsonp",
+				jsonp:"jsoncallback",
+				error:function(){
+					
+				},
+				success:function(data){
+					// 展示评论主体
+					showCommentList(data.commentlist);
+				}
+			});
+		}
+		// 2.1、展示评论列表
+		function showCommentList(data){
+			var str = '';
+			for (var i=0; i<data.length; i++ )
+			{
+				var userhead = data[i].userhead;
+				if (userhead.indexOf("&amp;")!=-1)
+				{
+					userhead = userhead.replace(reg3,"/");
+				}else{
+					userhead = userhead.replace(reg2,"/");
+				}
+				str += '<div class="comment"><a class="heada"><img class="headimg" src="'+userhead+'"></a><a class="nickname">'+data[i].username+'</a><div class="fontcontent">'+data[i].comment+'</div><div class="date">'+data[i].created+'</div></div>'
+			}
+			$("#comment_box").html(str);
+		}
+		
+		var nickName = "",
+		headImg = "";
+		var reg=new RegExp("/","g"); //创建正则RegExp对象 
+		var reg2 = new RegExp("&","g");
+		var reg3 = new RegExp("&amp;","g");
+		// 0、获得用户信息
+		var getUserInfo = function(){
+			//alert("openId="+openId);
+			$.ajax({
+				url:"http://www.4uplus.com/weixin-studio/interact/showUInteract?ids="+openId,
+				type:"get",
+				async:false,
+				success:function(data){
+					// 赋值：用户头像
+					nickName = data.rows[0].nickname;
+					headImg = data.rows[0].headimgurl;
+					$("#userInfo_img").attr("src",headImg);
+					$("#userInfo_img").css("display","block");
+                    $("#itemtype").val(data.rows[0].waccountId);
+				}
+			});
+		}
+
+		$(function(){
+			getUserInfo();
+			getHuatiZhuti();
+			//getCommentList();
+		});
+		// 3、提交评论
+		function sub_comment(){
+			var comment_str = $("#comment_Content").val();
+			var headImgStr = $("#userInfo_img").attr("src");
+			//headImgStr = headImgStr.replace(reg,"\\"); 
+			headImgStr = headImgStr.replace(reg,"&");  
+                        var  itemtype = $("#itemtype").val();
+
+			$.ajax({
+				 url:'/weixin-studio/hudong/addcommentHudong',
+                 type: 'POST',   
+                 async: false,
+                 data:  {'comment.comment':comment_str,'comment.userhead':headImgStr,'comment.itemtype':itemtype,'comment.userid':openId,'comment.username':nickName},
+				dataType:"json",
+				
+				error:function(){
+					
+				},
+				success:function(data){
+					// 展示评论主体
+					if (data.status == "success")
+					{
+						//alert("建议提交成功，感谢您的参与！");
+					}
+				}
+			});
+
+		//	jifenAdd_post();//
+
+			alert("建议提交成功，感谢您的参与！");
+			// 多调用一个接口，实现持久化
+			/*$.ajax({
+				url:"http://www.4uplus.com/btvinteract/api/index.php/Front/Comment/insertcomment",
+				dataType:"jsonp",
+				jsonp:"jsoncallback",
+				error:function(){
+				},
+				success:function(data){
+				}
+			});*/
+			if (typeof WeixinJSBridge === "undefined") {
+				document.addEventListener('WeixinJSBridgeReady', readyFunc, false);
+			} else {
+				readyFunc();
+			}
+		}
+
+/*积分增加方法   yaonana   add  20150914*/
+		var jifenAdd_post = function(){
+			//openId = "o8VcbwFdjlQOC7yfSvirKNzYSsbs";
+			$.ajax({
+				url:"http://www.4uplus.com/integral-rules/interact/integralAdd/"+openId+"/falvzixun/"+zhutiId,
+				dataType:"jsonp",
+				jsonp:"jsoncallback",
+				error:function(){
+					console.log("jifenAdd_post  error方法");
+				},
+				success:function(data){
+					
+				}
+			});
+		}
+
+
+
+		var readyFunc = function onBridgeReady() {
+			// 关闭当前webview窗口 - closeWindow
+			WeixinJSBridge.invoke('closeWindow',{
+				},function(res){
+			}); 
+		}
+		
+	//-->
+	</script>
+ </div>
+ </body>
+</html>

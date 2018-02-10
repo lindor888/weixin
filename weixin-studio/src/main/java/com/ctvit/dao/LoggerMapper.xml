@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ctvit.dao.LoggerMapper">
+
+	<resultMap type="com.ctvit.bean.Logger" id="logResultMap">
+		<id column="id" property="id" />
+		<result column="ip" property="ip" />
+		<result column="class" property="type" />
+		<result column="action" property="act" />
+		<result column="value" property="value"/>
+		<result column="time" property="time"/>
+		<result column="remark" property="remark"/>
+	</resultMap>
+	
+	<insert id="saveLog" parameterType="com.ctvit.bean.Logger">
+		insert into tab_logger (username,ip,class,action,value,time,remark) values (#{username},#{ip},#{type},#{act},#{value},#{time},#{remark})
+	</insert>
+	
+</mapper>

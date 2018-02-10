@@ -1,0 +1,264 @@
+
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>答题</title>
+  <meta name="viewport" content="width:640px,initial-scale=1,user-scalable=1">
+  <link href="style/style.css" rel="stylesheet"/>
+  <script src="js/jquery-1.4.1.min.js" type="text/javascript"></script>
+ </head>
+ <body>
+ <div class="column_wrapper">
+	<header class="header">
+		<!-- <a href="#" class="md-close"><img src="style/img/backmoren.png"></a> -->
+		<a class="title"><i>答题</i></a>
+		<a href="" class="user_btn"><img id="userInfo_img" src="" style="display:none;"></a>
+	</header>
+	<div>
+		<img style="display: none;" src="" id="userInfo_img">
+		<input type="hidden" name="userid" value="2" id="userid">
+		<input type="hidden" name="username" value="2" id="username">
+
+   </div>
+	<section class="diaocha">
+		<div class="md" id="md">
+			
+			
+		</div>
+
+	</section>
+	<script type="text/javascript">
+    var type='';
+    var optionids='';
+    var openId = '';
+    var nickname = '';
+    var headimg = '';
+    
+    var pageUrl = window.location.href;
+		if (pageUrl.indexOf("openId=") != -1)
+		{
+			openId = pageUrl.split("openId=")[1];
+		}
+		// 1、据id展示投票
+		var getJSON = function(){
+			var url = '/weixin-studio/question/getlistQuestion';
+			
+			$.ajax({
+				url:url,
+				dataType:"json",
+				type:"get",
+				error:function(){
+					console.log("getJSON  error方法");
+				},
+				success:function(data){
+					if (data.msg == "success")
+					{
+						diaochaSucessHandler(data.rows);
+					}else{
+						console.log("getJSON  获得数据异常");
+					}
+				}
+			});
+		}
+
+		var diaochaSucessHandler = function(voteData){
+            var html='';
+            var str = '';
+            var init= '{"questions":[';
+			type = voteData.headtitletype;
+			var optionBean='';
+			var questions =voteData.questionBean;
+			for(var i=0;i<questions.length;i++){
+			   if(questions[i].questionname !="" && questions[i].questionname != null){
+			   html += '<div class="titile_box"><p id="diaocha_title'+i+'" data="'+questions[i].questionname+'">'+questions[i].questionname+'</p></div>';
+			   }
+			   if(questions[i].optionBean !="" && questions[i].optionBean != null){
+			   optionBean = questions[i].optionBean;
+			   html += '<div class="option_box">';
+			   html += '<ul class="list" id="diaocha_options'+i+'">';
+			   for(var j=0;j<optionBean.length;j++){
+			    html += '<li><i id="'+optionBean[j].optionid+'">'+optionBean[j].opt+'</i></li>';
+			   }
+			    html +='</div>';
+			    html +='</ul>';
+			   }
+			  // html +='</div>';
+			}
+			    html +='<div class="submit_box"><div class="submit" onClick="datiVote();"><a class="commit_btn" >完成</a></div></div>'
+			$("#md").html(html);
+
+			// 单选、双选
+			
+			for (var t = 0;t<10;t++){
+			
+			if (type == "单选")
+			{
+				//questionType = 1;
+				$("#diaocha_options0 li").click(function(){
+					$("#diaocha_options0 li").removeClass("cur");
+					$(this).addClass("cur");
+				});
+				$("#diaocha_options1 li").click(function(){
+					$("#diaocha_options1 li").removeClass("cur");
+					$(this).addClass("cur");
+				});
+				$("#diaocha_options2 li").click(function(){
+					$("#diaocha_options1 li").removeClass("cur");
+					$(this).addClass("cur");
+				});
+				$("#diaocha_options3 li").click(function(){
+					$("#diaocha_options1 li").removeClass("cur");
+					$(this).addClass("cur");
+				});
+				$("#diaocha_options4 li").click(function(){
+					$("#diaocha_options1 li").removeClass("cur");
+					$(this).addClass("cur");
+				});
+				$("#diaocha_options5 li").click(function(){
+					$("#diaocha_options1 li").removeClass("cur");
+					$(this).addClass("cur");
+				});
+				$("#diaocha_options6 li").click(function(){
+					$("#diaocha_options1 li").removeClass("cur");
+					$(this).addClass("cur");
+				});
+				$("#diaocha_options7 li").click(function(){
+					$("#diaocha_options1 li").removeClass("cur");
+					$(this).addClass("cur");
+				});
+				$("#diaocha_options8 li").click(function(){
+					$("#diaocha_options1 li").removeClass("cur");
+					$(this).addClass("cur");
+				});
+				$("#diaocha_options9 li").click(function(){
+					$("#diaocha_options1 li").removeClass("cur");
+					$(this).addClass("cur");
+				});
+				$("#diaocha_options10 li").click(function(){
+					$("#diaocha_options1 li").removeClass("cur");
+					$(this).addClass("cur");
+				});
+			}
+			if (type == "多选")
+			{
+				$("#diaocha_options0 li").toggle(function(){
+					$(this).addClass("cur");
+				},function(){
+					$(this).removeClass("cur");
+				});
+				$("#diaocha_options1 li").toggle(function(){
+					$(this).addClass("cur");
+				},function(){
+					$(this).removeClass("cur");
+				});
+				$("#diaocha_options2 li").toggle(function(){
+					$(this).addClass("cur");
+				},function(){
+					$(this).removeClass("cur");
+				});
+				$("#diaocha_options3 li").toggle(function(){
+					$(this).addClass("cur");
+				},function(){
+					$(this).removeClass("cur");
+				});
+				$("#diaocha_options4 li").toggle(function(){
+					$(this).addClass("cur");
+				},function(){
+					$(this).removeClass("cur");
+				});
+				$("#diaocha_options5 li").toggle(function(){
+					$(this).addClass("cur");
+				},function(){
+					$(this).removeClass("cur");
+				});
+				$("#diaocha_options6 li").toggle(function(){
+					$(this).addClass("cur");
+				},function(){
+					$(this).removeClass("cur");
+				});
+				$("#diaocha_options7 li").toggle(function(){
+					$(this).addClass("cur");
+				},function(){
+					$(this).removeClass("cur");
+				});
+				$("#diaocha_options8 li").toggle(function(){
+					$(this).addClass("cur");
+				},function(){
+					$(this).removeClass("cur");
+				});
+				$("#diaocha_options9 li").toggle(function(){
+					$(this).addClass("cur");
+				},function(){
+					$(this).removeClass("cur");
+				});
+				$("#diaocha_options10 li").toggle(function(){
+					$(this).addClass("cur");
+				},function(){
+					$(this).removeClass("cur");
+				});
+				
+			}
+           }
+			// 完毕
+		}
+		//获取用户信息
+		function getUserInfo(){
+		$.ajax({
+			url:"/weixin-studio/interact/showUInteract?ids="+openId,
+			type:"get",
+			async:false,
+			success:function(data){
+				// 展示头像
+				$("#userInfo_img").attr("src",data.rows[0].headimgurl);
+				$("#userid").val(data.rows[0].openid);
+				$("#username").val(data.rows[0].nickname);
+				nickname = data.rows[0].nickname;
+				headimg = data.rows[0].headimgurl;
+			}
+		});
+		}
+		$(function(){
+		getJSON();
+		getUserInfo();
+		});
+	function datiVote(){
+	    var dom = $(".cur i[id]");
+	    if(dom.length == 0){
+	    
+	      alert("至少选择一组");
+	      
+	      return;
+	    }
+	    for(var i= 0;i<dom.length;i++){
+	     if(i == dom.length-1){
+			optionids += dom[i].id;
+		   }else{
+			optionids += dom[i].id+',';
+		   }
+	    }
+	   $.ajax({   
+	       url:'/weixin-studio/question/datisubQuestion',
+	        type: 'POST',   
+	        async: false,
+	        data:  {'receiveQuestionBean.optionids':optionids,'questionStat.openid':openId,'questionStat.nickname':nickname,'questionStat.headimg':headimg},
+	       dataType: 'json',  
+	       success:function(data){ 
+	    	   if(data.msg=="error"){
+	    		   window.location="/weixin-studio/question/result_error.html";  
+	    	   }
+	    	   if(data.msg=="success"){
+	    		   window.location="/weixin-studio/question/result_success.html";  
+	    	   }
+	        }   
+		});
+	}	
+		
+	</script>
+ </div>
+ </body>
+</html>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+	
+	 <bean id="baoliaoObjectMapper" class="org.mybatis.spring.MapperFactoryBean">
+		<property name="mapperInterface" value="com.ctvit.dao.Interact_baoliao_objectMapper" />
+		<property name="sqlSessionFactory" ref="sessionFactory" />
+	</bean>
+	 <bean id="baoliaoMapper" class="org.mybatis.spring.MapperFactoryBean">
+		<property name="mapperInterface" value="com.ctvit.dao.Interact_baoliaoMapper" />
+		<property name="sqlSessionFactory" ref="sessionFactory" />
+	</bean>
+	 <bean id="commentMapper" class="org.mybatis.spring.MapperFactoryBean">
+		<property name="mapperInterface" value="com.ctvit.dao.Interact_commentMapper" />
+		<property name="sqlSessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="baoLiaoService" class="com.ctvit.service.BaoLiaoService">
+		<property name="baoliaoMapper" ref="baoliaoMapper" />
+		<property name="baoliaoObjectMapper" ref="baoliaoObjectMapper" />
+		<property name="commentMapper" ref="commentMapper" />
+	</bean>
+	<bean id="baoliao" class="com.ctvit.bean.Interact_baoliao" />
+	<bean id="baoliaoObject" class="com.ctvit.bean.Interact_baoliao_object" />
+	<bean id="comment" class="com.ctvit.bean.Interact_comment" />
+	 <bean name="hudongAction" class="com.ctvit.action.HudongAction" scope="prototype">
+		 <property name="baoLiaoService" ref="baoLiaoService" />
+		 <property name="baoliao" ref="baoliao" />
+		 <property name="baoliaoObject" ref="baoliaoObject" />
+		 
+	</bean>
+ 
+
+
+</beans>

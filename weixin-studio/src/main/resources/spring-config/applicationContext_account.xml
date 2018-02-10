@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+	
+	<!-- 人物mapper
+	<bean id="tabActorMapper" class="org.mybatis.spring.MapperFactoryBean">
+		<property name="mapperInterface" value="com.ctvit.dao.mapping.AccountMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>   
+	 -->
+	 
+	<bean id="accountMapper" class="org.mybatis.spring.MapperFactoryBean">
+		<property name="mapperInterface" value="com.ctvit.dao.AccountMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
+    </bean>
+    
+  <bean id="roleMapper" class="org.mybatis.spring.MapperFactoryBean">
+		<property name="mapperInterface" value="com.ctvit.dao.roleMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
+    </bean>  
+  
+    
+    <bean id="customizemenumapper" class="org.mybatis.spring.MapperFactoryBean">
+		<property name="mapperInterface" value="com.ctvit.dao.WxCustomizeMenusMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
+    </bean>  
+    
+    <bean id="accountRelationmapper" class="org.mybatis.spring.MapperFactoryBean">
+		<property name="mapperInterface" value="com.ctvit.dao.AccountRelationMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
+    </bean>  
+    
+    <!-- impl -->
+	<bean id="accountService" class="com.ctvit.service.AccountServiceImp">
+	  <property name="accountMapper" ref="accountMapper"/>
+      <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+      <property name="KeyGenerator" ref="KeyGenerator"/>  
+    </bean>
+	
+	 <bean id="RoleService" class="com.ctvit.service.RoleServiceImpl">
+	  <property name="roleMapper" ref="roleMapper"/>
+	 </bean>
+	
+	
+	  <bean id="accountRelationService" class="com.ctvit.service.AccountRelationServiceImpl">
+		  <property name="accountRelationmapper" ref="accountRelationmapper"/>
+	      <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	      <property name="KeyGenerator" ref="KeyGenerator"/>  
+     </bean>
+	
+	 
+	 <bean id="customizeMenuService" class="com.ctvit.service.CustomizeMenuServiceImpl">
+	  <property name="customizemenumapper" ref="customizemenumapper"/>
+      <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+      <property name="KeyGenerator" ref="KeyGenerator"/>  
+     </bean>
+	 
+	 
+	 
+	
+	 <bean name="queryData" class="com.ctvit.dao.QueryDataBean"></bean> 
+	
+	<!-- action-->
+	<bean name="accountAction" class="com.ctvit.action.AccountAction" scope="prototype">
+	<property name="loggerService" ref="loggerService" />
+	<property name="queryData" ref="queryData"></property> 
+	<property name="accountService" ref="accountService"></property>
+    <property name="RoleService" ref="RoleService"></property>	
+    <property name="accountRelationService" ref="accountRelationService"></property>
+    <property name="departService" ref="departService"></property>
+     <property name="departRelationService" ref="departRelationService"></property>
+	</bean>
+	
+	<bean name="waccountAction" class="com.ctvit.action.TabWaccountAction" scope="prototype">
+	<property name="accountRelationService" ref="accountRelationService"></property>
+	<property name="loggerService" ref="loggerService" />
+	<property name="waccountService" ref="waccountService"></property>
+    <property name="queryData" ref="queryData"></property> 
+	</bean>
+	
+	
+	
+	<bean name="CustomizemenuAction" class="com.ctvit.action.CustomizeMenusAction" scope="prototype">
+	<property name="customizeMenuService" ref="customizeMenuService"></property>
+	<property name="waccountService" ref="waccountService"></property>
+	<property name="loggerService" ref="loggerService" />
+    <property name="queryData" ref="queryData"></property> 
+	</bean>
+	
+	<bean name="ArelarionAction" class="com.ctvit.action.AccountRelationAction" scope="prototype">
+	<property name="accountRelationService" ref="accountRelationService"></property>
+    <property name="queryData" ref="queryData"></property> 
+    <property name="waccountService" ref="waccountService"></property>
+    <property name="loggerService" ref="loggerService" />
+	</bean>
+
+</beans>

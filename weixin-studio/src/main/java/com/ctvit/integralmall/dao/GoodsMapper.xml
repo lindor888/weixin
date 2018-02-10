@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ctvit.integralmall.dao.GoodsMapper">
+
+	<!-- <select id="getAllList" parameterType="java.util.Map" resultType="com.ctvit.integralmall.entity.Goods">
+		SELECT GoodsID,GoodsName,GoodsTypeID,GoodsDescript,GoodsUnitPoint,GoodsImageName ,Inventory
+		FROM tab_goods
+		WHERE Status = 0
+		AND waccountID = #{app_id}
+		limit #{currentPage},#{pageSize}
+	</select> --> 
+	<select id="getAllList" parameterType="java.util.Map" resultType="com.ctvit.integralmall.entity.Goods">
+		SELECT GoodsID,GoodsName,
+	     	goods.GoodsTypeID as GoodsTypeID , type.GoodsTypeName as GoodsTypeName,
+    	 	GoodsDescript,GoodsUnitPoint,GoodsImageName ,Inventory 
+ 		FROM tab_goods AS goods
+ 		LEFT JOIN tab_goodstype AS type
+ 		ON goods.GoodsTypeID = type.GoodsTypeID
+		WHERE goods.`Status` = 0 
+		AND waccountID = #{app_id}
+		ORDER BY CreateTime DESC
+		limit #{currentPage},#{pageSize}
+	</select>
+	
+	<select id="getGoodsTypeList" resultType="com.ctvit.integralmall.entity.GoodsType">
+		SELECT GoodsTypeID,GoodsTypeName
+			FROM tab_goodstype
+			WHERE `Status` = 0
+	</select>
+	
+	<select id="selectOne" parameterType="String" resultType="com.ctvit.integralmall.entity.Goods">
+	SELECT GoodsID,GoodsName,GoodsTypeID,GoodsDescript,GoodsUnitPoint,GoodsImageName ,Inventory
+		FROM tab_goods
+		WHERE GoodsID = #{goodsID}
+	</select>
+	
+	<select id="getCount" resultType="Integer" parameterType="String">
+		SELECT COUNT(GoodsID) FROM tab_goods
+		WHERE `Status` = 0
+		AND waccountID = #{appid}
+	</select>
+	
+	<insert id="insertSelective" parameterType="com.ctvit.integralmall.entity.Goods">
+		INSERT INTO tab_goods
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="goodsID != null">
+				GoodsID,
+			</if>
+			<if test="goodsName != null">
+				GoodsName,
+			</if>
+			<if test="goodsTypeID != null">
+				GoodsTypeID,
+			</if>
+			<if test="goodsDescript != null">
+				GoodsDescript,
+			</if>
+			<if test="goodsUnitPoint != null ">
+				GoodsUnitPoint,
+			</if>
+			<if test="goodsImageName != null">
+				GoodsImageName,
+			</if>
+			<if test="inventory != null">
+				Inventory,
+			</if>
+			<if test="createTime != null">
+				CreateTime,
+			</if>
+			<if test="waccountID != null">
+				waccountID,
+			</if>
+			<if test="status != null">
+				Status,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="goodsID != null">
+				#{goodsID,jdbcType=VARCHAR},
+			</if>
+			<if test="goodsName != null">
+				#{goodsName,jdbcType=VARCHAR},
+			</if>
+			<if test="goodsTypeID != null">
+				#{goodsTypeID,jdbcType=VARCHAR},
+			</if>
+			<if test="goodsDescript != null">
+				#{goodsDescript,jdbcType=VARCHAR},
+			</if>
+			<if test="goodsUnitPoint != null">
+				#{goodsUnitPoint,jdbcType=INTEGER},
+			</if>
+			<if test="goodsImageName != null">
+				#{goodsImageName,jdbcType=VARCHAR},
+			</if>
+			<if test="inventory != null">
+				#{inventory,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="waccountID != null">
+				#{waccountID,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ctvit.integralmall.entity.Goods" >
+    	UPDATE tab_goods
+	    <set >
+	      <if test="goodsName != null" >
+	        GoodsName = #{goodsName,jdbcType=VARCHAR},
+	      </if>
+	      <if test="goodsTypeID != null" >
+	        GoodsTypeID = #{goodsTypeID,jdbcType=VARCHAR},
+	      </if>
+	      <if test="goodsDescript != null" >
+	        GoodsDescript = #{goodsDescript,jdbcType=VARCHAR},
+	      </if>
+	      <if test="goodsUnitPoint != null" >
+	        GoodsUnitPoint = #{goodsUnitPoint,jdbcType=INTEGER},
+	      </if>
+	      <if test="goodsImageName != null" >
+	        GoodsImageName = #{goodsImageName,jdbcType=VARCHAR},
+	      </if>
+	      <if test="inventory != null" >
+	        Inventory = #{inventory,jdbcType=INTEGER},
+	      </if>
+	      <if test="createTime != null" >
+	        CreateTime = #{createTime,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="waccountID != null" >
+	        waccountID = #{waccountID,jdbcType=VARCHAR},
+	      </if>
+	      <if test="status != null" >
+	        Status = #{status,jdbcType=INTEGER},
+	      </if>
+	    </set>
+    	where GoodsID = #{goodsID,jdbcType=VARCHAR}
+  </update>
+</mapper>

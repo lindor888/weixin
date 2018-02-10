@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="keyword" namespace="/keyword" extends="weixin">
+		<!-- 匹配词管理 -->
+		<action name="*KeywordAction" class="keywordAction" method="{1}">
+			<result name="tiaozhuan">/editKeyword.jsp</result>
+			<result name="tiaoxuan">/sucai.jsp</result>
+			<result type="json" name="dft"><param name="root">mapJson</param></result>
+			<result name="init">/keywordManage.jsp</result>
+		</action>
+	</package>
+</struts>

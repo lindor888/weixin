@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<!-- saved from url=(0144)http://iwmh.mtq.tvm.cn/rest/epg/sub?token=8e8cae5ba3d5&channel_id=21497&openid=oHFX0jhpMq4PGO5wiyAVB8uLKlKc&sig=7e66389f692e4178c9c1c091b70986c6 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>节目单预约</title>
+<link href="resource/common_mobile.css" rel="stylesheet" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<style type="text/css">
+.body_bg{ position:fixed; left:0; right:0; top:0; bottom:0; z-index:-1}
+.body_bg img{ width:100%; height:100%}
+.slide_program{ clear:both; overflow:hidden; height:120px; position:relative; padding-top:25px;}
+.slide_program ul{clear:both; overflow:hidden;}
+.slide_program ul li{ float:left; position:relative; text-align:center}
+.slide_program ul li .pic img{   width: 100px;}
+.slide_program ul li h3{ padding-top:4px; color:#fff; font-size:16px;}
+.slide_program .forward{ position:absolute; left:0; top:0; width:10%; height:145px; background:url(resource/ico_forward.png) no-repeat center center; background-size:14px 25px; cursor:pointer}
+.slide_program .nextone{position:absolute; right:0; top:0; width:10%; height:145px; background:url(resource/ico_back.png) no-repeat center center; background-size:14px 25px;cursor:pointer}
+
+.list_order2{ margin:0 10px 0 14px; padding:0 0 55px 32px; border-left:solid 2px #cdcdcd;}
+.list_order2 li{ padding-top:12px; position:relative}
+.list_order2 li .arrow{ position:absolute; left:-38px; width:38px; height:31px; background:url(resource/ico_li.png) no-repeat 0 0; background-size:38px 31px;}
+.list_order2 li .wrap{ padding:6px 8px; background:#eaf2f7; border-radius:5px;}
+.list_order2 li .wrap .time{ clear:both; overflow:hidden; padding-bottom:3px}
+.list_order2 li .wrap .time strong{ float:left; font-weight:normal; font-size:14px; line-height:30px} 
+.list_order2 li .wrap .time span{ float:right; padding:4px 0; width:75px; text-align:center; color:#fff; font-size:12px; background:#000; border-radius:4px; box-shadow:0 2px 2px #888; cursor:pointer}
+.list_order2 li .wrap .time span.end{ background:#576b95}
+.list_order2 li .wrap .time span.ing{ background:#0eca79}
+.list_order2 li .wrap .time span.ready{ background:#ed4b3c}
+.list_order2 li .wrap h3{ margin-top:5px; padding-top:5px; border-top:solid 1px #c7c7c7; font-size:14px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis}
+.list_order2 li .wrap h3 img{ position:relative; top:-1px;width:20px; height:19px; vertical-align:middle; margin-right:4px;}
+
+.date_bottom{ position:fixed; bottom:0; width:100%; height:55px; left:0; overflow:hidden; background:#fff; border-top:solid 1px #888785;}
+.date_bottom ul li, .date_bottom ol li{ float:left; width:70px; text-align:center; cursor:pointer}
+.date_bottom ul li p, .date_bottom ol li p{ padding-top:5px; color:#777; font-size:18px; line-height:23px}
+.date_bottom ul li h3, .date_bottom ol li h3{padding:2px 0; color:#929292;font-size:12px}
+.date_bottom ul li.on p{ font-size:22px; color:#ed4b3c}
+.date_bottom ul li.on h3{ color:#ed4b3c}
+
+.date_bottom2{ position:fixed; bottom:0; display:none; width:100%; height:55px; left:0; overflow:hidden; background:#fff; border-top:solid 1px #888785;}
+.date_bottom2 ul li, .date_bottom ol li{ float:left; width:70px; text-align:center; cursor:pointer}
+.date_bottom2 ul li p, .date_bottom ol li p{ padding-top:5px; color:#777; font-size:18px; line-height:23px}
+.date_bottom2 ul li h3, .date_bottom ol li h3{padding:2px 0; color:#929292;font-size:12px}
+.date_bottom2 ul li.on p{ font-size:22px; color:#ed4b3c}
+.date_bottom2 ul li.on h3{ color:#ed4b3c}
+
+
+.tips2 {
+    background-color: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    z-index: 9999;
+    color: #FFF;
+    left: 0;
+    top: 0;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 14px;
+    display: none;
+    -webkit-transition: all 500ms ease-in-out;
+    height: 0;
+    line-height: 30px;
+}
+
+.tips {
+	position:absolute; 
+	z-index:10000; 
+	display:none;  
+	top:30%; 
+	left:6%; 
+	width:85%;  
+	border-radius:10px;
+}
+.tips .tip{ margin-top:15px; padding:0 15px 0 15px; min-height:50px; background-size:75px 75px; font-size:17px; line-height:1.4em; color:#ffffff;}
+.tips .btn{ margin:20px 0; text-align:center}
+.tips .btn strong{ display:inline-block; margin:0 4%; width:37%; line-height:40px; background:#fff; background:-webkit-gradient(linear, left top, left bottom, from(#ebebeb), to(#d8d8d8)); border-radius:5px; font-size:18px; font-weight:normal; text-align:center; cursor:pointer; color:#666}
+.tips .btn strong.focus{ background:-webkit-gradient(linear, left top, left bottom, from(#9fceeb), to(#67b2df)); color:#fff}
+.tips .arrow{ position:absolute; width:14px; height:29px; background:url("http://iwmh.mtq.tvm.cn/tpl/static/images/arrow.png") no-repeat 0 0; background-size:14px 29px; right:-13px; bottom:15%;}
+@media all and (min-width:600px){
+    .tips{max-width:600px; left:50%; margin-left:-310px}
+}
+@media all and (max-width:320px){
+    .tips .tip{ font-size:14px; padding-left:15px;background-size:65px 65px;min-height:50px;}
+    .tips .btn strong{ font-size:15px; line-height:34px}
+}
+.cover_div{position:absolute; z-index:9999; display:none;width:100%;height:100%;background-color:#000000;opacity:0.8;}
+.pop_tip{ position:absolute; z-index:10001; display:none;  top:30%; left:6%; width:85%; background:#fff; border-radius:10px;}
+.pop_tip .tip{ margin-top:15px; padding:0 15px 0 110px; min-height:75px; background:url("http://iwmh.mtq.tvm.cn/tpl/static/images/ico.png") no-repeat 20px center; background-size:75px 75px; font-size:17px; line-height:1.4em; color:#888}
+.pop_tip .btn{ margin:20px 0; text-align:center}
+.pop_tip .btn strong{ display:inline-block; margin:0 4%; width:37%; line-height:40px; background:#fff; background:-webkit-gradient(linear, left top, left bottom, from(#ebebeb), to(#d8d8d8)); border-radius:5px; font-size:18px; font-weight:normal; text-align:center; cursor:pointer; color:#666}
+.pop_tip .btn strong.focus{ background:-webkit-gradient(linear, left top, left bottom, from(#9fceeb), to(#67b2df)); color:#fff}
+.pop_tip .arrow{ position:absolute; width:14px; height:29px; background:url("http://iwmh.mtq.tvm.cn/tpl/static/images/arrow.png") no-repeat 0 0; background-size:14px 29px; right:-13px; bottom:15%;}
+@media all and (min-width:600px){
+    .pop_tip{max-width:600px; left:50%; margin-left:-310px}
+}
+@media all and (max-width:320px){
+    .pop_tip .tip{ font-size:14px; padding-left:100px;background-size:65px 65px;min-height:65px;}
+    .pop_tip .btn strong{ font-size:15px; line-height:34px}
+}
+
+
+.bodyScroll{width:100%; height:100%; overflow:hidden;position:relative;}
+</style>
+<script type="text/javascript" charset="utf-8" src="resource/jquery-1.10.2.js"></script><script type="text/javascript" src="resource/jweixin-1.0.0.js" charset="UTF-8"></script><script type="text/javascript" src="resource/weixin_share_new.js" charset="UTF-8"></script><script type="text/javascript" src="resource/iscroll_5.js" charset="UTF-8"></script><script>
+//提示信息
+var times;
+function setTips(){
+    clearTimeout(times);
+    tips.style.display="block";
+    times = setTimeout(function(){
+        tips.style.display="none";
+        $('.cover_div').hide();
+    },5000);
+}
+var times2;
+function setTips2(value){
+    tips2.innerHTML=value;
+    clearTimeout(times2);
+    tips2.style.display="block";
+    tips2.style.height="30px";
+    times2 = setTimeout(function(){
+        tips2.style.display="none";
+    },3000);
+}
+
+
+var channelScroll;
+var dayScroll;
+var bodyScroll;
+
+function loaded() {
+	channelScroll = new IScroll('.slide_program', { 
+		snap:true,
+		//probeType: 3, 
+		//mouseWheel: true,
+		click:true,
+		scrollX: true, 
+		scrollY: false,
+		momentum: false, //去掉惯性前冲效果
+		
+	});
+	channelScroll.on('scrollEnd', function(){
+		
+		c_p = this.currentPage.pageX;
+		//console.log(this);
+		
+		//防止重复加载同一个频道
+		var _tmpN = this.currentPage.pageX;
+		
+		if(_tmpN == now_cp)
+			return false;
+		
+		var _left = false;
+		var _right = true;
+		if(_tmpN < now_cp)
+		{
+			_left= true;
+			_right=false;
+		}
+		
+		now_cp = _tmpN;
+		
+		//控制左右箭头显示
+		if(parseInt(_ismore) == 1)
+		{
+			//alert(this.directionX);
+			if(_left)
+			{
+				$('.nextone').show();
+			}
+			else if(_right)
+			{
+				//alert('sge');
+				$('.forward').show();
+			}
+			if(_tmpN <= 0)
+			{
+				$('.forward').hide();
+			}
+			if(_tmpN >= this.pages.length -1)
+			{
+				$('.nextone').hide();
+			}
+			//alert(this.pages.length);
+		}
+
+		_isNewChannel = true;
+		_epgDay = ''; //清空epgday
+		
+		getEpgList();
+		//$('#ddd').html(this.currentPage.pageX);
+	});
+
+	dayScroll = new IScroll('.date_bottom', {
+		//snap:true,
+		//probeType: 3,
+		//mouseWheel: true,
+		click:true,
+		scrollX: true,
+		scrollY: false
+		//momentum: false, //去掉惯性前冲效果
+
+	});
+	dayScroll.scrollTo(-$(window).width(),0,1);
+	
+	bodyScroll = new IScroll('.bodyScroll', {
+		//snap:true,
+		//probeType: 3,
+		mouseWheel: true,
+		click:true,
+		scrollX: false, 
+		scrollY: true,
+		deceleration:0.003,//流动速度
+		//momentum: false, //去掉惯性前冲效果
+
+	});
+}
+
+//document.addEventListener('DOMContentLoaded', loaded, false);
+</script>
+<script>
+function getSearch(str){
+    var s=decodeURIComponent(str||location.search.substr(1)),arr=(s!==""&&s.split("&"))||[],arrL=arr.length,i=0,key=null,v=null,a=null,o={};
+        if(arrL)for(;i<arrL;i++){
+                a=arr[i].split("=")
+                o[a[0]]=a[1]    
+            }else if(s!==""){
+                a=s.split("=")
+                o[a[0]]=a[1]
+                };
+        return o            
+    };  
+var c_p = 0;
+var now_cp = 0;
+var d_p = 0;
+var _token = "8e8cae5ba3d5";
+var search=getSearch()
+,_openid=search["openid"]
+,_channel_id =search["waccountid"]
+var search = document.location.search;
+//var _openid = search.substr(search.indexOf('=')+1,search.length);
+var _sig = "7e66389f692e4178c9c1c091b70986c6";
+//var _channel_id = '';
+var _english_channel = '';
+var _channelUl = '';
+var _epgDay = '';
+var _ismore = "0";
+var _share_url = "http://mb.mtq.tvm.cn/oauth?wx_token=8e8cae5ba3d5&token=40fe533606&redirect_uri=http%3A%2F%2Fiwmh.mtq.tvm.cn%2Frest%2Fepg%2Fsub%3Ftoken%3D8e8cae5ba3d5%26channel_id%3D21497";
+var channelNum = "1";
+var _isNewChannel = true; //是否更改了频道数据,用于底部回看天数的加载
+
+var _nowDay = '';
+
+//默认的page_version和sid
+var _def_page_version = '';
+var _def_sid = '';
+var _constant_epg_day = '';
+
+$(function(){
+	var _windowWidth = $(window).width();
+	_channelUl = $('.slide_program ul');
+	var _LI = _channelUl.children('li');
+	var _liNum = _LI.length;
+	_channelUl.width(_liNum * _windowWidth);
+	_LI.width(_windowWidth);
+	
+	//bodyScroll
+	$('.bodyScroll').height($(window).height());
+	
+	//底部回看天数DIV
+	$('.date_bottom').width(_windowWidth);
+	$('.date_bottom2').width(_windowWidth);
+	var _dayLi = $('.date_bottom ul').children('li').first();
+	$('.date_bottom ul').width((10 * _dayLi.width()));
+	
+	$('.forward').hide();
+	
+	if(parseInt(_ismore) == 0 || parseInt(channelNum) == 1)
+	{
+		$('.nextone').hide();
+	}
+	//前一个
+	$('.forward').click(function(){
+		c_p --;
+		channelScroll.goToPage(c_p, 0,400);
+		
+	});
+	//后一个
+	$('.nextone').click(function(){
+		c_p ++;
+		channelScroll.goToPage(c_p, 0,400);
+		
+	});
+	
+	//当前天
+	var tim = new Date();
+	var _ty = tim.getFullYear();
+	var _tm = tim.getMonth()+ 1;
+	_tm = _tm < 10 ? '0'+_tm : _tm;
+	var _td = tim.getDate();
+	_td = _td < 10 ? '0'+_td : _td;
+	_nowDay = _ty + '-' + _tm + '-' + _td;
+	
+	//加载EPG列表
+	getEpgList();
+	
+	loaded();
+	
+	//监听节目单的预约和取消预约事件
+	listenEventFunc();
+});
+
+//获取epg列表
+getEpgList = function(){
+	//_channel_id = _channelUl.children("li:nth-child("+(c_p+1)+")").attr('channel_id');
+	_english_channel = _channelUl.children("li:nth-child("+(c_p+1)+")").attr('english_channel');
+	
+	var _showType = _channelUl.children("li:nth-child("+(c_p+1)+")").attr('show_type');
+	if(parseInt(_showType) == 2) //固定日期的类型
+	{
+		_epgDay = _channelUl.children("li:nth-child("+(c_p+1)+")").attr('constant_day');
+	}
+	
+	$.post(
+		"../epgdata",
+		{"token":_token,"openid":_openid,"sig":_sig,"channel_id":_channel_id,"english_channel":_english_channel,"epg_day":_epgDay},
+		function(data){
+			
+			if(data.result)
+			{
+				//先清空epg列表
+				$('.list_order2').html('');
+				
+				//设置标题
+				$('title').html(data.normalconf.title);
+				//设置背景
+			/* 	if(data.normalconf.bg_img !== '')
+				{
+					$('.body_bg').children('img').attr("src",data.normalconf.bg_img);
+				} */
+				
+				//默认的page_version和sid
+				_def_page_version = data.normalconf.page_version;
+				_def_sid = data.normalconf.sid;
+
+				//分亨方法
+				shareFunc(data);
+			
+				var time_now = Math.round(new Date().getTime() / 1000);
+				var listStr = '';
+				$.each(data.epglist,function(k,v){
+					listStr = '';
+					var _class = ''; //class名
+					var _button = ''; //按钮名, 回看,预约,边看边聊...
+					var _ico = '' //小图标
+					var _liveUrl = '';
+					var _liveUrlEnd = '';
+					
+					if(v.end_time < time_now)
+					{
+						_class = 'end';
+						_button = '回看';
+						_liveUrl = '<a href="../live/btv/index.html?openId='+_openid+'&videoId='+v.id+'&liveUrl='+v.live_url+'">';
+						_liveUrlEnd = '</a>';
+					}
+					else if(v.start_time <= time_now && v.end_time >= time_now)
+					{
+						_class = 'ing';
+						_button = '边看边聊';
+						_liveUrl = '<a href="../live/btv/live.html?openId='+_openid+'&videoId='+v.id+'&liveUrl='+v.live_url+'&waccountid='+_channel_id+'">';
+						_liveUrlEnd = '</a>';
+					}
+				
+					else
+					{
+						//已预约
+						if(v.issub == 1)
+						{
+							_class = 'cancel';
+							_button = '取消预约';
+						}
+						else
+						{
+							if(v.mid !== '' && v.push_time !=='' && parseInt(v.push_time) >= time_now)
+							{
+								_class = 'ready';
+								_button = '预约';
+							}
+							else
+							{
+								_class = 'ing';
+								_button = "即将开始";
+								_liveUrl = '<a href="'+v.live_url+'">';
+								_liveUrlEnd = '</a>';
+							}
+						}
+					}
+					
+					if(parseInt(v.label) !== 0)
+					{
+						_ico = '<img src="resource/ico'+v.label+'.png">';
+					}
+					listStr += '<li epgid="'+v.id+'" subid="'+v.subid+'" mid="'+v.mid+'" push_time="'+v.push_time+'">'+
+					'<div class="arrow"></div>'+
+					'<div class="wrap">'+
+					'<p class="time"><strong>'+UnixToTime(v.start_time)+'-'+UnixToTime(v.end_time)+'</strong>'+_liveUrl+'<span class="'+_class+'">'+_button+'</span>'+_liveUrlEnd+'</p>'+
+					'<h3>'+_ico+v.title+'</h3>'+
+					'</div>'+
+					'</li>';
+					$('.list_order2').append(listStr);
+					
+				});
+				
+				
+				//alert($('.list_order2').children().first().height());
+				//$('.list_order2').height(data.epglist.length * 83);
+				$('.list_order2').show();
+				//底部回看天数列表, 根据show_type 1:10天, 0:当天
+				//如果换了频道重新加载回看天数列表
+				if(_isNewChannel)
+				{
+					$('.date_ul').children('.on').removeClass('on');
+					$('.date_ul').children('li[today="1"]').addClass('on');
+					//getDayList(data.normalconf.show_type);
+
+					getDayList(data.normalconf.show_type, data.normalconf.constant_epg_day);
+				}
+				
+				$('.list_order2').css("color",data.normalconf.font_color);
+				$('.tips2').hide();
+				
+				/*setTimeout(function () {
+					channelScroll.refresh();
+					dayScroll.refresh();
+			    }, 200);*/
+			    
+				bodyScroll.refresh();
+			    
+				if(_nowDay !== _epgDay) //不是当天回顶部
+				{
+					bodyScroll.scrollTo(0,0,1);
+				}
+			    
+				setTimeout(function () {
+				//页面定位到当前时间
+				setPagePositionF();
+				}, 100);
+			}
+			else
+			{
+				$('.list_order2').hide();
+				setTips2(data.msg);
+			}
+		},
+		'json'
+	);
+	
+}
+
+///将页面定位到当前时间
+setPagePositionF = function()
+{
+	$('.list_order2').ready(function(){
+		if($('span[class="ing"]').length > 0)
+		{
+			//var offsetTop = $('span[class="ing"]').offset().top;
+			var _thli = $('span[class="ing"]').parents('li');
+			//alert(offsetTop);
+			//$('html body').scrollTop(offsetTop - 20);
+			var _n = $('.list_order2 li').index(_thli) +1;
+			bodyScroll.scrollToElement(document.querySelector('#listdiv li:nth-child('+_n+')'),0);
+			//bodyScroll.scrollTo(0,-(offsetTop - 20));
+		}
+	});
+}
+
+//监听预约和取消预约事件 
+listenEventFunc = function()
+{
+	//预约事件 
+	$(document).on('click','span[class="ready"]',function(){
+		
+		//判断是否关注了服务号
+		var isAtt = "1";
+		var flowUrl = "http://mp.weixin.qq.com/s?__biz=MjM5ODM3NzI0NA==&mid=205254081&idx=1&sn=3eece0b971ba06b0d394144a3dfc55b1#rd";
+		if(parseInt(isAtt) !== 1)
+		{
+			$('.cover_div').show();
+			$('.pop_tip').show();
+			return false;
+		} 
+		
+		var _epgid = $(this).parents('li').attr('epgid');
+		var _mid = $(this).parents('li').attr('mid');
+		var _subid = $(this).parents('li').attr('subid');
+		var _push_time = $(this).parents('li').attr('push_time');
+		var _epg_name = $(this).parents('.wrap').children('h3').html();
+		//console.log(_mid+'--'+_subid+'--'+_push_time+'--'+_token+'--'+_openid);
+		//alert($(this).parents('li').attr('subid'));
+		var subType = 1;
+		doSubscribeFunc(_epgid,_epg_name,_mid,_subid,_push_time,subType,$(this));
+	});
+	
+	//取消预约事件
+	$(document).on('click','span[class="cancel"]',function(){
+		var _epgid = $(this).parents('li').attr('epgid');
+		var _mid = $(this).parents('li').attr('mid');
+		var _subid = $(this).parents('li').attr('subid');
+		var _push_time = $(this).parents('li').attr('push_time');
+		var _epg_name = $(this).parents('.wrap').children('h3').html();
+		//console.log(_mid+'--'+_subid+'--'+_push_time+'--'+_token+'--'+_openid);
+		//alert($(this).parents('li').attr('subid'));
+		var subType = 0;
+		doSubscribeFunc(_epgid,_epg_name,_mid,_subid,_push_time,subType,$(this));
+	});
+}
+
+doSubscribeFunc = function(_epgid,_epg_name,_mid,_subid,_push_time,subType,obj)
+{
+	var _nowObj = obj;
+	var _now_subid = _subid;
+	var _now_subtype = subType;
+	var _now_epg_id = _epgid;
+	var headimgurl,nickname;
+	$.ajax({
+		url:"/weixin-studio/interact/showUInteract?ids="+_openid,
+		type:"get",
+		async:false,
+		success:function(data){
+			// 赋值：用户头像
+			nickname = data.rows[0].nickname;
+			headimgurl = data.rows[0].headimgurl;
+		}
+	});
+	
+	$.post(
+		"../subscribe",
+		{"epgid":_epgid,"waccountid":_channel_id,"openid":_openid,"subid":_now_subid,"subtype":_now_subtype,"headimgurl":headimgurl,"nickname":nickname},
+		function(data){
+			if(data.result)
+			{
+				//第一次预约,回写subid
+				if(_now_subid == '' && _now_subtype == 1)
+				{
+					_nowObj.parents('li').attr('subid',data.subid);
+					_now_subid = data.subid;
+				}
+				
+				var _msg = '';
+				//预约后
+				if(_now_subtype == 1)
+				{
+					_nowObj.html('取消预约');
+					_nowObj.attr('class','cancel');
+					_msg = '预约成功';
+					setTips2(_msg);
+				
+					//跳转到预约后的页面
+					window.location.href="sub.html?token="+_token+'&openid='+_openid+'&subid='+_now_subid+'&epgid='+_now_epg_id+'&waccountid='+_channel_id+'&lineNum='+data.seat.lineNum+'&columnNum='+data.seat.columnNum;
+					 	
+ 				}
+				else //取消预约后
+				{
+					_nowObj.html('预约');
+					_nowObj.attr('class','ready');
+					_msg = '预约已取消';
+
+					setTips2(_msg);
+				}
+			}
+			else
+			{
+				setTips2("操作失败!");
+			}
+		},
+		'json'
+	);
+}
+
+//底部回看天数列表 
+getDayList = function(show_type, static_day)
+{
+	//10天
+	if(show_type == 1)
+	{
+		$('.date_bottom2').hide();
+		$('.date_bottom').children('ul').children('li').last().show();
+		$('.date_bottom').children('ul').children('li').last().prev().show();
+		$('.date_bottom').show();
+	}
+	//只显示当天和历史数据
+	else if(show_type == 3)
+	{
+		$('.date_bottom2').hide();
+		$('.date_bottom').children('ul').children('li').last().hide();
+		$('.date_bottom').children('ul').children('li').last().prev().hide();
+		$('.date_bottom').show();
+	}
+	else //当天
+	{
+		showOneDay(show_type, static_day);
+		$('.date_bottom').hide();
+		$('.date_bottom2').show();
+	}
+	
+}
+
+//分享方法
+shareFunc = function(data)
+{
+	var share_img = "http://iwmh.mtq.tvm.cn/static/images/epg/img/share_df.jpg";
+	var share_title = data.normalconf.share_title;
+	var share_desc = '节目单';
+	
+	share_img = data.normalconf.share_img;
+	share_title = data.normalconf.share_title;
+	share_desc = data.normalconf.share_desc;
+	
+	wxfn({
+		appId		:	"wx07af901adc6f0198"
+		,timestamp	:	"1438755847"
+		,nonceStr	:	"ClXsbCaDEvrtRbWB"
+		,signature	:	"32bcb9aeec6649890107c72b478e3abc886140bb"
+		,img		:	share_img
+		,url		:	_share_url
+		,title		:	share_title
+		,desc		:	share_desc
+		});
+}
+
+</script><script>
+//时间戳转换
+/**               
+* 时间戳转换日期               
+* @param <int> unixTime    待时间戳(秒)
+* @param <boolen> ext	   完成 时间  YY-MM-DD HH:II
+* @return string  H:i
+*/
+UnixToTime		=	function(unixTime,ext){
+	var _this = this;
+	var tim = new Date(unixTime * 1000);
+	var hour = tim.getHours();
+	hour = hour < 10 ? '0'+hour : hour;
+	var minute = tim.getMinutes();
+	minute = minute < 10 ? '0'+minute : minute;
+	var timStr = hour + ':' + minute;
+	if(ext)
+	{
+		var year = tim.getFullYear();
+		var month = tim.getMonth()+1;
+		month = month < 10 ? '0'+month : month;
+		var day = tim.getDate();
+		day = day < 10 ? '0'+day : day;
+		
+		timStr = year +'-'+ month +'-'+ day +' '+ timStr;
+	}
+	
+	return timStr;
+}
+
+
+function focusFol(){
+    var follow_url = "http://mp.weixin.qq.com/s?__biz=MjM5ODM3NzI0NA==&mid=205254081&idx=1&sn=3eece0b971ba06b0d394144a3dfc55b1#rd";
+    //alert(follow_url);
+    follow_url = '';
+    if(follow_url !== '')
+    {
+    	window.location.href = follow_url;
+    }
+    else
+    {
+    	$('.pop_tip').hide();
+    	setTips();
+    }
+}
+function concel(){
+    //pop_tip.style.display = "none";
+    $('.cover_div').hide();
+    $('.pop_tip').hide();
+    //return false;
+}
+</script></head>
+
+<body>
+<div class="cover_div"></div>
+<div class="tips2" id="tips2" style="display: none;"></div>
+<div class="body_bg"><img src="resource/epg_default.jpg"></div>
+
+<div class="bodyScroll" style="height: 642px;">
+<div style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); -webkit-transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; -webkit-transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);">
+<div class="slide_program" style="width:100%;"><!--//宽为浏览器的宽度-->
+	<ul style="position: relative; width: 1366px; transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); -webkit-transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; -webkit-transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);">
+	
+	<li channel_id="21497" show_type="1" constant_day="2015-08-04" english_channel="CCTV5AHD" style="width: 1366px;"><!--//li宽为浏览器的宽度-->
+        <div class="pic"><img src="resource/btv.jpg"></div>
+        <h3>北京电视台</h3>
+    </li>    
+
+    </ul>
+    <div class="forward" style="display: none;"></div><!-- 前一个 -->
+    <div class="nextone" style="display: none;"></div><!-- 后一个 -->
+</div>
+
+
+
+<ul class="list_order2" id="listdiv" style="color: rgb(0, 0, 0);">
+</ul>
+</div>
+</div><!-- bodyScroll -->
+
+<div class="date_bottom" style="width: 1366px;">
+	<ul class="date_ul" style="position: relative; width: 700px; transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); -webkit-transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; -webkit-transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);"><li date="2015-07-29" class="on"><p>29</p><h3>星期三</h3></li><li date="2015-07-30" class=""><p>30</p><h3>星期四</h3></li><li date="2015-07-31" class=""><p>31</p><h3>星期五</h3></li><li date="2015-08-01" class=""><p>01</p><h3>星期六</h3></li><li date="2015-08-02" class=""><p>02</p><h3>星期天</h3></li><li date="2015-08-03" class=""><p>03</p><h3>星期一</h3></li><li date="2015-08-04" class=""><p>昨天</p><h3>星期二</h3></li><li date="2015-08-05" class="" today="1"><p>今天</p><h3>星期三</h3></li><li date="2015-08-06" class=""><p>明天</p><h3>星期四</h3></li><li date="2015-08-07" class=""><p>07</p><h3>星期五</h3></li></ul>
+</div>
+
+<div class="date_bottom2" style="width: 1366px; display: none;">
+</div>
+<!-- 统计 -->
+<img style="display:none;" src="resource/ana" width="0" height="0">
+<!-- 统计 -->
+
+<script>
+//生成回看天数列表
+function showday(){
+	var _arr = ['星期天','星期一','星期二','星期三','星期四','星期五','星期六'];
+	var nowDate = new Date();
+	var timenum = nowDate.getTime();
+
+	var _dateStr = '';
+
+	//回看7天
+	for(var i = 7; i > 0; i--)
+	{
+		var _tmpDateN = timenum - (3600 * 24 * i * 1000);
+		//var _s = UnixToTime(_tmpDateN);
+		var _tmpDate = new Date(_tmpDateN);
+		var _year = _tmpDate.getFullYear();
+		var _month = _tmpDate.getMonth() + 1;
+		_month = _month < 10 ? '0' + _month : _month
+		var _day = _tmpDate.getDate();
+		_day = _day < 10 ? '0' + _day : _day;
+		var _week = _tmpDate.getDay();
+
+		var _date = _year + '-' + _month + '-' + _day;
+
+		if(i == 1)
+		{
+			_day = '昨天';
+		}
+		_dateStr += '<li date="'+_date+'"><p>'+_day+'</p><h3>'+_arr[_week]+'</h3></li>';
+	}
+	//未来三天含当天
+	for(var j=0; j < 3; j++)
+	{
+		var _tmpDateN = timenum + (3600 * 24 * j * 1000);
+		//var _s = UnixToTime(_tmpDateN);
+		var _tmpDate = new Date(_tmpDateN);
+		var _year = _tmpDate.getFullYear();
+		var _month = _tmpDate.getMonth() + 1;
+		_month = _month < 10 ? '0' + _month : _month
+		var _day = _tmpDate.getDate();
+		_day = _day < 10 ? '0' + _day : _day;
+		var _week = _tmpDate.getDay();
+
+		var _date = _year + '-' + _month + '-' + _day;
+		var _class = '';
+		if(j == 0)
+		{
+			_day = '今天';
+			_class = 'class="on" today="1"';
+		}
+		if(j == 1)
+		{
+			_day = '明天';
+		}
+		_dateStr += '<li date="'+_date+'" '+_class+'><p>'+_day+'</p><h3>'+_arr[_week]+'</h3></li>';
+	}
+
+	//console.log(_dateStr);
+	$('.date_ul').html(_dateStr);
+
+	$(document).on('click','.date_ul li',function(){
+		if($(this).hasClass('on'))
+			return false;
+		
+		$(this).siblings().removeClass('on');
+		$(this).addClass('on');
+		//alert($(this).attr("date"));
+		_epgDay =  $(this).attr("date");
+		
+		_isNewChannel = false;
+		getEpgList();
+	});
+}
+//当天或某天的EPG方法
+function showOneDay(type,day){
+	var _arr = ['星期天','星期一','星期二','星期三','星期四','星期五','星期六'];
+	if(day != '' && parseInt(type) == 2){
+		console.log('指定某天');
+		var myDate = new Date(Date.parse(day.replace(/-/g, "/")));
+		_week = myDate.getDay();
+		_dateStr = '<ul class="data_ul" style="width:140px;margin:0 auto"><li style="width:140px" date="'+day+'"><p>'+day+'</p><h3>'+_arr[_week]+'</h3></li></ul>';
+		$('.date_bottom2').html(_dateStr);
+		return;
+	}
+
+	if(parseInt(type) == 0){
+		console.log('当天');
+		var _tmpDate = new Date();
+
+		var _year = _tmpDate.getFullYear();
+		var _month = _tmpDate.getMonth() + 1;
+		_month = _month < 10 ? '0' + _month : _month
+		var _day = _tmpDate.getDate();
+		_day = _day < 10 ? '0' + _day : _day;
+		var _week = _tmpDate.getDay();
+		var _date = _year + '-' + _month + '-' + _day;
+		_week = _tmpDate.getDay();
+		_dateStr = '<ul class="data_ul" style="width:140px;margin:0 auto"><li style="width:140px" date="'+_date+'"><p>'+_date+'</p><h3>'+_arr[_week]+'</h3></li></ul>';
+		$('.date_bottom2').html(_dateStr);
+		return;
+	}
+}
+$(function(){
+	showday();
+});
+</script>
+</body></html>

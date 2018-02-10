@@ -1,0 +1,32 @@
+@charset "utf-8";
+
+/*common*/
+html,body,div,ul,dl,dt,dd,li,p,h1,h2,h3,h4,h5,h6,span,a,em,img{margin:0;padding:0;}
+body{font:12px "宋体";}
+ul{list-style:none;}
+ul:after{font-size:0;line-height:0;clear:both;overflow:hidden;height:0;}
+.clear{font-size:0;line-height:0;clear:both;overflow:hidden;height:0;}
+.vspace{font-size:0;line-height:0;clear:both;overflow:hidden;height:10px;}
+.l{float:left;}
+.r{float:right;}
+a{text-decoration:none;}
+img{ border:0}
+
+/*index*/
+.wrapper{width:1221px;margin:0 auto; background: url(../images/bg.jpg); overflow:hidden; height:614px;}
+.wrapper:after{font-size:0;line-height:0;clear:both;overflow:hidden;}
+.bg{ background:url(../images/wxbg.jpg)}
+
+/*login*/
+.logintop img{ border:0px;}
+.logintop { width:519px;float:left;}
+.logintop .top{ padding:10px 0 0 10px; float:left;}
+.logintop .loginx{ padding-top:20px;float:left;}
+.login img{ border:0px;}
+.login{ width:519px; height:293px;float:left;padding: 257px 0 0 670px;*padding: 256px 0 0 670px;}
+.login .name{float:left; font-family:"微软雅黑"; font-size:18px; padding:0 0 0 137px; width:186px;color:#000;}
+.login .namebox{ width:183px; height:21px;border:1px solid #00abd6}
+.login .password{float:left; font-family:"微软雅黑"; font-size:18px;padding: 21px 0 0 137px;*padding: 19px 0 0 137px; width:186px;color:#000;}
+.login .pdbox{ width:183px; height:21px; border:1px solid #00abd6}
+.login .loginbtn{float:left; padding:9px 0 0 138px;*padding:7px 0 0 138px;}
+

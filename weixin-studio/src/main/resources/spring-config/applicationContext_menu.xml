@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+	<!-- menu -->
+	<bean id="menuMapper" class="org.mybatis.spring.MapperFactoryBean">
+		<property name="mapperInterface" value="com.ctvit.dao.MenuMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
+	<bean id="menuService" class="com.ctvit.service.MenuServiceImpl">
+		<property name="menuMapper" ref="menuMapper" />
+		<property name="loggerService" ref="loggerService" />
+	</bean>
+
+	<bean name="menuAction" class="com.ctvit.action.MenuAction" scope="prototype">
+		<property name="menuService" ref="menuService"></property>
+	</bean>
+	<!-- depart -->
+	<bean id="departMapper" class="org.mybatis.spring.MapperFactoryBean">
+		<property name="mapperInterface" value="com.ctvit.dao.DepartMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
+	<bean id="departService" class="com.ctvit.service.DepartServiceImpl">
+		<property name="departMapper" ref="departMapper" />
+	</bean>
+
+	<bean name="departAction" class="com.ctvit.action.DepartAction"
+		scope="prototype">
+		<property name="departService" ref="departService"></property>
+		<property name="RoleService" ref="RoleService"></property>
+	</bean>
+	<!-- role -->
+	<bean id="roleMapper" class="org.mybatis.spring.MapperFactoryBean">
+		<property name="mapperInterface" value="com.ctvit.dao.roleMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	
+	<bean id="departRelationMapper" class="org.mybatis.spring.MapperFactoryBean">
+		<property name="mapperInterface" value="com.ctvit.dao.DepartRelationMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	
+
+	<bean id="roleService" class="com.ctvit.service.RoleServiceImpl">
+		<property name="roleMapper" ref="roleMapper" />
+	</bean>
+	<bean id="departRelationService" class="com.ctvit.service.DepartRelationServiceImpl">
+		<property name="departRelationMapper" ref="departRelationMapper" />
+	</bean>
+
+	<bean name="roleAction" class="com.ctvit.action.RoleAction" scope="prototype">
+		<property name="menuService" ref="menuService"></property>
+		<property name="roleService" ref="roleService"></property>
+		<property name="KeyGenerator" ref="KeyGenerator"/>  
+	</bean>
+
+<bean name="ReAction" class="com.ctvit.action.DepartRelationAction" scope="prototype">
+		<property name="departRelationService" ref="departRelationService"></property>
+	    <property name="loggerService" ref="loggerService" />
+		<property name="roleService" ref="roleService"></property>
+		<property name="KeyGenerator" ref="KeyGenerator"/>  
+	</bean>
+	<!-- log -->
+
+	<bean id="loggerMapper" class="org.mybatis.spring.MapperFactoryBean">
+		<property name="mapperInterface" value="com.ctvit.dao.LoggerMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
+	<bean id="loggerService" class="com.ctvit.service.LoggerServiceImpl">
+		<property name="loggerMapper" ref="loggerMapper" />
+	</bean>
+	
+	<bean id="loggerAction" class="com.ctvit.action.LoggerAction" scope="prototype">
+		<property name="loggerService" ref="loggerService"></property>
+	</bean>
+</beans>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+	
+	<!-- 人物mapper
+	<bean id="tabActorMapper" class="org.mybatis.spring.MapperFactoryBean">
+		<property name="mapperInterface" value="com.ctvit.dao.mapping.AccountMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>   
+	 -->
+	 
+	<bean id="graphicMaterialMapper" class="org.mybatis.spring.MapperFactoryBean">
+		<property name="mapperInterface" value="com.ctvit.dao.GraphicMaterialMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
+    </bean>
+	<bean id="graphicMaterialService" class="com.ctvit.service.GraphicMaterialServiceImp">
+	  <property name="graphicMaterialMapper" ref="graphicMaterialMapper"/>
+     <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+     <property name="keyGenerator" ref="KeyGenerator" />
+	<!--  <property name="keyGenerator" ref="KeyGenerator"/>-->
+	</bean>
+	 
+	 
+	 <bean id="GraphicMaterial" class="com.ctvit.bean.GraphicMaterial"></bean>
+	<bean id="KeyGenerator" class="com.ctvit.util.KeyGenerator"></bean>
+	<!-- action-->
+	<bean name="graphicMaterialAction" class="com.ctvit.action.GraphicMaterialAction" >
+	<property name="graphicMaterial" ref="GraphicMaterial"></property>
+	<property name="graphicMaterialService" ref="graphicMaterialService"></property>
+	 
+	</bean>
+	 <!-- 新增推送  -->
+	<bean id="image" class="com.ctvit.bean.TuwenPushBean"></bean>
+	<bean id="graphicpushAction" class="com.ctvit.action.GraphicPushAction" scope="prototype">
+	<property name="image" ref="image"></property>
+	<property name="graphicPushService" ref="graphicPushService"></property>
+	</bean>
+	 <bean id="graphicPushMapper" class="org.mybatis.spring.MapperFactoryBean">
+   		<property name="mapperInterface" value="com.ctvit.dao.GraphicPushMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+	<bean id="graphicPushService" class="com.ctvit.service.GraphicPushService" scope="prototype">
+	<property name="graphicPushMapper" ref="graphicPushMapper" />
+	</bean>
+	 <!-- 新增推送 
+	<bean id="jsonBean" class="com.ctvit.bean.JsonBean"></bean>
+	<bean id="articles" class="com.ctvit.bean.Articles">
+	<property name="jsonBean" ref="jsonBean"></property>
+	</bean>
+	<bean id="news" class="com.ctvit.bean.News">
+	<property name="articles" ref="articles"></property>
+	</bean>
+	<bean id="image" class="com.ctvit.bean.Imagexml"></bean>
+	<bean id="graphicBean" class="com.ctvit.bean.GraphicBean">
+	<property name="news" ref="news"></property>
+	</bean>
+	<bean id="graphicpushAction" class="com.ctvit.action.GraphicPushAction" scope="prototype">
+	<property name="graphicPushService" ref="graphicPushService"></property>
+	<property name="image" ref="image"></property>
+	</bean>
+	<bean id="graphicPushService" class="com.ctvit.service.GraphicPushService" scope="prototype">
+	<property name="graphicBean" ref="graphicBean"></property>
+	</bean>
+	-->
+</beans>

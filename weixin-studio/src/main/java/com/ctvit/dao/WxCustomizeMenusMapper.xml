@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ctvit.dao.WxCustomizeMenusMapper" >
+  <resultMap id="BaseResultMap" type="com.ctvit.bean.WxCustomizeMenus" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="parentId" property="parentid" jdbcType="VARCHAR" />
+    <result column="Name" property="name" jdbcType="VARCHAR" />
+    <result column="contentType" property="contenttype" jdbcType="TINYINT" />
+    <result column="MaterialId" property="materialid" jdbcType="VARCHAR" />
+    <result column="creatTime" property="creattime" jdbcType="TIMESTAMP" />
+    <result column="modifierId" property="modifierid" jdbcType="VARCHAR" />
+    <result column="modifiTime" property="modifitime" jdbcType="TIMESTAMP" />
+    <result column="state" property="state" jdbcType="TINYINT" />
+    <result column="catalogTitle" property="catalogTitle" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, account, parentId, Name, contentType, MaterialId, creatTime, modifierId, modifiTime, 
+    state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tab_wxCustomizeMenus
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tab_wxCustomizeMenus
+    where id = #{id,jdbcType=VARCHAR} or parentId=#{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ctvit.bean.WxCustomizeMenus" >
+    insert into tab_wxCustomizeMenus (id, account, parentId, 
+      Name, contentType, MaterialId, 
+      creatTime, modifierId, modifiTime, 
+      state)
+    values (#{id,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, #{parentid,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{contenttype,jdbcType=TINYINT}, #{materialid,jdbcType=VARCHAR}, 
+      #{creattime,jdbcType=TIMESTAMP}, #{modifierid,jdbcType=VARCHAR}, #{modifitime,jdbcType=TIMESTAMP}, 
+      #{state,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ctvit.bean.WxCustomizeMenus" >
+    insert into tab_wxCustomizeMenus
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="account != null" >
+        account,
+      </if>
+      <if test="parentid != null" >
+        parentId,
+      </if>
+      <if test="name != null" >
+        Name,
+      </if>
+      <if test="contenttype != null" >
+        contentType,
+      </if>
+      <if test="materialid != null" >
+        MaterialId,
+      </if>
+      <if test="creattime != null" >
+        creatTime,
+      </if>
+      <if test="modifierid != null" >
+        modifierId,
+      </if>
+      <if test="modifitime != null" >
+        modifiTime,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="contenttype != null" >
+        #{contenttype,jdbcType=TINYINT},
+      </if>
+      <if test="materialid != null" >
+        #{materialid,jdbcType=VARCHAR},
+      </if>
+      <if test="creattime != null" >
+        #{creattime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifierid != null" >
+        #{modifierid,jdbcType=VARCHAR},
+      </if>
+      <if test="modifitime != null" >
+        #{modifitime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ctvit.bean.WxCustomizeMenus" >
+    update tab_wxCustomizeMenus
+    <set >
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        parentId = #{parentid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="contenttype != null" >
+        contentType = #{contenttype,jdbcType=TINYINT},
+      </if>
+      <if test="materialid != null" >
+        MaterialId = #{materialid,jdbcType=VARCHAR},
+      </if>
+      <if test="creattime != null" >
+        creatTime = #{creattime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifierid != null" >
+        modifierId = #{modifierid,jdbcType=VARCHAR},
+      </if>
+      <if test="modifitime != null" >
+        modifiTime = #{modifitime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR} 
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ctvit.bean.WxCustomizeMenus" >
+    update tab_wxCustomizeMenus
+      set account = #{account,jdbcType=VARCHAR},
+      parentId = #{parentid,jdbcType=VARCHAR},
+      Name = #{name,jdbcType=VARCHAR},
+      contentType = #{contenttype,jdbcType=TINYINT},
+      MaterialId = #{materialid,jdbcType=VARCHAR},
+      creatTime = #{creattime,jdbcType=TIMESTAMP},
+      modifierId = #{modifierid,jdbcType=VARCHAR},
+      modifiTime = #{modifitime,jdbcType=TIMESTAMP},
+      state = #{state,jdbcType=TINYINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ctvit.dao.QueryDataBean">
+     select * from tab_wxCustomizeMenus where 1=1 and state=1
+     <if test="waccountId !=null and waccountId!=''">
+     and account =#{waccountId,jdbcType=VARCHAR}
+     </if>
+  </select>
+  
+  <select id="selectById" resultMap="BaseResultMap"  parameterType="java.lang.String" >
+   select  w.*, case when  t.catalogTitle is not null and t.catalogTitle!=''  then  t.catalogTitle when  g.catalogTitle is not null and g.catalogTitle!=''   then  g.catalogTitle    end  catalogTitle
+from tab_wxCustomizeMenus   w left  join tab_wx_TextMaterial  t on t.id=w.MaterialId   left join tab_wx_GraphicMaterial g on g.id=w.MaterialId   where w.id=#{id,jdbcType=VARCHAR}
+and state !=3
+  </select>
+  
+  <select id="menuCount" resultType="Integer"   parameterType="java.lang.String">
+  select  count(*)  from tab_wxCustomizeMenus   where 
+  account=#{id,jdbcType=VARCHAR} and  parentId =#{id,jdbcType=VARCHAR}   
+  </select>
+  
+  
+   <select id="menuparentCount"  resultType="Integer"  parameterType="java.lang.String">
+  select  count(*)  from tab_wxCustomizeMenus   where   parentId =#{id,jdbcType=VARCHAR}     
+  </select>
+  
+   <select id="menuparentCountByName"  resultType="Integer"  parameterType="com.ctvit.bean.WxCustomizeMenus">
+  select  count(*)  from tab_wxCustomizeMenus   where binary  Name =#{name,jdbcType=VARCHAR}  
+  
+  and account= #{account,jdbcType=VARCHAR}   
+  
+  <if test="id !=null ">
+  and id!=#{id,jdbcType=VARCHAR}  
+  
+  </if>
+  </select>
+  
+</mapper>

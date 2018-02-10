@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ctvit.dao.AccountMapper">
+	<resultMap id="BaseResultMap" type="com.ctvit.bean.Account">
+		<id column="account_id" property="accountId" jdbcType="VARCHAR" />
+		<result column="login" property="login" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="role_id" property="roleId" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="state" property="state" jdbcType="TINYINT" />
+		<result column="department" property="department" jdbcType="TINYINT" />
+		<result column="rname" property="roleName" jdbcType="VARCHAR" />
+		<result column="departname" property="departName" jdbcType="VARCHAR" />
+		<result column="department" property="department" jdbcType="TINYINT" />
+		<result column="isinside" property="isinside" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap type="com.ctvit.bean.Account" id="userAndDepartResultMap">
+		<id column="account_id" property="accountId" />
+		<result column="login" property="login" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="role_id" property="roleId" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="state" property="state" jdbcType="TINYINT" />
+		<result column="department" property="department" jdbcType="TINYINT" />
+		<result column="rname" property="roleName" jdbcType="VARCHAR" />
+		<result column="createtimestring" property="createtimestring" jdbcType="VARCHAR" />
+		<association property="depart" column="depart_id" javaType="com.ctvit.bean.Depart">
+			<id column="depart_id" property="departId" />
+			<result column="departnane" property="departName" />
+			<association property="role" column="role_id" javaType="com.ctvit.bean.role">
+				<result column="role_id" property="roleId" />
+				<result column="rights" property="rights" />
+			</association>
+		</association>
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		account_id, login, password, username, role_id, create_time,state,department
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select * from tab_account where account_id = #{accountId,jdbcType=VARCHAR}
+	</select>
+	<select id="getUserAndRoleById" parameterType="string" resultMap="userAndDepartResultMap">
+		select u.account_id,u.login,u.password,u.username,u.department,d.depart_id,d.departname,r.role_id,r.rights
+		from tab_account u
+		left join tb_depart d on u.department=d.depart_id
+		left join tb_role r on r.role_id=d.role_id
+		where u.login=#{login}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from tab_account
+		where account_id = #{accountId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.ctvit.bean.Account">
+		insert into tab_account (account_id, login, password,
+		username,
+	
+		 role_id,
+		
+		  create_time,state,department
+		)
+		values (#{accountId,jdbcType=VARCHAR}, #{login,jdbcType=VARCHAR},
+		#{password,jdbcType=VARCHAR},
+		#{username,jdbcType=VARCHAR},
+	
+		#{roleId,jdbcType=VARCHAR},
+		
+		 #{createTime,jdbcType=TIMESTAMP}
+		, #{state,jdbcType=TINYINT} , #{department,jdbcType=TINYINT}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ctvit.bean.Account">
+		insert into tab_account
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="accountId != null">
+				account_id,
+			</if>
+			<if test="login != null">
+				login,
+			</if>
+			<if test="password != null">
+				password,
+			</if>
+			<if test="username != null">
+				username,
+			</if>
+			<if test="roleId != null ">
+				role_id,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="state != null">
+				state,
+			</if>
+			<if test="department != null">
+				department,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="accountId != null">
+				#{accountId,jdbcType=VARCHAR},
+			</if>
+			<if test="login != null">
+				#{login,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				#{password,jdbcType=VARCHAR},
+			</if>
+			<if test="username != null">
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="roleId != null">
+				#{roleId,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=TINYINT},
+			</if>
+			<if test="department != null">
+				#{department,jdbcType=TINYINT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ctvit.bean.Account">
+		update tab_account
+		<set>
+			<if test="login != null">
+				login = #{login,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				password = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="username != null">
+				username = #{username,jdbcType=VARCHAR},
+			</if>
+			<if test="roleId != null  ">
+				role_id = #{roleId,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+
+			<if test="state != null">
+				state = #{state,jdbcType=TIMESTAMP},
+			</if>
+			<if test="department != null">
+				department = #{department,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where account_id = #{accountId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ctvit.bean.Account">
+		update tab_account
+		set login = #{login,jdbcType=VARCHAR},
+		password = #{password,jdbcType=VARCHAR},
+		username = #{username,jdbcType=VARCHAR},
+		role_id = #{roleId,jdbcType=VARCHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		state = #{state,jdbcType=VARCHAR},
+		department = #{department,jdbcType=TIMESTAMP}
+
+		where account_id = #{accountId,jdbcType=TINYINT}
+	</update>
+
+
+	<select id="countByExample" resultType="java.lang.Integer"
+		parameterType="com.ctvit.dao.QueryDataBean">
+		select count(1) from tab_account where 1=1 
+		 <if test="state!= null and  state!='' and state!=100">
+			and state = #{state}
+		</if>
+		 <if test="state == null or  state==''">
+			and state =0
+		</if>
+		<if test="login!= null and  login!=''">
+			and binary login = #{login}
+		</if>
+		<if test="password!= null and  password!=''">
+			and password = #{password}
+		</if>
+		<if test="username!= null and  username!=''">
+			and binary username = #{username}
+		</if>
+		<if test="create_time != null  and  create_time!=''">
+			and create_time = #{createTime}
+		</if>
+		<if test="roleId != null  and  roleId !=''">
+			and role_id = #{roleId}
+		</if>
+		<if test="department != null  and  department!=0">
+			and department = #{department}
+		</if>
+	</select>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.ctvit.dao.QueryDataBean">
+		select * from tab_account where 1=1 
+		 <if test="state!= null and  state!='' and state!=100">
+			and state = #{state}
+		</if>
+		 <if test="state == null or  state==''">
+			and state =0
+		</if>
+		<if test="login!= null and  login!=''">
+			and binary login = #{login}
+		</if>
+		<if test="password!= null and  password!=''">
+			and binary password = #{password}
+		</if>
+		<if test="username!= null and  username!=''">
+			and username = #{username}
+		</if>
+		<if test="create_time != null  and  create_time!=''">
+			and create_time = #{createTime}
+		</if>
+		<if test="roleId != null  and  roleId !=''">
+			and role_id = #{roleId}
+		</if>
+		<if test="department != null  and  department!=0">
+			and department = #{department}
+		</if>
+		order by account_id desc
+	</select>
+
+
+	<select id="selectByExamplepage" resultMap="BaseResultMap"
+		parameterType="com.ctvit.dao.QueryDataBean">
+		select ac.*,r.role_name rname , create_time createtimestring,part.departname  departname,part.inorout isinside from
+		tab_account ac 
+		
+		left join tb_depart part on ac.department=part.depart_id
+		
+		left join tb_role r on r.role_id=ac.role_id
+		where 1=1
+        <if test="state!= null and  state != '' and state != 100">
+			and state = #{state}
+		</if>
+		 <if test="state == null or  state == ''">
+			and state =0
+		</if>
+		<if test="login!= null and  login != ''">
+			and binary login = #{login}
+		</if>
+		<if test="password!= null and  password != ''">
+			and password = #{password}
+		</if>
+		<if test="username!= null and  username != ''">
+			and binary username = #{username}
+		</if>
+		<if test="create_time != null  and  create_time != ''">
+			and create_time = #{createTime}
+		</if>
+		<if test="roleId != null  and  roleId !=''">
+			and ac.role_id = #{roleId}
+		</if>
+		<if test="department != null  and  department != 0">
+			and department = #{department}
+		</if>
+		order by create_time desc limit #{page} , #{rows}
+	</select>
+	<select id="selectCheckUserNameByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="com.ctvit.bean.Account">
+		select t.* from tab_account t where 1=1 and t.state ='0'
+		<if test="login != null and login !=''">
+			and binary t.login = #{login,jdbcType=VARCHAR}
+		</if>
+		<if test="accountId != null and accountId !=''">
+			and account_id != #{accountId,jdbcType=VARCHAR}
+		</if>
+	</select>
+	
+	<select id="checkdepartment"   resultMap="BaseResultMap" parameterType="java.lang.String">
+	select ac.*,part.inorout isinside from tab_account ac 
+	join tb_depart part on ac.department=part.depart_id
+	where  account_id = #{accountId,jdbcType=VARCHAR}
+	
+	</select>
+
+</mapper>

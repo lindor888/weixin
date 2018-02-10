@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+
+	<bean id="dbBeanIntegral" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass"><value>com.mysql.jdbc.Driver</value></property>
+	    <property name="jdbcUrl"><value>jdbc:mysql://localhost:3306/btvintegral?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;zeroDateTimeBehavior=round</value></property> 
+	    <!-- <property name="jdbcUrl"><value>jdbc:mysql://127.0.0.1:3306/btvintegral?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;zeroDateTimeBehavior=round</value></property>  -->
+
+		<property name="user"><value>root</value></property> 
+		<property name="password"><value>root</value></property> 
+		<!-- <property name="password"><value>ynn1990</value></property> --> 
+
+		<property name="minPoolSize"><value>1</value></property>
+		<property name="maxPoolSize"><value>20</value></property>
+		<property name="initialPoolSize"><value>1</value></property>
+		<property name="maxIdleTime"><value>25000</value></property>
+		<property name="acquireIncrement"><value>1</value></property>
+		<property name="acquireRetryAttempts"><value>30</value></property>
+		<property name="acquireRetryDelay"><value>1000</value></property>
+		<property name="testConnectionOnCheckin"><value>true</value></property>
+		<property name="automaticTestTable"><value>c3p0TestTable</value></property>
+		<property name="idleConnectionTestPeriod"><value>18000</value></property>
+		<property name="checkoutTimeout"><value>3000</value></property>
+	</bean>
+
+	<bean id="transactionManagerIntegral"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dbBeanIntegral" />
+	</bean>
+
+	<bean id="sqlSessionFactoryIntegral" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
+		<property name="dataSource" ref="dbBeanIntegral" />
+	</bean>
+	
+	<bean id="accountSessionBean" class="com.ctvit.bean.AccountSessionBean" scope="session" />
+	
+<!-- mapper -->	
+	<bean id="goodsMapper" class="org.mybatis.spring.MapperFactoryBean">
+		<property name="mapperInterface" value="com.ctvit.integralmall.dao.GoodsMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactoryIntegral" /> 
+    </bean>
+	<bean id="goodsOrderMapper" class="org.mybatis.spring.MapperFactoryBean">
+		<property name="mapperInterface" value="com.ctvit.integralmall.dao.GoodsOrderMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactoryIntegral" /> 
+    </bean>
+    
+	<bean id="goodsServiceImpl" class="com.ctvit.integralmall.service.GoodsServiceImpl">
+		<property name="goodsMapper" ref="goodsMapper" />
+	</bean>
+	
+	<bean id="goodsOrderServiceImpl" class="com.ctvit.integralmall.service.GoodsOrderServiceImpl">
+		<property name="goodsOrderMapper" ref="goodsOrderMapper" />
+		<property name="followersMapper" ref="followersMapper" />
+	</bean>
+	 
+<!-- action -->    
+    <bean name="goodsAction" class="com.ctvit.integralmall.action.GoodsAction" scope="prototype">
+		<property name="goodsServiceImpl" ref="goodsServiceImpl" />
+	</bean>
+	
+    <bean name="goodsOrderAction" class="com.ctvit.integralmall.action.GoodsOrderAction" scope="prototype">
+		<property name="goodsOrderServiceImpl" ref="goodsOrderServiceImpl" />
+	</bean>
+	
+</beans>

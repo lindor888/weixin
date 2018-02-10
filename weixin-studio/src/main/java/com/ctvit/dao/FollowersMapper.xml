@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ctvit.dao.FollowersMapper" >
+  <resultMap id="BaseResultMap" type="com.ctvit.bean.Followers" >
+    <id column="openId" property="openid" jdbcType="VARCHAR" />
+    <result column="subscribe" property="subscribe" jdbcType="VARCHAR" /> 
+    <result column="waccountId" property="waccountId" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="headimgurl" property="headimgurl" jdbcType="VARCHAR" />
+    <result column="subscribe_time" property="subscribeTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+              countByExample    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    openId,waccountId, subscribe, nickname, sex, city, country, province, headimgurl, subscribe_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ctvit.bean.FollowersExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tab_wx_followers
+    <if test="_parameter != null" >
+      where 1=1
+      <include refid="Example_Where_Clause" />
+    </if>
+   <!--  <if test="orderByClause != null" > -->
+      order by subscribe_time desc
+    <!-- </if> -->
+  </select>
+  <select id="selectListPage" resultMap="BaseResultMap" parameterType="com.ctvit.bean.FollowersExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tab_wx_followers
+    <if test="_parameter != null" >
+    where 1=1
+<!--       <include refid="Example_Where_Clause" /> -->
+		<if test="nickname != null  and nickname!=''" >
+		   and nickname like "%"#{nickname}"%"
+		</if>
+		<if test="waccountId != null  and waccountId!=''" >
+		   and waccountId = #{waccountId}
+		</if>
+		<if test="province != null  and province!=''" >
+		   and province = #{province}
+		</if>
+		<if test="sex != null  and sex!=''" >
+		   and sex = #{sex}
+		</if>
+    </if>
+   <!--  <if test="orderByClause != null" > -->
+      order by subscribe_time desc limit #{page},#{rows}
+    <!-- </if> -->
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tab_wx_followers
+    where openId = #{openid,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByWaccountId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tab_wx_followers
+    where waccountId = #{waccountId,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tab_wx_followers
+    where openId = #{openid,jdbcType=VARCHAR}
+  </delete>
+  
+  <delete id="deleteWaccountId" parameterType="java.lang.String" >
+    delete from tab_wx_followers
+    where waccountId = #{waccountId,jdbcType=VARCHAR}
+  </delete>
+  
+  <delete id="deleteByExample" parameterType="com.ctvit.bean.FollowersExample" >
+    delete from tab_wx_followers
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+
+  <insert id="insert" parameterType="com.ctvit.bean.Followers" >
+    insert into tab_wx_followers (openId,waccountId, subscribe, nickname, 
+      sex, city, country, 
+      province, headimgurl, subscribe_time
+      )
+    values (#{openid,jdbcType=VARCHAR}, #{waccountId,jdbcType=VARCHAR},#{subscribe,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, 
+      #{province,jdbcType=VARCHAR}, #{headimgurl,jdbcType=VARCHAR}, #{subscribeTime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ctvit.bean.Followers" >
+    insert into tab_wx_followers
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="openid != null" >
+        openId,
+      </if>
+      <if test="waccountId != null" >
+        waccountId,
+      </if>
+      <!-- groupId -->
+      <if test="subscribe != null" >
+        subscribe,
+      </if>
+      <if test="nickname != null" >
+        nickname,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="country != null" >
+        country,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="headimgurl != null" >
+        headimgurl,
+      </if>
+      <if test="subscribeTime != null" >
+        subscribe_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="openid != null" >
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="waccountId != null" >
+        #{waccountId,jdbcType=VARCHAR},
+      </if>
+      <if test="subscribe != null" >
+        #{subscribe,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="headimgurl != null" >
+        #{headimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="subscribeTime != null" >
+        #{subscribeTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ctvit.bean.FollowersExample" resultType="java.lang.Integer" >
+    select count(*) from tab_wx_followers
+    <if test="_parameter != null" >
+          where 1=1
+<!--       <include refid="Example_Where_Clause" /> -->
+		<if test="nickname != null  and nickname!=''" >
+		   and nickname like "%"#{nickname}"%"
+		</if>
+		<if test="waccountId != null  and waccountId!=''" >
+		   and waccountId =#{waccountId}
+		</if>
+		<if test="province != null  and province!=''" >
+		   and province = #{province}
+		</if>
+		<if test="sex != null  and sex!=''" >
+		   and sex = #{sex}
+		</if>
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tab_wx_followers
+    <set >
+      <if test="record.openid != null" >
+        openId = #{record.openid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subscribe != null" >
+        subscribe = #{record.subscribe,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nickname != null" >
+        nickname = #{record.nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null" >
+        city = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.country != null" >
+        country = #{record.country,jdbcType=VARCHAR},
+      </if>
+      <if test="record.province != null" >
+        province = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headimgurl != null" >
+        headimgurl = #{record.headimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subscribeTime != null" >
+        subscribe_time = #{record.subscribeTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tab_wx_followers
+    set openId = #{record.openid,jdbcType=VARCHAR},
+      subscribe = #{record.subscribe,jdbcType=VARCHAR},
+      nickname = #{record.nickname,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      country = #{record.country,jdbcType=VARCHAR},
+      province = #{record.province,jdbcType=VARCHAR},
+      headimgurl = #{record.headimgurl,jdbcType=VARCHAR},
+      subscribe_time = #{record.subscribeTime,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ctvit.bean.Followers" >
+    update tab_wx_followers
+    <set >
+      <if test="subscribe != null" >
+        subscribe = #{subscribe,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="headimgurl != null" >
+        headimgurl = #{headimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="subscribeTime != null" >
+        subscribe_time = #{subscribeTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where openId = #{openid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ctvit.bean.Followers" >
+    update tab_wx_followers
+    set subscribe = #{subscribe,jdbcType=VARCHAR},
+      waccountId = #{waccountId,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      headimgurl = #{headimgurl,jdbcType=VARCHAR},
+      subscribe_time = #{subscribeTime,jdbcType=VARCHAR}
+    where openId = #{openid,jdbcType=VARCHAR}
+  </update>
+  <select id="selectMy" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select * from tab_wx_followers where openId like 'Foll%' and waccountId = #{waccountId,jdbcType=VARCHAR}
+  </select>
+   <select id="selectByIds" resultMap="BaseResultMap" parameterType="map">
+  	select * from tab_wx_followers a where a.subscribe_time is not null
+  	<if test="ids !=null and ids!=''">
+  		and a.openid in (${ids})
+  	</if>
+  	<if test="startTime !=null and startTime!=''">
+  		and cast(subscribe_time as signed integer) > cast(#{startTime} as signed integer)
+  	</if>
+  	<if test="waccountId !=null and waccountId!=''">
+  		and waccountId = #{waccountId}
+  	</if>
+  	order by (subscribe_time+0) desc
+  </select>
+  <select id="netInit"  resultType="com.ctvit.bean.FollowersExt" parameterType="com.ctvit.bean.FollowersExt">
+  	select openId,waccountId, subscribe, nickname, sex, city, country, province, headimgurl,subscribe_time from tab_wx_followers where groupsId = #{groupsId} and waccountId = #{waccountId,jdbcType=VARCHAR} limit #{rowStart},#{pageSize}
+  </select> 
+  <select id="usearch"  resultType="com.ctvit.bean.FollowersExt" parameterType="com.ctvit.bean.FollowersExt">
+  	select openId,waccountId, subscribe, nickname, sex, city, country, province, headimgurl,subscribe_time,groupsId from tab_wx_followers where waccountId = #{waccountId,jdbcType=VARCHAR} and nickname like "%"#{nickname}"%"
+  </select> 
+  <select id="netfriend"  resultType="com.ctvit.bean.FollowersExt" parameterType="com.ctvit.bean.FollowersExt">
+  	select a.openId,a.waccountId, a.subscribe, a.nickname, a.sex, a.city, a.country, a.province, a.headimgurl,a.subscribe_time from tab_wx_followers a  where a.groupsId != '0' and a.waccountId = #{waccountId,jdbcType=VARCHAR} limit #{rowStart},#{pageSize}
+  </select> 
+  <select id="findgroups"  resultType="com.ctvit.bean.GroupsBean" parameterType="com.ctvit.bean.GroupsBean">
+  	select * from tab_wx_groups
+  </select>
+  <select id="alluser"  resultType="int" parameterType="com.ctvit.bean.Followers">
+  	select count(1) from tab_wx_followers where waccountId = #{waccountId}
+  </select>
+  <select id="blacklist"  resultType="int" parameterType="com.ctvit.bean.Followers">
+  	select count(1) from tab_wx_followers where waccountId = #{waccountId} and groupsId=#{groupsId}
+  </select>
+   <select id="usercount"  resultType="int" parameterType="com.ctvit.bean.FollowersExt">
+  	select count(1) from tab_wx_followers where waccountId = #{waccountId} and groupsId=#{groupsId}
+  </select> 
+  <update id="useraddgroup"  parameterType="com.ctvit.bean.Followers">
+    update tab_wx_followers set groupsId=#{groupsId} where waccountId = #{waccountId} and openId = #{openid}    
+  </update>
+  <insert id="insertgroup" parameterType="com.ctvit.bean.GroupsBean">
+  insert into tab_wx_groups (waccountId,name) values (#{waccountId},#{name})
+  </insert>
+   <update id="addblackUser" parameterType="com.ctvit.bean.Interact">
+  update tab_interact set flagx = #{flagx}  where open_id = #{openId}
+  </update>
+  <insert id="saveContent" parameterType="com.ctvit.bean.ReplayBean">
+  insert into tab_replay(replayid,waccountid,openid,replaycontent,replaytime,replaytype) values (#{replayid},#{waccountid},#{openid},#{replaycontent},#{replaytime},#{replaytype})
+  </insert>
+  <select id="selectReplay"  resultType="com.ctvit.bean.ReplayBean" parameterType="map">
+  	select * from tab_replay where waccountId = #{waccountid}
+  </select>
+</mapper>

@@ -1,0 +1,754 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ctvit.dao.InteractMapper" >
+  <resultMap id="BaseResultMap" type="com.ctvit.bean.Interact" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="waccount_id" property="waccountId" jdbcType="VARCHAR" />
+    <result column="open_id" property="openId" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="flag" property="flag" jdbcType="INTEGER" />
+     <result column="flagx" property="flagx" jdbcType="INTEGER" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="headimgurl" property="headimgurl" jdbcType="VARCHAR" />
+    <result column="huifu" property="huifu" jdbcType="VARCHAR" />
+    <result column="video" property="video" jdbcType="VARCHAR" />
+    <result column="audio" property="audio" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="xuanzhuan" property="xuanzhuan" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.ctvit.bean.Interact" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+      and a.open_id = b.openId
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    a.id, a.waccount_id, a.open_id, a.image, a.insert_time, a.flag,a.flagx, a.huifu, a.video, a.audio, a.type, a.update_time, a.xuanzhuan,
+    b.nickname, b.sex, b.city, b.country, b.province, b.headimgurl
+  </sql>
+  <sql id="Blob_Column_List" >
+    a.content
+  </sql>
+  <sql id="programmeUpdate" >
+    <set >
+      <if test="waccountId != null" >
+        waccountId = #{waccountId,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null" >
+        openId = #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        insertTime = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="flagx != null" >
+        flagx = #{flagx,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="huifu != null" >
+        huifu = #{huifu,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="video != null" >
+        video = #{video,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="audio != null" >
+        audio = #{audio,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+     
+      <if test="nickname != null" >
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="headimgurl != null" >
+        headimgurl = #{headimgurl,jdbcType=VARCHAR},
+      </if>
+     
+    </set>
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.ctvit.bean.InteractExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tab_interact a, tab_wx_followers b
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    and flagx != 5
+    order by a.update_time desc
+    <if test="beginIndex !=null and rows > 0">
+    	limit #{beginIndex},#{rows}
+    </if>
+  </select>
+  <select id="findjiemuByPaging" resultType="com.ctvit.bean.ProgrammeViewName" parameterType="com.ctvit.bean.ProgrammeViewName" >
+    select * from tab_programme_name 
+      where 1=1
+       <if test="flag == 0 " >
+		   and flag = #{flag}
+		</if>
+        <if test="flag != null  and flag!=''" >
+		   and flag = #{flag}
+		</if>
+		
+		<if test="programme_name != null  and programme_name!=''" >
+		   and programme_name like "%"#{programme_name}"%"
+		</if>
+		
+  </select>
+  <select id="findyixuanByPaging" resultType="com.ctvit.bean.Interact" parameterType="com.ctvit.bean.Interact" >
+    select * from tab_programme
+      where 1=1
+       <if test="flag == 0 " >
+		   and flag = #{flag}
+		</if>
+      <if test="flag != null  and flag!=''" >
+		   and flag = #{flag}
+		</if>
+		
+		<if test="nickname != null  and nickname!=''" >
+		   and nickname like "%"#{nickname}"%"
+		</if>
+		
+  </select>
+  <select id="findchakanByPaging" resultType="com.ctvit.bean.Interact" parameterType="com.ctvit.bean.Interact" >
+    select * from tab_programme_save
+      where 1=1
+      <if test="flag == 0 " >
+		   and flag = #{flag}
+		</if>
+      <if test="flag != null  and flag!=''" >
+		   and flag = #{flag}
+		</if>
+		<if test="nickname != null  and nickname!=''" >
+		   and nickname like "%"#{nickname}"%"
+		</if>
+		
+		
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ctvit.bean.InteractExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tab_interact
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tab_interact a, tab_wx_followers b
+    where a.id = #{id,jdbcType=INTEGER} and a.open_id = b.openId 
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tab_interact
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ctvit.bean.InteractExample" >
+    delete from tab_interact
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ctvit.bean.Interact" >
+    insert into tab_interact (id, waccount_id, open_id, 
+      image, insert_time, flag, flagx,
+      content)
+    values (#{id,jdbcType=INTEGER}, #{waccountId,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, 
+      #{image,jdbcType=VARCHAR}, #{insertTime,jdbcType=TIMESTAMP}, #{flag,jdbcType=INTEGER},#{flagx,jdbcType=INTEGER}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ctvit.bean.Interact" >
+    insert into tab_interact
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="waccountId != null" >
+        waccount_id,
+      </if>
+      <if test="openId != null" >
+        open_id,
+      </if>
+      <if test="image != null" >
+        image,
+      </if>
+      <if test="insertTime != null" >
+        insert_time,
+      </if>
+      <if test="flag != null" >
+        flag,
+      </if>
+      <if test="flagx != null" >
+        flagx,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="video != null" >
+        video,
+      </if>
+      <if test="audio != null" >
+        audio,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="xuanzhuan != null" >
+        xuanzhuan,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="waccountId != null" >
+        #{waccountId,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null" >
+        #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=INTEGER},
+      </if>
+       <if test="flagx != null" >
+        #{flagx,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="video != null" >
+        #{video,jdbcType=VARCHAR},
+      </if>
+      <if test="audio != null" >
+        #{audio,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="xuanzhuan != null" >
+        #{xuanzhuan,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ctvit.bean.InteractExample" resultType="java.lang.Integer" >
+    select count(*) from tab_interact a, tab_wx_followers b
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tab_interact
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.waccountId != null" >
+        waccount_id = #{record.waccountId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openId != null" >
+        open_id = #{record.openId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image != null" >
+        image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insertTime != null" >
+        insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.flag != null" >
+        flag = #{record.flag,jdbcType=INTEGER},
+      </if>
+      <if test="record.flagx != null" >
+        flagx = #{record.flagx,jdbcType=INTEGER},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tab_interact
+    set id = #{record.id,jdbcType=INTEGER},
+      waccount_id = #{record.waccountId,jdbcType=VARCHAR},
+      open_id = #{record.openId,jdbcType=VARCHAR},
+      image = #{record.image,jdbcType=VARCHAR},
+      insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      flag = #{record.flag,jdbcType=INTEGER},
+      flagx = #{record.flagx,jdbcType=INTEGER},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tab_interact
+    set id = #{record.id,jdbcType=INTEGER},
+      waccount_id = #{record.waccountId,jdbcType=VARCHAR},
+      open_id = #{record.openId,jdbcType=VARCHAR},
+      image = #{record.image,jdbcType=VARCHAR},
+      insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      flag = #{record.flag,jdbcType=INTEGER}
+      flagx = #{record.flagx,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ctvit.bean.Interact" >
+    update tab_interact
+    <set >
+      <if test="waccountId != null" >
+        waccount_id = #{waccountId,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null" >
+        open_id = #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="flagx != null" >
+        flagx = #{flagx,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="huifu != null" >
+        huifu = #{huifu,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="video != null" >
+        video = #{video,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="audio != null" >
+        audio = #{audio,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="xuanzhuan != null" >
+        xuanzhuan = #{xuanzhuan,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ctvit.bean.Interact" >
+    update tab_interact
+    set waccount_id = #{waccountId,jdbcType=VARCHAR},
+      open_id = #{openId,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      flag = #{flag,jdbcType=INTEGER},
+      flagx = #{flagx,jdbcType=INTEGER},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ctvit.bean.Interact" >
+    update tab_interact
+    set waccount_id = #{waccountId,jdbcType=VARCHAR},
+      open_id = #{openId,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      flag = #{flag,jdbcType=INTEGER}
+      flagx = #{flagx,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+   <select id="listselect" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+    
+      select * from (select a.id,a.content,a.insert_time,a.open_id,a.image,a.update_time,a.flag,a.huifu,a.video,a.audio,a.type,a.xuanzhuan,b.nickname,b.sex,b.city,b.country,b.province,b.headimgurl from tab_interact a , tab_wx_followers b  where a.open_id=b.openId) as d where d.id in
+        <foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+    <insert id="programme_insert" parameterType="com.ctvit.bean.Interact">   
+       insert into tab_programme(id,orderId,waccountId,openId,content,image,insertTime,updateTime,flag,huifu,video,audio,type,xuanzhuan,nickname,sex,city,country,province,headimgurl) values (#{id},#{orderId},#{waccountId},#{openId},#{content},#{image},#{insertTime},#{updateTime},#{flag},#{huifu},#{video},#{audio},#{type},#{xuanzhuan},#{nickname},#{sex},#{city},#{country},#{province},#{headimgurl})   
+        
+    </insert>   
+     <select id="tiaodanlist" resultType="com.ctvit.bean.Interact">
+    
+      select * from tab_programme where waccountId = #{waccountId} order by orderId desc
+        
+    </select>
+   <update id="update_flagx" parameterType="com.ctvit.bean.Interact" >
+    update tab_interact
+    set flagx=1 where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+    <update id="setflagx" parameterType="com.ctvit.bean.Interact" >
+    update tab_interact
+    set flagx=0 where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+    <delete id="shanchu" parameterType="com.ctvit.bean.Interact">
+    
+    delete from tab_programme where id=#{id}
+    </delete>
+    
+    <update id="updateflag" parameterType="com.ctvit.bean.Interact" >
+    update tab_programme_save
+    <set >
+      
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+       <if test="updateTime != null" >
+        updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where pid = #{id,jdbcType=INTEGER}
+  </update>
+   <update id="updatesavaflag" parameterType="com.ctvit.bean.Interact" >
+    update tab_programme
+    <set >
+      
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+       <if test="updateTime != null" >
+        updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="saveflag" parameterType="com.ctvit.bean.Interact" >
+    update tab_programme
+    <set >
+      
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+       <if test="updateTime != null" >
+        updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where orderId = #{id,jdbcType=INTEGER}
+  </update>
+   <update id="updateProgramme" parameterType="com.ctvit.bean.Interact" >
+    update tab_programme 
+    <include refid="programmeUpdate" />
+    where orderId = #{id,jdbcType=INTEGER}
+    </update>
+     <update id="updateProgrammeSave" parameterType="com.ctvit.bean.Interact" >
+    update tab_programme_save
+    <include refid="programmeUpdate" />
+    where pid = #{id,jdbcType=INTEGER} and programme_save_id = #{programmeId,jdbcType=INTEGER}
+    </update>
+  <select id="listContent" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String">
+    
+      select * from tab_programme a where a.id in
+        <foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+     <delete id="deleteTable">
+    
+      delete from tab_programme where id in
+        <foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+    <insert id="programmeInsert" parameterType="com.ctvit.bean.Interact">   
+       insert into tab_programme_save(pid,orderId,programme_save_id, waccountId,openId,content,image,insertTime,updateTime,flag,huifu,video,audio,type,xuanzhuan,nickname,sex,city,country, province,headimgurl) values (#{id},#{orderId},#{programmeId},#{waccountId},#{openId},#{content},#{image},#{insertTime},#{updateTime},#{flag},#{huifu},#{video},#{audio},#{type},#{xuanzhuan},#{nickname},#{sex},#{city},#{country},#{province},#{headimgurl})    
+        
+    </insert>
+     <insert id="programmeSaveName" parameterType="com.ctvit.bean.ProgrammeViewName">   
+       insert into tab_programme_name (programme_name,programme_id,programme_time,programme_account_name,flag) values (#{programme_name},#{programme_id},#{programme_time},#{programme_account_name},#{flag})    
+        
+    </insert>
+    <select id="selectPageCount" resultType="java.lang.Integer">  
+    
+      select count(1) from tab_programme_name;
+       
+    </select>
+    <select id="ProgrammeCount" resultType="java.lang.Integer">  
+    
+      select count(1) from tab_programme;
+       
+    </select>
+    <select id="programmeView" resultType="com.ctvit.bean.ProgrammeViewName" parameterType="com.ctvit.bean.FenyeBean">  
+    
+      select * from tab_programme_name where waccountId = #{waccountId} order by programme_time desc limit #{currentPage},#{pageSize} 
+       
+    </select>
+    <update id="updateProgrammeName" parameterType="com.ctvit.bean.Interact" >
+    update tab_programme_save set flag = #{flag},updateTime = #{updateTime} where pid =  #{id}
+    
+    </update>
+    <update id="updateProgrammeViewName" parameterType="com.ctvit.bean.ProgrammeViewName" >
+    update tab_programme_name set flag = #{flag},programme_time = #{programme_time} where programme_id =  #{programme_id}
+    </update>
+     <delete id="shanchujiemu" parameterType="com.ctvit.bean.Interact" >
+    delete from tab_programme_save
+    where pid = #{id,jdbcType=INTEGER}
+  </delete>
+   <select id="selectPageCountSave" resultType="java.lang.Integer" parameterType="com.ctvit.bean.ChakanBean">   
+     select count(*) from tab_programme_save where programme_save_id = #{programme_save_id}  
+    </select>
+     <select id="chakanbean" resultType="com.ctvit.bean.ChakanBean" parameterType="com.ctvit.bean.ChakanBean">   
+     select * from tab_programme_save where programme_save_id = #{programme_save_id} order by orderId asc 
+    </select>
+   <delete id="shanchujiemudan" parameterType="com.ctvit.bean.ProgrammeViewName" >
+    delete from tab_programme_name where  programme_id = #{programme_id}
+  </delete>
+  <delete id="shanchujiemudanneirong" parameterType="com.ctvit.bean.ChakanBean">
+    delete from tab_programme_save where programme_save_id = #{programme_save_id}
+  </delete>
+  <delete id="truncateTable">
+    truncate table tab_programme
+  </delete>
+  <update id="xiugainame" parameterType="com.ctvit.bean.ProgrammeViewName" >
+    update tab_programme_name set programme_name = #{programme_name},programme_time = #{programme_time} where programme_id=#{programme_id}
+  </update>
+   <insert id="tianjiainsert" parameterType="com.ctvit.bean.ChakanBean">
+   
+   
+   
+       insert into tab_programme_save(pid,orderId,programme_save_id, waccountId,openId,content,image,insertTime,updateTime,flag,huifu,video,audio,type,xuanzhuan,nickname,sex,city,country, province,headimgurl) values (#{id},#{orderId},#{programme_save_id},#{waccountId},#{openId},#{content},#{image},#{insertTime},#{updateTime},#{flag},#{huifu},#{video},#{audio},#{type},#{xuanzhuan},#{nickname},#{sex},#{city},#{country},#{province},#{headimgurl})          
+    </insert>
+    <update id="updateList"  parameterType="com.ctvit.bean.ChakanBean">   
+    update tab_programme_save set orderId = #{orderId} where id = #{id}
+    </update>
+    <select id="selectOpenid" resultType="java.lang.String">   
+    select open_id from tab_interact 
+    </select>
+     <insert id="insertpushtext" parameterType="java.util.Map">   
+    insert into tab_pushtext(content) values (#{cnt}) 
+    </insert>
+    <insert id="saveInteractLoaction" parameterType="com.ctvit.bean.InteractLocation">   
+    insert into tab_interact_location(interactid,waccount_id,openid,headurl,zhutiid,Longitude,Latitude,send_time,title,content,nickname,type,flag) values (#{interactid},#{waccount_id},#{openid},#{headurl},#{zhutiid},#{Longitude},#{Latitude},#{send_time},#{title},#{content},#{nickname},#{type},#{flag}) 
+    </insert> 
+     <insert id="saveqrcode" parameterType="com.ctvit.bean.QrcodeBean">   
+    insert into tab_qrcode(qrcodeID,waccountID,qrcodeUrl,createTime,qrcodeType,qrcodeName) values (#{qrcodeID},#{waccountID},#{qrcodeUrl},#{createTime},#{qrcodeType},#{qrcodeName}) 
+    </insert>
+    <select id="locationlist" parameterType="map" resultType="com.ctvit.bean.InteractLocation">   
+    select * from tab_interact_location where zhutiid = #{zhutiid} order by send_time desc
+    </select> 
+    <select id="prizeusers"  resultType="com.ctvit.bean.PrizeBean">   
+    select * from tab_wx_followers a,tab_prize b where a.openID = b.openID and a.waccountId = b.waccountID order by prizeTime desc
+    </select> 
+     <select id="meeting"  resultType="com.ctvit.bean.MeetingAgenda" parameterType="com.ctvit.bean.MeetingAgenda">   
+    select * from tab_meeting where waccountid = #{waccountid} and status = '1' or status = '0' order by createtime desc
+    </select> 
+     <select id="getmeeting"  resultType="com.ctvit.bean.MeetingAgenda" parameterType="com.ctvit.bean.MeetingAgenda">   
+    select * from tab_meeting where waccountid = #{waccountid} and status = '1' order by createtime desc limit 0,1;
+    </select> 
+     <select id="sidmeeting"  resultType="com.ctvit.bean.MeetingAgenda" parameterType="com.ctvit.bean.MeetingAgenda">   
+     select * from  tab_meeting  where meetingid=#{meetingid}
+    </select>
+    <update id="modifymeeting"  parameterType="com.ctvit.bean.MeetingAgenda">   
+     update tab_meeting set meetingtheme=#{meetingtheme} , meetingdata=#{meetingdata}, starttime=#{starttime}, meetingaddress=#{meetingaddress} where meetingid=#{meetingid}
+    </update>
+     <insert id="createmeeting" parameterType="com.ctvit.bean.MeetingAgenda">   
+    insert into tab_meeting(meetingid,meetingtheme,meetingdata,meetingaddress,createtime,starttime,createuser,waccountid,status) values (#{meetingid},#{meetingtheme},#{meetingdata},#{meetingaddress},#{createtime},#{starttime},#{createuser},#{waccountid},#{status})
+    </insert>
+     <update id="meetingstate" parameterType="com.ctvit.bean.MeetingAgenda">   
+    update tab_meeting set createtime=#{createtime} , status=#{status} where meetingid=#{meetingid}
+    </update>
+     <insert id="insertContent" parameterType="com.ctvit.bean.MeetingContent">   
+    insert into tab_meetingcontent (meetingid,content,contentserial,contenttime,contentpersion,contentgroup) values
+       <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.meetingid},#{item.content},#{item.contentserial},#{item.contenttime},#{item.contentpersion},#{item.contentgroup})
+    </foreach>
+    </insert>   
+     <select id="findContent"  resultType="com.ctvit.bean.MeetingContent" parameterType="com.ctvit.bean.MeetingContent">   
+    select * from tab_meetingcontent where meetingid=#{meetingid}
+    </select> 
+     <update id="modifycontent" parameterType="com.ctvit.bean.MeetingContent">   
+     update tab_meetingcontent set content=#{content},contentserial=#{contentserial},contenttime=#{contenttime},contentpersion=#{contentpersion},contentgroup=#{contentgroup} where meetingcontentid=#{meetingcontentid}
+    </update>
+    <update id="shanchucontent" parameterType="com.ctvit.bean.MeetingContent">   
+    delete from tab_meetingcontent where meetingcontentid=#{meetingcontentid}
+    </update>
+     <select id="getmeetingContent"  resultType="com.ctvit.bean.MeetingContent" parameterType="com.ctvit.bean.MeetingContent">   
+    select * from tab_meetingcontent where meetingcontentid=#{meetingcontentid}
+    </select> 
+     <select id="getprize"  resultType="com.ctvit.bean.Probability" parameterType="com.ctvit.bean.Probability">   
+    select * from tab_probability where  prizetitleId=#{prizetitleId} and waccountId=#{waccountId}
+    </select>
+     <select id="goodschaxun"  resultType="com.ctvit.bean.Probability" parameterType="com.ctvit.bean.Probability">   
+    select * from tab_probability where prize_goodsId=#{prize_goodsId}
+    </select>
+    <update id="goods"  parameterType="com.ctvit.bean.Probability">     
+    update tab_probability set prize_goodName=#{prize_goodName},prize_goodsProbability=#{prize_goodsProbability},probabilityNumber=#{probabilityNumber},goodsProbability=#{goodsProbability},prize_goodsCount=#{prize_goodsCount} where prize_goodsId=#{prize_goodsId}
+    </update> 
+     <select id="prizelist"  resultType="com.ctvit.bean.PrizeTitle" parameterType="com.ctvit.bean.PrizeTitle">   
+    select * from tab_prizetitle where waccountId=#{waccountId} order by createtime desc
+    </select> 
+    <update id="prizetitleFlag"  parameterType="com.ctvit.bean.PrizeTitle">   
+    update tab_prizetitle set flag=#{flag},createtime=#{createtime} where prizetitleId=#{prizetitleId}
+    </update>  
+     <select id="updateprize"  resultType="com.ctvit.bean.PrizeTitle" parameterType="com.ctvit.bean.PrizeTitle">   
+    select * from tab_prizetitle where prizetitleId=#{prizetitleId}
+    </select>
+     <update id="updateprizesave"  parameterType="com.ctvit.bean.PrizeTitle">   
+    update tab_prizetitle set prizetitleName=#{prizetitleName},starTime=#{starTime},endTime=#{endTime} where prizetitleId=#{prizetitleId}
+    </update>
+    <insert id="createprize" parameterType="com.ctvit.bean.PrizeTitle">
+    insert into tab_prizetitle (prizetitleId,prizetitleName,createtime,starTime,endTime,waccountId,flag) values (#{prizetitleId},#{prizetitleName},#{createtime},#{starTime},#{endTime},#{waccountId},#{flag})
+    </insert>
+     <insert id="insertprize" parameterType="com.ctvit.bean.Probability">   
+    insert into tab_probability (prizetitleId,prize_goodName,prize_goodsProbability,prize_goodsCount,probabilityNumber,waccountId,goodsProbability) values
+       <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.prizetitleId},#{item.prize_goodName},#{item.prize_goodsProbability},#{item.prize_goodsCount},#{item.probabilityNumber},#{item.waccountId},#{item.goodsProbability})
+    </foreach>
+    </insert>  
+     <select id="getprizeTitle"  resultType="com.ctvit.bean.PrizeTitle" parameterType="com.ctvit.bean.PrizeTitle">   
+    select * from tab_prizetitle where  now() &gt; starTime and now() &lt; endTime and waccountId =#{waccountId} and flag = 1 order by createtime desc limit 0,1
+    </select> 
+    <insert id="saveprizeuser" parameterType="com.ctvit.bean.PrizeNameBean">
+    insert into tab_prize (prizeID,waccountID,openID,prizeName,prizeTime,qrcodeID) values (#{prizeID},#{waccountID},#{openID},#{prizeName},#{prizeTime},#{qrcodeID})
+    </insert> 
+    <update id="goodsCountupdate"  parameterType="com.ctvit.bean.Probability">   
+    update tab_probability set prize_goodsCount=#{prize_goodsCount} where prize_goodsId=#{prize_goodsId}
+    </update>  
+    <select id="selectReport" resultType="com.ctvit.bean.ReportsBean">
+    select * from tab_reports where date(reportsTime) = curdate() order by reportsTime desc
+    </select>
+    <select id="showRoss" resultMap="ResultMapWithBLOBs">
+    select  
+    
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from
+    tab_interact a, tab_wx_followers b where date(a.update_time) = curdate() and a.flag = #{flag} and a.open_id = b.openId order by a.update_time desc
+    </select>
+    <update id="locationFlag"  parameterType="com.ctvit.bean.InteractLocation">   
+    update tab_interact_location set send_time=#{send_time},flag = #{flag} where interactid=#{interactid}
+    </update>   
+     <select id="showLocation" resultType="com.ctvit.bean.InteractLocation" parameterType="com.ctvit.bean.InteractLocation">
+    select * from tab_interact_location where date(send_time) = curdate() and zhutiid='15' and flag = #{flag} order by send_time desc
+    </select>  
+    <select id="showNewsRoss" resultType="com.ctvit.bean.InteractLocation" parameterType="com.ctvit.bean.InteractLocation">
+    select * from tab_interact_location where date(send_time) = curdate() and zhutiid='9' and flag = #{flag} order by send_time desc
+    </select>
+    <select id="selectALLLocation" resultType="com.ctvit.bean.InteractLocation" parameterType="com.ctvit.bean.InteractLocation">
+    select * from tab_interact_location where date(send_time) = curdate() and waccount_id=#{waccount_id} and flag = 1 order by send_time desc
+    </select>
+     <select id="getUser" resultType="com.ctvit.bean.Interact_baoliaoExt" parameterType="com.ctvit.bean.Interact_baoliaoExt" >
+    <!--
+      WARNING - @mbggenerated
+      This element is automatically generated by MyBatis Generator, do not modify.
+    -->
+    select nickname,city,headimgurl
+    from tab_wx_followers 
+    where openId = #{userid}
+  </select>
+</mapper>

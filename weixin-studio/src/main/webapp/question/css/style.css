@@ -1,0 +1,1106 @@
+*{
+	margin: 0;
+	padding: 0;
+	outline: 0
+}
+
+:not(input,textarea) {
+	-webkit-touch-callout: inherit;
+	-webkit-user-select: auto
+}
+
+body {
+	width: 100%;
+	font-family: Hiragino Sans GB,Arial,Helvetica,"宋体",sans-serif;
+	font-size: 14px;
+	color: #323232;
+	-webkit-touch-callout: inherit;
+	-webkit-user-select: auto;
+	background-color: #f5f5f5;
+	-webkit-font-smoothing: antialiased;
+	-webkit-text-size-adjust: 100%
+}
+
+body.white {
+	background-color: #fff
+}
+
+a {
+	color: #878787;
+	text-decoration: none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0)
+}
+
+a:hover {
+	text-decoration: none
+}
+
+button,input,select,textarea {
+	font-size: 100%;
+	margin: 0;
+	padding: 0;
+	outline: 0
+}
+
+dt,dd {
+	display: inline-block
+}
+
+textarea,input {
+	resize: none;
+	outline: 0
+}
+
+textarea {
+	resize: none;
+	-webkit-appearance: none
+}
+
+ul,ol,li {
+	list-style: none
+}
+
+em {
+	font-style: normal
+}
+
+.arrow-ent {
+	width: 8px;
+	height: 8px;
+	display: inline-block;
+	border-right: 2px solid #ccc;
+	border-bottom: 2px solid #ccc;
+	cursor: pointer;
+	position: relative;
+	top: -1px
+}
+
+.arrow-ent.right {
+	-webkit-transform: rotate(-45deg)
+}
+
+.arrow-ent.bottom {
+	-webkit-transform: rotate(-315deg);
+	position: relative;
+	top: -2px
+}
+
+.arrow-ent.top {
+	-webkit-transform: rotate(-135deg);
+	position: relative;
+	top: 2px
+}
+
+.arrow-ent.left {
+	-webkit-transform: rotate(-225deg)
+}
+
+.price {
+	color: #f63
+}
+
+.o-price {
+	text-decoration: line-through
+}
+
+.Hide {
+	display: none!important
+}
+
+.Clear {
+	float: none!important
+}
+
+.Fix:after {
+	display: block;
+	content: '\20';
+	height: 0;
+	clear: both
+}
+
+.f-l {
+	float: left
+}
+
+.f-r {
+	float: right
+}
+
+.receipt-detail .receipt-info,.receipt-detail .receipt-extra,.delivery-box .mes-list tr,.link-btn,.refund-flow .navbar,.order-list a,.order-info .list-info,.order-info .deal-info,.receipt-box .navbar,header,.content,.col-list a,.section .top-border,.section .cont {
+	background: url(img/repeat-x-bottom.png) repeat-x 0 bottom;
+	background-size: auto 1px
+}
+
+.receipt-list .tips {
+	background: url(img/repeat-x-top.png) repeat-x 0 top;
+	background-size: auto 1px
+}
+
+.my-order .order-menu a .icon,.refund-flow .navbar .help {
+	background: url(img/c.comm.png) no-repeat center 0;
+	background-size: 30px auto
+}
+
+.col-list a {
+	display: block
+}
+
+.col-list a.off {
+	color: #999
+}
+
+.col-list a.off .arrow-ent {
+	display: none
+}
+
+.flex-box {
+	display: -webkit-box
+}
+
+.flex-box .pic {
+	font-size: 0
+}
+
+.flex-box .info {
+	-webkit-box-flex: 1
+}
+
+.section {
+	margin-bottom: 20px;
+	padding-bottom: 1px
+}
+
+.section .top-border {
+	height: 1px
+}
+
+.section .cont {
+	background-color: #fff
+}
+
+.r-btn,.g-btn,.n-btn {
+	font-size: 18px;
+	padding: 10px 20px;
+	margin: 0 22px 20px;
+	color: #fff;
+	border-radius: 4px;
+	display: block;
+	text-align: center
+}
+
+.r-btn {
+	background-color: #f63
+}
+
+.n-btn {
+	background-color: #fff;
+	border: 1px solid #c7c7c7;
+	color: #f63
+}
+
+.g-btn {
+	background-color: #dbdbdb;
+	border: 1px solid #fff
+}
+
+.link-btn {
+	height: 45px;
+	line-height: 45px;
+	color: #333;
+	font-size: 16px;
+	background-color: #FFF;
+	display: block;
+	margin-bottom: 20px
+}
+
+.view-btn {
+	color: #333;
+	text-align: center;
+	font-size: 16px;
+	display: block;
+	margin-bottom: 20px
+}
+
+.view-btn .arrow-ent {
+	left: 5px;
+	top: -4px
+}
+
+.card-btn {
+	display: block;
+	height: 43px;
+	text-align: center;
+	font-size: 15px;
+	line-height: 43px;
+	border-radius: 4px;
+	background-color: #06bf04;
+	color: #fff;
+	border: 1px solid #189b16;
+	cursor: pointer;
+	margin: 0 15px 10px
+}
+
+.card-btn.done {
+	opacity: .5
+}
+
+header {
+	height: 52px;
+	background-color: #fff;
+	display: -webkit-box;
+	padding: 0 10px
+}
+
+header nav,header .back,header h3 {
+	-webkit-box-align: center;
+	display: -webkit-box
+}
+
+header .back {
+	position: absolute;
+	line-height: 52px
+}
+
+header .back .arrow-ent {
+	border-color: #f63
+}
+
+header nav {
+	-webkit-box-flex: 1;
+	box-flex: 1;
+	-ms-box-flex: 1;
+	-ms-flex: 1;
+	margin: 0 auto
+}
+
+header nav .box {
+	border: 1px solid #f63;
+	border-radius: 4px;
+	display: -webkit-box
+}
+
+header nav .box a {
+	font-size: 14px;
+	padding: 4px 11px;
+	display: block;
+	color: #f63
+}
+
+header nav .box a.on {
+	color: #fff;
+	background-color: #f63
+}
+
+header h3 {
+	-webkit-box-flex: 1;
+	box-flex: 1;
+	-ms-box-flex: 1;
+	-ms-flex: 1;
+	margin: 0 auto;
+	color: #333;
+	font-size: 18px;
+	white-space: nowrap
+}
+
+.qr-box.cont {
+	padding: 11px 15px 11px 20px
+}
+
+.qr-box .pic {
+	margin-right: 10px
+}
+
+.qr-box .pic .icon {
+	background: url(img/qr-icon.png) no-repeat;
+	background-size: 58px auto;
+	width: 58px;
+	height: 60px;
+	display: block
+}
+
+.qr-box .info {
+	position: relative
+}
+
+.qr-box .info h3 {
+	color: #333;
+	font-size: 17px;
+	line-height: 19px;
+	margin: 8px 0
+}
+
+.qr-box .info p {
+	font-size: 12px;
+	line-height: 14px;
+	color: #FFA54B
+}
+
+.qr-box .info .arrow-ent {
+	position: absolute;
+	top: 50%;
+	right: 0
+}
+
+.page-item {
+	background-color: #fff;
+	border: 1px solid #d8d8d8;
+	border-radius: 3px;
+	margin-bottom: 20px;
+	position: relative
+}
+
+.page-item .l-semicircle,.page-item .r-semicircle {
+	position: absolute;
+	background-color: #f5f5f5;
+	z-index: 99;
+	top: 27px
+}
+
+.page-item .r-semicircle {
+	border-radius: 8px 0 0 8px;
+	border: 1px solid #d8d8d8;
+	border-right: 0;
+	right: -1px;
+	width: 5px;
+	height: 10px;
+	display: block
+}
+
+.page-item .l-semicircle {
+	border-radius: 0 8px 8px 0;
+	border: 1px solid #d8d8d8;
+	border-left: 0;
+	left: -1px;
+	width: 5px;
+	height: 10px;
+	display: block
+}
+
+.page-item .navbar {
+	margin: 8px 12px 0 11px;
+	padding-bottom: 8px
+}
+
+.page-item .navbar h3 {
+	font-size: 14px;
+	color: #333
+}
+
+.ytips {
+	padding: 10px 15px;
+	background-color: #fffcf0;
+	border-top: 1px solid #f4dea2;
+	border-bottom: 1px solid #f4dea2;
+	color: #eeb734;
+	font-size: 12px;
+	display: block;
+	position: relative;
+	margin-top: 10px
+}
+
+.ytips .cont {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical
+}
+
+.ytips .arrow-ent {
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	margin-top: -5px
+}
+
+.my-info {
+	margin-top: 15px
+}
+
+.my-info .cont {
+	padding: 20px 15px 19px
+}
+
+.my-info .cont h3 {
+	font-size: 18px;
+	line-height: 20px;
+	color: #333;
+	font-weight: 700;
+	margin-bottom: 7px
+}
+
+.my-info .cont .balance {
+	font-size: 13px;
+	line-height: 17px
+}
+
+.my-info .cont .balance .price {
+	padding-left: 3px
+}
+
+.my-info .cont .balance .price strong {
+	padding-left: 2px;
+	font-size: 17px
+}
+
+.my-order .col-list a .number {
+	font-size: 12px;
+	margin-top: 1px
+}
+
+.my-order .col-list a .arrow-ent {
+	top: 0
+}
+
+.my-order .order-menu {
+	padding: 17px 2%
+}
+
+.my-order .order-menu a {
+	float: left;
+	width: 32%;
+	text-align: center
+}
+
+.my-order .order-menu a .icon {
+	border-radius: 22.5px;
+	-webkit-border-radius: 22.5px;
+	width: 45px;
+	height: 45px;
+	display: block;
+	margin: 0 auto 5px
+}
+
+.my-order .order-menu a .icon.un-pay {
+	background-color: #3cb2ef;
+	background-position: center 9px
+}
+
+.my-order .order-menu a .icon.un-use {
+	background-color: #71d01d;
+	background-position: center -25px
+}
+
+.my-order .order-menu a .icon.refund {
+	background-color: #ffc000;
+	background-position: center -60px
+}
+
+.my-info .col-list,.my-coupon .col-list,.my-order .col-list,.my-booking .col-list,.my-feedback .col-list {
+	padding-left: 15px
+}
+
+.my-info .col-list a,.my-coupon .col-list a,.my-order .col-list a,.my-booking .col-list a,.my-feedback .col-list a {
+	font-size: 16px;
+	color: #333;
+	padding: 13px 15px 13px 0
+}
+
+.my-info .col-list a.none,.my-coupon .col-list a.none,.my-order .col-list a.none,.my-booking .col-list a.none,.my-feedback .col-list a.none {
+	background-image: none
+}
+
+.my-info .col-list a .sub,.my-coupon .col-list a .sub,.my-order .col-list a .sub,.my-booking .col-list a .sub,.my-feedback .col-list a .sub {
+	font-size: 16px;
+	color: #333;
+	line-height: 18px
+}
+
+.my-info .col-list a .number,.my-coupon .col-list a .number,.my-order .col-list a .number,.my-booking .col-list a .number,.my-feedback .col-list a .number {
+	color: #999
+}
+
+.my-info .col-list a .arrow-ent,.my-coupon .col-list a .arrow-ent,.my-order .col-list a .arrow-ent,.my-booking .col-list a .arrow-ent,.my-feedback .col-list a .arrow-ent {
+	margin-left: 5px
+}
+
+.receipt-box {
+	margin: 0 15px;
+	margin-top: 20px
+}
+
+.receipt-list a {
+	color: #999;
+	display: block;
+	font-size: 12px;
+	padding-top: 12px;
+	padding-bottom: 13px;
+	margin: 0 13px;
+	border-bottom: 1px dotted #ededed
+}
+
+.receipt-list a.table {
+	display: table
+}
+
+.receipt-list a:last-child {
+	border: none
+}
+
+.receipt-list a .code {
+	color: #f63;
+	font-size: 19px;
+	line-height: 21px;
+	margin-top: 4px
+}
+
+.receipt-list a .code.expired {
+	text-decoration: line-through;
+	color: #999
+}
+
+.receipt-list a .password {
+	color: #f63
+}
+
+.receipt-list a .refund {
+	color: #65c07a
+}
+
+.receipt-list a .f-r {
+	border-left: 1px dotted #EDEDED;
+	padding-left: 25px;
+	padding-top: 4px;
+	padding-bottom: 6px;
+	height: 44px;
+	width: 100px;
+	box-sizing: border-box;
+	display: box;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	-webkit-box-align: center;
+	-ms-box-align: center;
+	box-align: center
+}
+
+.receipt-list a .t-r,.receipt-list a .t-l {
+	display: table-cell;
+	vertical-align: middle
+}
+
+.receipt-list a .t-l {
+	width: 65%
+}
+
+.receipt-list a .t-r {
+	width: 35%;
+	border-left: 1px dotted #EDEDED;
+	padding-left: 20px
+}
+
+.receipt-list a .t-r span {
+	display: inline-block;
+	padding-bottom: 5px
+}
+
+.receipt-list .view-more {
+	display: block;
+	padding: 10px 0 11px;
+	text-align: center;
+	color: #999;
+	cursor: pointer;
+	height: 16px;
+	font-size: 14px
+}
+
+.receipt-list .view-more .arrow-ent {
+	border-width: 1px;
+	margin-left: 5px
+}
+
+.receipt-list .tips {
+	background-color: #F6F6F6;
+	padding: 0 12px;
+	font-size: 12px;
+	line-height: 30px;
+	height: 30px;
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical
+}
+
+.receipt-detail {
+	margin-bottom: 10px
+}
+
+.receipt-detail .receipt-info {
+	padding: 10px;
+	box-sizing: border-box;
+	background-color: #fff
+}
+
+.receipt-detail .receipt-info .pic img {
+	width: 103px;
+	height: 77px
+}
+
+.receipt-detail .receipt-info .info {
+	position: relative;
+	margin-left: 16px
+}
+
+.receipt-detail .receipt-info .info h3 {
+	font-size: 15px;
+	line-height: 18px;
+	font-weight: 400;
+	margin-right: 20px;
+	color: #333;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 4;
+	-webkit-box-orient: vertical
+}
+
+.receipt-detail .receipt-info .info .arrow-ent {
+	position: absolute;
+	top: 30px;
+	right: 0
+}
+
+.receipt-detail .receipt-extra {
+	padding: 12px 15px;
+	box-sizing: border-box;
+	padding-bottom: 5px;
+	background-color: #fff;
+	position: relative
+}
+
+.receipt-detail .receipt-extra p {
+	font-size: 12px;
+	line-height: 12px;
+	color: #999;
+	margin: 4px 0
+}
+
+.receipt-detail .receipt-extra p.num {
+	color: #f63;
+	font-size: 24px;
+	line-height: 26px
+}
+
+.receipt-detail .receipt-extra p.done {
+	color: #999;
+	font-size: 24px;
+	line-height: 26px;
+	text-decoration: line-through
+}
+
+.receipt-detail .receipt-extra p.status {
+	position: absolute;
+	right: 12px;
+	top: 41%;
+	font-size: 14px;
+	line-height: 14px
+}
+
+.receipt-detail .receipt-extra p.status.refunding {
+	color: #65c07a
+}
+
+.order-nav {
+	margin-bottom: 0;
+	background-color: #FFF;
+	border-bottom: 1px solid #e8e8e8;
+	font-size: 0;
+	line-height: 0
+}
+
+.order-nav a {
+	font-size: 0;
+	display: inline-block;
+	width: 24%;
+	text-align: center;
+	height: 45px;
+	line-height: 45px;
+	color: #333;
+	box-sizing: border-box;
+	font-size: 14px;
+	position: relative
+}
+
+.order-nav a.on {
+	color: #f63
+}
+
+.order-nav a.on .arrow-ent {
+	position: absolute;
+	border-color: #e8e8e8;
+	top: initial;
+	bottom: -5px;
+	left: 44%;
+	z-index: 99;
+	border-width: 1px;
+	background-color: #FFF
+}
+
+.order-list a {
+	margin-left: 10px;
+	padding: 10px 0
+}
+
+.order-list a .pic {
+	margin-right: 10px
+}
+
+.order-list a .pic img {
+	width: 90px;
+	height: 68px;
+	border-radius: 2px
+}
+
+.order-list a .info {
+	height: 66px;
+	-webkit-box-align: center;
+	-ms-box-align: center;
+	box-align: center;
+	padding-right: 10px;
+	display: box;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	position: relative
+}
+
+.order-list a .info h3,.order-list a .info h4 {
+	font-size: 15px;
+	line-height: 17px;
+	color: #333;
+	display: inline-block
+}
+
+.order-list a .info h3 {
+	height: 16px;
+	word-wrap: normal;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	font-weight: 400
+}
+
+.order-list a .info h4 {
+	color: #999
+}
+
+.order-list a .info p {
+	font-size: 12px;
+	display: inline;
+	color: #999
+}
+
+.order-list a .info p .refund {
+	color: #65c07a
+}
+
+.order-list a .info p .fail {
+	color: #f63
+}
+
+.order-list a .info .r-sbtn {
+	position: absolute;
+	right: 12px;
+	bottom: 4px;
+	background-color: #f63;
+	color: #fff;
+	display: block;
+	font-size: 12px;
+	padding: 8px 10px
+}
+
+.order-info .deal-info {
+	margin-left: 20px;
+	padding: 10px 0
+}
+
+.order-info .deal-info .pic {
+	margin-right: 10px
+}
+
+.order-info .deal-info .pic img {
+	width: 90px;
+	height: 67px
+}
+
+.order-info .deal-info .info h3 {
+	font-size: 14px;
+	line-height: 19px;
+	color: #333;
+	margin-top: 3px;
+	font-weight: 400;
+	padding-right: 10px
+}
+
+.order-info .deal-info .info p {
+	font-size: 12px;
+	line-height: 14px;
+	color: #999;
+	margin-top: 7px
+}
+
+.order-info .list-info {
+	margin-left: 20px;
+	padding: 12px 0;
+	color: #333
+}
+
+.order-info .list-info .f-r {
+	color: #999;
+	margin-right: 20px
+}
+
+h3.order-info.sub {
+	font-size: 14px;
+	color: #999;
+	line-height: 14px;
+	margin-bottom: 15px;
+	margin-left: 20px
+}
+
+.delivery-box .navbar {
+	color: #999;
+	font-size: 12px;
+	height: 45px;
+	line-height: 45px;
+	padding: 0 10px
+}
+
+.delivery-box .navbar a {
+	color: #08C
+}
+
+.delivery-box .mes-list {
+	border-collapse: collapse;
+	margin-left: 10px
+}
+
+.delivery-box .mes-list tr td {
+	width: 80%;
+	font-size: 14px;
+	padding: 10px 0;
+	color: #333;
+	vertical-align: middle
+}
+
+.delivery-box .mes-list tr td:first-child {
+	width: 20%
+}
+
+.fu-menu .col-list {
+	padding-left: 20px
+}
+
+.fu-menu a {
+	color: #333;
+	height: 45px;
+	line-height: 45px;
+	position: relative;
+	font-size: 14px
+}
+
+.fu-menu a .arrow-ent {
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	margin-top: -5px
+}
+
+.col-list a:last-child {
+	background-image: none
+}
+
+.refund-detail {
+	font-size: 12px;
+	margin-bottom: 0
+}
+
+.refund-detail .cont {
+	padding: 7px 15px 10px
+}
+
+.refund-detail li {
+	margin-bottom: 8px
+}
+
+.refund-detail li:last-child {
+	margin-bottom: 0
+}
+
+.refund-detail li p {
+	color: #333;
+	vertical-align: middle;
+	display: inline-block;
+	font-size: 14px;
+	width: 80%;
+	word-break: break-word
+}
+
+.refund-detail li p:first-child {
+	font-size: 12px;
+	color: #999;
+	width: 50px;
+	text-align: left;
+	margin-right: 3px
+}
+
+.refund-detail li p.price {
+	color: #f63
+}
+
+.refund-detail li p.price strong {
+	font-size: 17px
+}
+
+.refund-flow .navbar {
+	font-size: 14px;
+	padding-left: 15px;
+	height: 40px;
+	line-height: 40px;
+	color: #333;
+	position: relative
+}
+
+.refund-flow .navbar .help {
+	position: absolute;
+	right: 5px;
+	top: 0;
+	color: #999;
+	background-position: right -102px;
+	padding-right: 30px
+}
+
+.refund-flow .list {
+	margin-left: 25px;
+	margin-top: 10px;
+	padding-bottom: 10px
+}
+
+.refund-flow .list li {
+	position: relative;
+	border-left: 1px solid #ededed;
+	padding-left: 20px;
+	box-sizing: border-box;
+	padding-bottom: 20px;
+	padding-right: 5px
+}
+
+.refund-flow .list li:last-child {
+	padding-bottom: 0;
+	border-left: none
+}
+
+.refund-flow .list li.on mark {
+	background-color: orange
+}
+
+.refund-flow .list li.on h3 {
+	color: #333
+}
+
+.refund-flow .list li.on p {
+	color: #666
+}
+
+.refund-flow .list li h3,.refund-flow .list li p {
+	color: #999;
+	font-weight: 400
+}
+
+.refund-flow .list li h3 {
+	font-size: 14px;
+	margin-bottom: 5px
+}
+
+.refund-flow .list li p {
+	font-size: 12px
+}
+
+.refund-flow .list li mark {
+	text-align: center;
+	line-height: 18px;
+	border-radius: 9px;
+	-webkit-border-radius: 9px;
+	width: 18px;
+	height: 18px;
+	position: absolute;
+	color: #fff;
+	background-color: #ededed;
+	left: -10px;
+	z-index: 99;
+	top: 0;
+	font-size: 12px
+}
+
+.title {
+	padding: 16px 0 10px 15px;
+	line-height: 15px;
+	color: #666;
+	font-size: 13px
+}
+
+section.form .cont .checks {
+	background-color: #fff;
+	padding-left: 15px;
+	padding-top: 10px
+}
+
+section.form .cont .checks p {
+	margin-bottom: 10px
+}
+
+section.form .cont .checks p label {
+	padding-left: 10px
+}
+
+section.form .cont .blank {
+	height: 10px;
+	background-color: #f5f5f5;
+	padding: 12px 0 12px 10px;
+	line-height: 15px;
+	color: #666;
+	font-size: 14px
+}
+
+section.form .cont textarea {
+	width: 100%;
+	padding: 15px;
+	border-color: #fff
+}
+
+.r-btn {
+	padding: 7px 0;
+	background-color: #f63
+}
+
+/* 积分 */
+.my-info .head {
+	float:left;
+	width:45px;
+	margin-right:5%;
+}
+.my-info .head img{
+	width:45px;
+	height:45px;
+	border-radius:22.5px;
+}
+
+.my-order .detial{
+	
+}
+
+.my-order .detial a{
+	font-size:14px;
+	color:#878787;
+	padding:13px 15px 13px 0;
+}
+
+.my-order .detial a .data{
+	margin-right:10px;
+}
+.my-order .detial a .con{
+	
+}
+.my-order .detial a .jifen{
+	float:right;
+	margin-right:10px;
+}

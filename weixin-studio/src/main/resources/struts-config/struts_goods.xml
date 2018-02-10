@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="goods" namespace="/goods" extends="weixin">
+		<!-- 积分商城商品管理 -->
+		<action name="*Goods" class="com.ctvit.integralmall.action.GoodsAction" method="{1}">
+			<result name="init">/integralmall/goodsList.jsp</result>
+			<result name="list" type="json"><param name="root">map</param></result>
+			<result name="toupdate">/integralmall/editgoods.jsp</result>
+			<result name="add" type="json"><param name="root">map</param></result> 
+			<result name="update" type="json"><param name="root">map</param></result> 
+			<result name="delete" type="json"><param name="root">map</param></result> 
+		</action>
+		
+		<action name="*Upload" class="com.ctvit.integralmall.action.GoodsUploadAction" method="{1}">
+			<result name="dft" type="json"><param name="root">map</param></result> 
+		</action>
+		<!-- 积分商城 订单管理 -->
+		<action name="*Order" class="com.ctvit.integralmall.action.GoodsOrderAction" method="{1}">
+			<result name="init">/integralmall/goodsOrderList.jsp</result>
+			<result name="list" type="json"><param name="root">map</param></result>
+		</action>
+	</package>
+
+</struts>

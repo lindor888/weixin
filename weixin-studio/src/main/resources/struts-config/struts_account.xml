@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="account" namespace="/account" extends="weixin">
+	<global-results>
+			<result name="success">success.jsp</result>
+			<result name="filerror">failure.jsp?errorMes=${errorMes}</result>
+			</global-results>
+		<!-- 账户管理 -->
+		<action name="*Account" class="accountAction" method="{1}">
+			<result name="selectAll" type="json"><param name="root">mapJson</param></result>
+			<result name="updateAccount">updateAccount.jsp</result>
+			<result name="adduser">addAccount.jsp</result>
+			<result name="updateuser">updateAccount.jsp</result>
+			<result name="resetpassword">addAccount.jsp</result>
+		    <result name="ok" type="json"><param name="root">mapJson</param></result>
+		    <result type="json" name="checkUsername"><param name="root">message</param></result>
+		    <result name="success">success.jsp</result>
+		    <result name="resetpwdbyuser">resetpassword.jsp</result>
+		    <result name="checkdepartment" type="json"><param name="root">mapJson</param></result>
+		    <result name="revisepwdbyuser">success.jsp</result>
+		    <result name="roleupdate">addRoleByaccount.jsp</result>
+		    <result name="selectrole">../Account.jsp</result>
+		    <result name="allotrelation">chooseWaccount.jsp</result>
+		    <result name="rePasswordById" type="json"><param name="root">mapJson</param></result>
+		    <result name="deletesuccess" type="json"><param name="root">mapJson</param></result>
+		    <result name="choose" type="json"><param name="root">retMap</param></result>
+		   
+		</action>
+		
+		<action name="*tabwaccount" class="waccountAction" method="{1}">
+		<result name="listfindurl">../WAccount.jsp</result>
+		<result name="insertfindurl">/waccount/addWaccount.jsp</result>
+		<result name="selectAll" type="json"><param name="root">mapJson</param></result>
+         <result name="deletewaccount" type="json"><param name="root">mapJson</param></result>
+        <result name="insertwaccount">success.jsp</result>
+        <result name="checkwaccount" type="json"><param name="root">message</param></result>
+        <result name="UrgentStatewaccount" type="json"><param name="root">mapJson</param></result>
+         <result name="createurl" type="json"><param name="root">mapJson</param></result>
+        <result name="updatewaccount" >/waccount/updateWaccount.jsp</result>
+          <result name="success">success.jsp</result>
+        </action>
+		
+		
+         
+		<action name="*CustomizemenuAction" class="CustomizemenuAction" method="{1}">
+	
+		<result name="selectAll" type="json"><param name="root">jna</param></result>
+        
+        <result name="delmenu" type="json"><param name="root">mapJson</param></result>
+        <result name="selectById" type="json"><param name="root">mapJson</param></result>
+        <result name="waccountBymenu" >../CustomizeMenus.jsp</result>
+         <result name="pubweixin" type="json"><param name="root">mapJson</param></result>
+          <result name="menuparentCount" type="json"><param name="root">mapJson</param></result>
+           <result name="meunCount" type="json"><param name="root">mapJson</param></result>
+         
+ 		</action>
+ 		
+ 		
+ 		<action name="*RelationAction" class="ArelarionAction" method="{1}">
+		<result name="add" type="json"><param name="root">mapJson</param></result>
+		<result name="findByaccount" type="json"><param name="root">mapJson</param></result>
+		
+        </action>
+	</package>
+</struts>

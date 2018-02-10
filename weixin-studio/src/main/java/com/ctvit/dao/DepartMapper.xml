@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ctvit.dao.DepartMapper">
+	<resultMap type="com.ctvit.bean.Depart" id="departAndRoleResultMap">
+		<id column="depart_id" property="departId"/>
+		<result column="departname" property="departName"/>
+		<result column="pdepartid" property="pdepartId"/>
+		<result column="inorout" property="inorout"/>
+		<result column="role_names" property="roleNames"/>
+	</resultMap>
+	<resultMap type="com.ctvit.bean.Depart" id="departResultMap">
+		<id column="depart_id" property="departId"/>
+		<result column="departname" property="departName"/>
+		<result column="pdepartid" property="pdepartId"/>
+		<result column="inorout" property="inorout"/>
+	</resultMap>
+	
+	<sql id="departColumns">depart_id,departname,pdepartid,inorout</sql>
+	
+	<select id="listAllDepart" resultMap="departResultMap">
+		select 
+		<include refid="departColumns"/>
+		from tb_depart
+	</select>
+	
+	<select id="listPageDepart" parameterType="com.ctvit.bean.Depart" resultMap="departAndRoleResultMap">
+		select u.depart_id,u.departname,u.inorout,
+		(select group_concat(r.role_name) from tb_role r, tab_depart_relation dr where dr.role_id=r.role_id
+		and dr.depart_id=u.depart_id) as roleNames
+		from tb_depart u 
+		<if test="roleId!=null and roleId!=''">
+			, tab_depart_relation tr 
+		</if>
+		where 1=1
+		<if test="departName!=null and departName!=''">
+			and u.departname like "%"#{departName}"%" 
+		</if>
+		<if test="inorout!=null and inorout!=''">
+			and u.inorout = #{inorout}
+		</if>
+		<if test="roleId!=null and roleId!=''">
+			and tr.role_id=#{roleId} and tr.depart_id=u.depart_id
+		</if>
+	</select>
+	
+	<select id="getDepartInfo" parameterType="com.ctvit.bean.Depart" resultMap="departAndRoleResultMap">
+		select 
+		<include refid="departColumns"/>
+		from tb_depart where 1=1
+		<if test="departName != null and departName != ''">
+		and departName = #{departName}
+		</if>
+		<if test="departId!=null and departId>0">
+		and depart_id = #{departId}
+		</if>
+	</select>
+	<select id="getDepartById" parameterType="string" resultMap="departAndRoleResultMap">
+		select 
+		<include refid="departColumns"/>
+		from tb_depart u where u.depart_id = #{departId}
+	</select>
+	<select id="getDepartAndRoleById" parameterType="string" resultMap="departAndRoleResultMap">
+		select u.depart_id,u.departname,u.rights,r.role_id,r.role_name,r.rights as role_rights 
+		from tb_depart u 
+		left join tb_role r on u.role_id=r.role_id 
+		where u.status=0 and u.user_id=#{userId}
+	</select>
+	<select id="getCountByName" parameterType="com.ctvit.bean.Depart" resultType="int">
+		select count(depart_id) from tb_depart where departname=#{departName} and inorout=#{inorout}
+	</select>
+	<select id="getCount" parameterType="com.ctvit.bean.Depart" resultType="int">
+		select count(depart_id) from tb_depart where 1=1 
+		<if test="departname!=null and departname!=''">
+		 and departname like "%"#{departName}"%" 
+		</if>
+		<if test="roleId!=null and roleId!=''">
+		and role_id=#{roleId} 
+		</if>
+	</select>
+	<select id="selectUserbydepart" parameterType="com.ctvit.bean.Depart" resultMap="departAndRoleResultMap">
+		select * from tab_account ta where ta.department=#{departId}
+	</select>
+	
+	<insert id="insertDepart" parameterType="com.ctvit.bean.Depart">
+		insert tb_depart (departname,pdepartid,inorout) 
+		values (#{departName},#{pdepartid},#{inorout})
+	</insert>
+	
+	<update id="updateDepartBaseInfo" parameterType="com.ctvit.bean.Depart">
+		update tb_depart set 
+		departname=#{departName},
+		inorout=#{inorout},
+		modifydate=#{modifyDate}
+		where depart_id=#{departId}
+	</update>
+	<update id="updateDepartRights" parameterType="com.ctvit.bean.Depart">
+		update tb_depart set rights=#{rights} where depart_id=#{departId}
+	</update>
+	<delete id="deleteDepart" parameterType="string">
+		delete from tb_depart where depart_id=#{departId}
+	</delete>
+</mapper>

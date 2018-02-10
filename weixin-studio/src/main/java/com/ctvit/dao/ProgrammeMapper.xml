@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ctvit.dao.ProgrammeMapper" >
+ <select id="selectPageCountSave" resultType="java.lang.Integer" parameterType="com.ctvit.bean.ChakanBean">   
+     select count(*) from tab_programme_save where programme_save_id = #{programme_save_id}  
+    </select>
+     <select id="chakanbean" resultType="com.ctvit.bean.ChakanBean" parameterType="com.ctvit.bean.ChakanBean">   
+     select * from tab_programme_save where programme_save_id = #{programme_save_id} order by orderId desc limit #{currentPage},10
+    </select>
+</mapper>

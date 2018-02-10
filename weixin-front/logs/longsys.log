@@ -1,0 +1,12 @@
+[longsys] 2016-02-21 20:49:23,596 ERROR (com.ctvit.exception.AccessDBException:31) - db error
+[longsys] 2016-02-21 20:49:44,969 ERROR (com.ctvit.exception.AccessDBException:31) - db error
+[longsys] 2016-02-21 20:58:07,748 ERROR (com.ctvit.exception.AccessDBException:31) - db error
+[longsys] 2016-02-21 20:58:29,058 ERROR (com.ctvit.exception.AccessDBException:31) - db error
+[longsys] 2016-02-21 20:58:50,364 ERROR (com.ctvit.exception.AccessDBException:31) - db error
+[longsys] 2016-02-21 21:03:03,323 INFO  (com.ctvit.dao.FollowerDao:49) - [text:]FromUserName:吉吉snakecontent:insert db sussess!
+[longsys] 2016-02-21 21:03:03,719 INFO  (com.ctvit.dao.FollowerDao:49) - [text:]FromUserName:雨季content:insert db sussess!
+[longsys] 2016-02-21 21:03:04,170 INFO  (com.ctvit.dao.FollowerDao:49) - [text:]FromUserName:♈猫大人♈content:insert db sussess!
+[longsys] 2016-02-21 21:03:04,439 INFO  (com.ctvit.dao.FollowerDao:49) - [text:]FromUserName:水中月content:insert db sussess!
+[longsys] 2016-02-21 21:03:04,754 INFO  (com.ctvit.dao.FollowerDao:49) - [text:]FromUserName:冰淇淋content:insert db sussess!
+[longsys] 2016-02-21 21:03:05,064 INFO  (com.ctvit.dao.FollowerDao:49) - [text:]FromUserName:宝宝content:insert db sussess!
+[longsys] 2016-02-21 21:03:05,338 INFO  (com.ctvit.dao.FollowerDao:49) - [text:]FromUserName:小瓶盖儿content:insert db sussess!

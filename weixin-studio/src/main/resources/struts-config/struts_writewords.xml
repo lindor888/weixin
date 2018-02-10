@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="writewords" namespace="/writewords" extends="weixin">
+		<global-results>
+			<result name="jsonResult" type="json">
+				<param name="root">queryJson</param>
+			</result>
+		</global-results>
+		<action name="*WriteWordsActivity" class="com.ctvit.writewords.action.WriteWordsActivityAction" method="{1}">
+			<result name="init">/writewords/activity/activity.jsp</result>
+		</action>
+		<action name="*WriteWordsList" class="com.ctvit.writewords.action.WriteWordsListAction" method="{1}">
+			<result name="init">/writewords/list/list.jsp</result>
+		</action>
+	</package>
+</struts>

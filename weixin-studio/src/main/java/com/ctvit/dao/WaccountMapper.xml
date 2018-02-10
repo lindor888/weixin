@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ctvit.dao.WaccountMapper" >
+  <resultMap id="BaseResultMap" type="com.ctvit.bean.Waccount" >
+    <id column="waccount_id" property="waccountId" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="token" property="token" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="welcome_content" property="welcomeContent" jdbcType="VARCHAR" />
+    <result column="no_reply_content" property="noReplyContent" jdbcType="VARCHAR" />
+    <result column="if_compress_image" property="ifCompressImage" jdbcType="TINYINT" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="app_id" property="appId" jdbcType="VARCHAR" />
+    <result column="app_secret" property="appSecret" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_account" property="createAccount" jdbcType="VARCHAR" />
+    <result column="operate_account" property="operateAccount" jdbcType="VARCHAR" />
+    <result column="operate_time" property="operateTime" jdbcType="TIMESTAMP" />
+    <result column="state" property="state" jdbcType="TINYINT" />
+    <result column="urgent_state" property="urgentState" jdbcType="TINYINT" />
+    
+    <result column="createtimestring" property="createtimestring" jdbcType="VARCHAR" />
+    <result column="operatetimestring" property="operatetimestring" jdbcType="VARCHAR" />
+    <result column="createname" property="createname" jdbcType="VARCHAR" />
+    <result column="operatname" property="operatname" jdbcType="VARCHAR" />
+     <result column="comcatalogTitle" property="comcatalogTitle" jdbcType="VARCHAR" />
+    <result column="nocatalogTitle" property="nocatalogTitle" jdbcType="VARCHAR" />
+    <result column="bridge_token" property="bridgeToken" jdbcType="VARCHAR" />
+  
+  </resultMap>
+  <sql id="Base_Column_List" >
+    waccount_id, name, token, code, type, welcome_content, no_reply_content, if_compress_image, 
+    url, app_id, app_secret, create_time, create_account, operate_account, operate_time,urgent_state, 
+    state, bridge_token
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tab_waccount
+    where waccount_id = #{waccountId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tab_waccount
+    where waccount_id = #{waccountId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ctvit.bean.Waccount" >
+    insert into tab_waccount (waccount_id, name, token, 
+      code, type, welcome_content, 
+      no_reply_content, if_compress_image, url, 
+      app_id, app_secret, create_time, 
+      create_account, operate_account, operate_time,urgent_state,  
+      state,bridge_token)
+    values (#{waccountId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR}, 
+      #{code,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, #{welcomeContent,jdbcType=VARCHAR}, 
+      #{noReplyContent,jdbcType=VARCHAR}, #{ifCompressImage,jdbcType=TINYINT}, #{url,jdbcType=VARCHAR}, 
+      #{appId,jdbcType=VARCHAR}, #{appSecret,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createAccount,jdbcType=VARCHAR}, #{operateAccount,jdbcType=VARCHAR}, #{operateTime,jdbcType=TIMESTAMP}, 
+      #{urgentState,jdbcType=TINYINT},#{state,jdbcType=TINYINT},#{bridgeToken,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ctvit.bean.Waccount" >
+    insert into tab_waccount
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="waccountId != null" >
+        waccount_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="token != null" >
+        token,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="welcomeContent != null" >
+        welcome_content,
+      </if>
+      <if test="noReplyContent != null" >
+        no_reply_content,
+      </if>
+      <if test="ifCompressImage != null" >
+        if_compress_image,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="appId != null" >
+        app_id,
+      </if>
+      <if test="appSecret != null" >
+        app_secret,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createAccount != null" >
+        create_account,
+      </if>
+      <if test="operateAccount != null" >
+        operate_account,
+      </if>
+      <if test="operateTime != null" >
+        operate_time,
+      </if>
+      <if test="urgentState != null" >
+        urgent_state,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="bridgeToken != null" >
+        bridge_token,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="waccountId != null" >
+        #{waccountId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null" >
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="welcomeContent != null" >
+        #{welcomeContent,jdbcType=VARCHAR},
+      </if>
+      <if test="noReplyContent != null" >
+        #{noReplyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="ifCompressImage != null" >
+        #{ifCompressImage,jdbcType=TINYINT},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="appId != null" >
+        #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="appSecret != null" >
+        #{appSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createAccount != null" >
+        #{createAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="operateAccount != null" >
+        #{operateAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null" >
+        #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="urgentState != null" >
+        #{operateTime,jdbcType=TINYINT},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="bridgeToken != null" >
+        #{bridgeToken,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ctvit.bean.Waccount" >
+    update tab_waccount
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null" >
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="welcomeContent != null" >
+        welcome_content = #{welcomeContent,jdbcType=VARCHAR},
+      </if>
+      <if test="noReplyContent != null" >
+        no_reply_content = #{noReplyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="ifCompressImage != null" >
+        if_compress_image = #{ifCompressImage,jdbcType=TINYINT},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="appId != null" >
+        app_id = #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="appSecret != null" >
+        app_secret = #{appSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createAccount != null" >
+        create_account = #{createAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="operateAccount != null" >
+        operate_account = #{operateAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null" >
+        operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="urgentState != null" >
+        urgent_state = #{urgentState,jdbcType=TINYINT},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="bridgeToken != null" >
+        bridge_token = #{bridgeToken,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where waccount_id = #{waccountId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ctvit.bean.Waccount" >
+    update tab_waccount
+    set name = #{name,jdbcType=VARCHAR},
+      token = #{token,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      type = #{type,jdbcType=TINYINT},
+      welcome_content = #{welcomeContent,jdbcType=VARCHAR},
+      no_reply_content = #{noReplyContent,jdbcType=VARCHAR},
+      if_compress_image = #{ifCompressImage,jdbcType=TINYINT},
+      url = #{url,jdbcType=VARCHAR},
+      app_id = #{appId,jdbcType=VARCHAR},
+      app_secret = #{appSecret,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_account = #{createAccount,jdbcType=VARCHAR},
+      operate_account = #{operateAccount,jdbcType=VARCHAR},
+      operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      urgent_state = #{urgentState,jdbcType=TINYINT},
+      state = #{state,jdbcType=TINYINT}
+    where waccount_id = #{waccountId,jdbcType=VARCHAR}
+  </update>
+  
+  
+   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ctvit.dao.QueryDataBean">
+  select * from tab_waccount where 1=1 
+  
+  <if test="state == null or state=='' ">
+  and state=0
+  </if>
+  
+  <if test="state!=null and state!='' and state!=100 ">
+  and state=#{state,jdbcType=VARCHAR}
+  </if>
+  
+   
+  
+  <if test="type!=null and type!='' and type !=100 ">
+  and urgent_state=#{type,jdbcType=VARCHAR}
+  </if>
+  
+  
+  <if test="username !=null and username != '' ">
+     and name=#{username,jdbcType=VARCHAR}
+    </if>
+   order by create_time desc
+  </select>
+
+
+    <select id="selectByExamplepage" resultMap="BaseResultMap" parameterType="com.ctvit.dao.QueryDataBean" >
+  select waccount_id,name,token,  code, type,  welcome_content,  no_reply_content,  if_compress_image, bridge_token,
+   url,   app_id,  app_secret,  create_account,  operate_account,urgent_state, t.state,
+  t.create_time createtimestring,operate_time  operatetimestring ,ac.login createname, 
+ at.login  operatname
+  
+  from tab_waccount t  join tab_account ac on t.create_account=ac.account_id
+  join tab_account at on at.account_id=t.operate_account
+    where 1=1 
+    
+    <if test="username !=null and username != '' ">
+     and name=#{username,jdbcType=VARCHAR}
+    </if>
+    
+      
+  <if test="state == null or state=='' ">
+  and t.state=0
+  </if>
+  
+  <if test="state!=null and state!='' and state!=100 ">
+  and t.state=#{state,jdbcType=VARCHAR}
+  </if>
+  
+   
+  
+  <if test="type!=null and type!='' and type !=100 ">
+  and t.urgent_state=#{type,jdbcType=VARCHAR}
+  </if>
+  
+   order by t.create_time desc  limit #{page} , #{rows} 
+   </select>
+  
+   <select id="selectByaccount" resultMap="BaseResultMap" parameterType="com.ctvit.dao.QueryDataBean">
+  select t.* from tab_waccount t   join   tab_account_relation  rela on rela.waccount_id=t.waccount_id where 1=1 
+  
+  <if test="state == null or state=='' ">
+  and state=0
+  </if>
+  
+  <if test="state!=null and state!='' and state!=100 ">
+  and state=#{state,jdbcType=VARCHAR}
+  </if>
+  
+   
+  
+  <if test="type!=null and type!='' and type !=100 ">
+  and urgent_state=#{type,jdbcType=VARCHAR}
+  </if>
+  
+  
+  <if test="username !=null and username != '' ">
+     and   name=#{username,jdbcType=VARCHAR}
+    </if>
+    
+     <if test="groupName !=null and groupName != '' ">
+     and rela.account_id=#{groupName,jdbcType=VARCHAR}
+     </if>
+     
+     
+   order by create_time desc
+  </select>
+  
+  
+  <select id="selectByaccountpage" resultMap="BaseResultMap" parameterType="com.ctvit.dao.QueryDataBean" >
+  select t.waccount_id,name,token,  code, type,  welcome_content,  no_reply_content,  if_compress_image, bridge_token,
+   url,   app_id,  app_secret,  create_account,  t.operate_account,urgent_state, t.state,
+  t.create_time createtimestring,t.operate_time  operatetimestring ,ac.login createname, 
+  at.login  operatname
+  
+  from tab_waccount t  join tab_account ac on t.create_account=ac.account_id
+  join tab_account at on at.account_id=t.operate_account
+  join   tab_account_relation  rela on rela.waccount_id=t.waccount_id
+    where 1=1 
+    
+    <if test="username !=null and username != '' ">
+     and binary name=#{username,jdbcType=VARCHAR}
+    </if>
+    
+     <if test="groupName !=null and groupName != '' ">
+    and rela.account_id=#{groupName,jdbcType=VARCHAR}
+    </if>
+      
+  <if test="state == null or state=='' ">
+  and t.state=0
+  </if>
+  
+  <if test="state!=null and state!='' and state!=100 ">
+  and t.state=#{state,jdbcType=VARCHAR}
+  </if>
+  
+  <if test="type!=null and type!='' and type !=100 ">
+  and t.urgent_state=#{type,jdbcType=VARCHAR}
+  </if>
+  
+   order by t.create_time desc  limit #{page} , #{rows} 
+   </select>
+   
+   <select id="selectWaccountList" resultMap="BaseResultMap">
+ 	 select * from tab_waccount where 1=1 and state=0 order by create_time desc
+  </select>
+  
+  <select id="selectWaccountListbyAccountId" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select tw.name,tw.waccount_id  from tab_waccount tw, tab_account_relation tar ,tab_account ta  
+  	where tw.waccount_id=tar.waccount_id  and ta.account_id=tar.account_id and tw.state=0 and ta.state=0 
+  	 and ta.account_id=#{accountId,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="checknameBywaccount" resultMap="BaseResultMap" parameterType="com.ctvit.bean.Waccount" >
+     select t.* from tab_waccount t where 1=1 
+	   <if test="name != null and name !=''">
+	      and binary  t.name = #{name,jdbcType=VARCHAR}
+	   </if>
+	   
+	     <if test="waccountId != null and waccountId !=''">
+	   
+	      and waccount_id != #{waccountId,jdbcType=VARCHAR}
+	   </if>
+	 </select>
+	<select id="selectBywelcomcontent" resultMap="BaseResultMap" parameterType="java.lang.String">
+
+   select   w.*,catalogTitle comcatalogTitle   from tab_waccount  w left  join tab_wx_TextMaterial   t on w.welcome_content=t.id 
+   where  1=1  and t.id is not null  and w.waccount_id = #{waccountId,jdbcType=VARCHAR}
+ 
+	union all
+	
+	select  w.*,catalogTitle  comcatalogTitle   from tab_waccount  w left  join tab_wx_GraphicMaterial t on w.welcome_content=t.id 
+	where 1=1 and t.id is not null   and w.waccount_id = #{waccountId,jdbcType=VARCHAR}
+
+	
+ </select>
+
+	<select id="selectBynoReplyContent" resultMap="BaseResultMap" parameterType="java.lang.String">
+
+   select w.* , catalogTitle  nocatalogTitle   from tab_waccount  w left  join tab_wx_TextMaterial   t on w.no_reply_content=t.id 
+   where  1=1  and t.id is not null  and w.waccount_id = #{waccountId,jdbcType=VARCHAR}
+  
+	union all
+	select w.*, catalogTitle nocatalogTitle    from tab_waccount  w left  join tab_wx_GraphicMaterial t on w.no_reply_content=t.id 
+	where 1=1 and t.id is not null   and w.waccount_id = #{waccountId,jdbcType=VARCHAR}
+  
+
+
+
+	
+</select>
+	
+	
+</mapper>

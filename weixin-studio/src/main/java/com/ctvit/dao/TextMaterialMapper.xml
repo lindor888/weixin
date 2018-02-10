@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ctvit.dao.TextMaterialMapper">
+	<resultMap id="BaseResultMap" type="com.ctvit.bean.TextMaterial">
+		<result column="ID" jdbcType="VARCHAR" property="id" />
+		<result column="CATALOGTITLE" jdbcType="VARCHAR" property="catalogTitle" />
+		<result column="WACCOUNT_iD" jdbcType="VARCHAR" property="waccount_id" />
+		<result column="WENBENXML" jdbcType="VARCHAR" property="wenbenxml" />
+		<result column="CREATEUSER" jdbcType="VARCHAR" property="createuser" />
+		<result column="CREATEUSERID" jdbcType="VARCHAR" property="createuserid" />
+		<result column="CREATEDATE" jdbcType="TIMESTAMP" property="createdate" />
+		<result column="MODIFYUSER" jdbcType="VARCHAR" property="modifyuser" />
+		<result column="MODIFYUSERID" jdbcType="VARCHAR" property="modifyuserid" />
+		<result column="MODIFYDATE" jdbcType="TIMESTAMP" property="modifydate" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+
+	</resultMap>
+	<resultMap id="ExtResultMap" extends="BaseResultMap" type="com.ctvit.bean.TextMaterial">
+		<result column="keyword0" jdbcType="VARCHAR" property="keyword0"/>
+		<result column="keyword1" jdbcType="VARCHAR" property="keyword1"/>
+	</resultMap>
+	<select id="selectTextMaterialList" resultMap="BaseResultMap" parameterType="com.ctvit.bean.TextMaterial">
+		select * from tab_wx_TextMaterial where status =1 and 
+			<if test="catalogTitle !=null">
+			catalogTitle like  CONCAT('%',#{catalogTitle},'%') and
+			</if>
+		 waccount_id=#{waccount_id} order by modifydate limit #{page} ,#{rows}
+	</select>
+	 <select id="selectTextCount" resultType="Integer" parameterType="com.ctvit.bean.TextMaterial">
+  		select count(*) from tab_wx_TextMaterial where status =1 and 
+			<if test="catalogTitle !=null">
+			  catalogTitle like  CONCAT('%',#{catalogTitle},'%') and
+			</if>
+			<if test="waccount_id !=null">
+			 waccount_id=#{waccount_id}
+			</if>
+	</select>
+	 <select id="counttextMaterial" resultType="Integer" parameterType="com.ctvit.bean.TextMaterial">
+  		select count(*)  from tab_wx_TextMaterial tt
+		where tt.status != -1
+		<if test="catalogTitle !=null">
+			and  tt.catalogTitle like CONCAT('%',#{catalogTitle},'%')
+		</if>
+		<if test="status !=null">
+			and tt.status =#{status,jdbcType=VARCHAR}
+		</if>
+		<if test="keyword0 !=null">
+			and tt.id in
+			(select twk.materialId from tab_wx_Keyword twk where keywordName like CONCAT('%',#{keyword0},'%')) 
+		</if>
+		<if test="waccount_id !=null">
+			and tt.waccount_id=#{waccount_id,jdbcType=VARCHAR}
+		</if>
+		
+	</select>
+
+
+
+ 
+   <select id="selectBytitle" resultMap="BaseResultMap" parameterType="com.ctvit.bean.TextMaterial" >
+  select * from tab_wx_TextMaterial where 1=1  and status!=-1
+   <if test="catalogTitle != null and catalogTitle != ''  " >
+  and catalogTitle like CONCAT('%',#{catalogTitle},'%') 
+  </if>
+   <if test="waccount_id != null and waccount_id != ''  " >
+  and waccount_id=#{waccount_id,jdbcType=VARCHAR}
+  </if>
+  order by modifydate desc limit #{page} ,#{rows}
+  </select>
+
+<select id="selecttextMaterial" resultMap="BaseResultMap" parameterType="com.ctvit.bean.TextMaterial" >
+		select tt.* from tab_wx_TextMaterial tt
+		where tt.status != -1
+		<if test="catalogTitle !=null">
+			and  tt.catalogTitle like CONCAT('%',#{catalogTitle},'%')
+		</if>
+		<if test="status !=null">
+			and tt.status =#{status,jdbcType=VARCHAR}
+		</if>
+		<if test="keyword0 !=null">
+			and tt.id in
+			(select twk.materialId from tab_wx_Keyword twk where keywordName like CONCAT('%',#{keyword0},'%')) 
+		</if>
+		<if test="waccount_id !=null">
+			and tt.waccount_id=#{waccount_id,jdbcType=VARCHAR}
+		</if>
+		order by tt.modifydate desc 
+		limit #{start,jdbcType=VARCHAR},#{end,jdbcType=VARCHAR}
+
+ </select>
+  
+  
+   <select id="countquerytextMaterial" resultType="Integer" parameterType="com.ctvit.bean.TextMaterial">
+  		select count(*) from tab_wx_TextMaterial tt , tab_waccount tw 
+			where tt.waccount_id=tw.waccount_id 
+			<if test="catalogTitle !=null">
+			 and catalogTitle like  CONCAT('%',#{catalogTitle},'%') 
+			</if>
+			<if test="status !=null">
+			and status = #{status} 
+			</if>
+			<if test="waccount_id !=null">
+			and tt.waccount_id = #{waccount_id} 
+			</if>
+			<!-- <if test="关键字 !=null">
+			and 关键字 = #{关键字} 
+			</if> -->
+	</select>
+<select id="querytextMaterial" resultMap="BaseResultMap" parameterType="com.ctvit.bean.TextMaterial" >
+  	
+			select tt.*  ,tw.name from tab_wx_TextMaterial tt , tab_waccount tw 
+			where tt.waccount_id=tw.waccount_id 
+			<if test="catalogTitle !=null">
+			 and catalogTitle like  CONCAT('%',#{catalogTitle},'%') 
+			</if>
+			<if test="status !=null">
+			and status = #{status} 
+			</if>
+			<if test="waccount_id !=null">
+			and tt.waccount_id = #{waccount_id} 
+			</if>
+			<!-- <if test="关键字 !=null">
+			and 关键字 = #{关键字} 
+			</if> -->
+			
+		  order by modifydate limit #{start} ,#{end}
+
+  </select>
+
+<select id="selecttextMaterialById" resultMap="BaseResultMap" parameterType="com.ctvit.bean.TextMaterial" >
+  	select tx.* from tab_wx_TextMaterial tx where tx.id=#{id,jdbcType=VARCHAR}
+</select>
+  
+<select id="selecttextMaterialWithKeywordsById" resultMap="ExtResultMap" parameterType="com.ctvit.bean.TextMaterial" >
+  	select tx.*,(select group_concat(twk.keywordName) from tab_wx_Keyword twk where twk.materialId = tx.id and twk.keywordRule=0) as keyword0,
+  	 (select group_concat(twk.keywordName) from tab_wx_Keyword twk where twk.materialId = tx.id and twk.keywordRule=1) as keyword1
+  	from tab_wx_TextMaterial tx  where tx.id=#{id,jdbcType=VARCHAR}
+</select>
+  
+  <select id="selecttextByTitle" resultMap="BaseResultMap" parameterType="com.ctvit.bean.TextMaterial" >
+
+		select * from tab_wx_TextMaterial where status!=-1 and catalogTitle=
+		#{catalogTitle} and waccount_id=#{waccount_id} limit 0,1
+
+  </select>
+  
+  <select id="selecttextByTitleNotSelf" resultMap="BaseResultMap" parameterType="com.ctvit.bean.TextMaterial" >
+
+		select * from tab_wx_TextMaterial where status!=-1 and catalogTitle=
+		#{catalogTitle} and id!=#{id} limit 0,1
+
+  </select>
+  
+  <select id="existInWaccount" resultType="int" parameterType="com.ctvit.bean.TextMaterial" >
+
+		select count(id) from tab_wx_TextMaterial where status!=-1 and catalogTitle=
+		#{catalogTitle} and id!=#{id} and waccount_id=#{waccount_id}
+
+  </select>
+  
+   <update id="update"   parameterType="com.ctvit.bean.TextMaterial" >    
+  update tab_wx_TextMaterial  
+  	<set >
+      <if test="catalogTitle != null" >
+        CATALOGTITLE = #{catalogTitle},
+      </if>
+      <if test="waccount_id != null" >
+        WACCOUNT_ID = #{waccount_id},
+      </if>
+      <if test="wenbenxml != null" >
+        WENBENXML = #{wenbenxml},
+      </if>
+      <if test="createuser != null" >
+        CREATEUSER = #{createuser,},
+      </if>
+       <if test="createuserid != null" >
+        CREATEUSERID = #{createuserid},
+      </if>
+      <if test="createdate != null" >
+        CREATEDATE = #{createdate,},
+      </if>
+       <if test="modifyuser != null" >
+        MODIFYUSER = #{modifyuser},
+      </if>
+      <if test="modifyuserid != null" >
+        MODIFYUSERID = #{modifyuserid,},
+      </if>
+       <if test="modifydate != null" >
+        MODIFYDATE = #{modifydate},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,},
+      </if>
+    </set>
+        where ID=  #{id,jdbcType=VARCHAR}
+  </update>
+
+	<insert id="insertText" parameterType="com.ctvit.bean.TextMaterial">
+
+		insert into
+		tab_wx_TextMaterial(ID,CATALOGTITLE,WACCOUNT_ID,WENBENXML,CREATEUSER,CREATEUSERID,CREATEDATE,MODIFYUSER,
+		MODIFYUSERID,MODIFYDATE,STATUS)
+		values (#{id},
+		#{catalogTitle},#{waccount_id},#{wenbenxml},#{createuser},#{createuserid},#{createdate},#{modifyuser},#{modifyuserid},
+		#{modifydate},#{status} )
+	</insert>
+
+
+ <update id="updatedeault"   parameterType="com.ctvit.bean.TextMaterial" >    
+  update tab_wx_TextMaterial  
+  	<set >
+      <if test="status != null" >
+        STATUS = #{status,},
+      </if>
+    </set>
+        where ID=  #{id,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

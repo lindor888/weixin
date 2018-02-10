@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="epgcomment" namespace="/epgcomment" extends="weixin">
+		<!-- epg 视频评论管理 -->
+		<action name="*Comment" class="com.ctvit.action.EpgCommentAction" method="{1}">
+			
+			<result name="list" type="json"><param name="root">map</param></result>
+			
+			<result name="query" type="json"><param name="root">map</param></result>
+	
+		</action>
+		
+	</package>
+
+</struts>

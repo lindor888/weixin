@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ctvit.dao.DepartRelationMapper" >
+  <resultMap id="BaseResultMap" type="com.ctvit.bean.DepartRelation" >
+    <id column="relation_id" property="relationId" jdbcType="VARCHAR" />
+    <result column="depart_id" property="departId" jdbcType="VARCHAR" />
+    <result column="role_id" property="roleId" jdbcType="VARCHAR" />
+    <result column="operate_time" property="operateTime" jdbcType="TIMESTAMP" />
+      <result column="operate_account" property="operateAccount" jdbcType="VARCHAR" />
+        <result column="rolename" property="rolename" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    relation_id, depart_id, role_id, operate_time,operate_account
+  </sql>
+  
+	 <insert id="insert" parameterType="com.ctvit.bean.DepartRelation" >
+    insert into tab_depart_relation (relation_id, depart_id, role_id, 
+      operate_time, operate_account)
+    values (#{relationId,jdbcType=VARCHAR}, #{departId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, 
+      #{operateTime,jdbcType=TIMESTAMP}, #{operateAccount,jdbcType=VARCHAR})
+  </insert>
+ 
+  
+  <select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.ctvit.bean.DepartRelation">
+		select * from tab_depart_relation where 1=1 
+		<if test="departId!= null and  departId!=''">
+			and depart_id = #{departId}
+		</if>
+		<if test="roleId!= null and  roleId!=''">
+			and role_id = #{roleId}
+		</if>
+		<if test="operateAccount!= null and  operateAccount!=''">
+			and operate_account = #{operateAccount}
+		</if>
+
+		<if test="operateTime != null  and  operateTime !=''">
+			and operate_time = #{operateTime}
+		</if>
+		order by operate_time desc
+	</select>
+  
+  <delete id="deleteBydepart" parameterType="com.ctvit.bean.DepartRelation" >
+    delete from tab_depart_relation  where 1=1  
+    <if test="departId !=null and  departId !='' ">
+     and  depart_id = #{departId,jdbcType=VARCHAR}
+    </if>
+    
+     <if test="roleId !=null and  roleId !='' ">
+     and  role_id = #{roleId,jdbcType=VARCHAR}
+    </if>
+    
+    
+  </delete>
+  
+  
+   <select id="selectByDepartment" resultMap="BaseResultMap" parameterType="java.lang.String">
+	
+	select rela.*,role.role_name rolename from tab_depart_relation rela join tb_role role on role.role_id=rela.role_id
+	
+	where rela.depart_id=#{id,jdbcType=VARCHAR}
+	
+	</select>
+  
+</mapper>

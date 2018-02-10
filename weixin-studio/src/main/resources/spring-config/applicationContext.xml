@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+
+	<bean id="dbBean" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass"><value>com.mysql.jdbc.Driver</value></property>
+	<property name="jdbcUrl"><value>jdbc:mysql://10.4.0.179:3306/weixinstudio?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;zeroDateTimeBehavior=round</value></property> 
+		<property name="user"><value>root</value></property> 
+		<property name="password"><value>123456</value></property> 
+		<property name="minPoolSize"><value>1</value></property>
+		<property name="maxPoolSize"><value>20</value></property>
+		<property name="initialPoolSize"><value>1</value></property>
+		<property name="maxIdleTime"><value>25000</value></property>
+		<property name="acquireIncrement"><value>1</value></property>
+		<property name="acquireRetryAttempts"><value>30</value></property>
+		<property name="acquireRetryDelay"><value>1000</value></property>
+		<property name="testConnectionOnCheckin"><value>true</value></property>
+		<property name="automaticTestTable"><value>c3p0TestTable</value></property>
+		<property name="idleConnectionTestPeriod"><value>18000</value></property>
+		<property name="checkoutTimeout"><value>3000</value></property>
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dbBean" />
+	</bean>
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
+		<property name="dataSource" ref="dbBean" />
+	</bean>
+	<bean id="KeyGenerator" class="com.ctvit.util.KeyGenerator" />
+	
+	<bean id="accountSessionBean" class="com.ctvit.bean.AccountSessionBean" scope="session" />
+<!-- 互动应用数据源 -->
+<bean id="dbSurce" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass"><value>com.mysql.jdbc.Driver</value></property>
+	<property name="jdbcUrl"><value>jdbc:mysql://10.4.0.179:3306/btvinteract?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;zeroDateTimeBehavior=round</value></property> 
+
+		<property name="user"><value>root</value></property> 
+		<property name="password"><value>123456</value></property> 
+
+		<property name="minPoolSize"><value>1</value></property>
+		<property name="maxPoolSize"><value>20</value></property>
+		<property name="initialPoolSize"><value>1</value></property>
+		<property name="maxIdleTime"><value>25000</value></property>
+		<property name="acquireIncrement"><value>1</value></property>
+		<property name="acquireRetryAttempts"><value>30</value></property>
+		<property name="acquireRetryDelay"><value>1000</value></property>
+		<property name="testConnectionOnCheckin"><value>true</value></property>
+		<property name="automaticTestTable"><value>c3p0TestTable</value></property>
+		<property name="idleConnectionTestPeriod"><value>18000</value></property>
+		<property name="checkoutTimeout"><value>3000</value></property>
+	</bean>
+    <bean id="transaction"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dbSurce" />
+	</bean>
+
+	<bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
+		<property name="dataSource" ref="dbSurce" />
+	</bean>
+	<!-- 定时任务 -->
+	<!-- 配置作业类JobDetailBean  -->
+   <bean name="job" class="org.springframework.scheduling.quartz.JobDetailBean">  
+		<property name="jobClass" value="com.ctvit.util.QuartzJobWeixin" />  
+		<property name="jobDataAsMap">  
+		<map>  
+		<entry key="timeout" value="0" />  
+		</map>  
+		</property>  
+	</bean>  
+	<!-- 配置作业调度的触发方式（触发器） -->
+	<bean id="simpleTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">  
+		<property name="jobDetail" ref="job" />  
+		<property name="startDelay" value="0" /><!-- 调度工厂实例化后，经过0秒开始执行调度 -->  
+		<property name="repeatInterval" value="5400000" /><!-- 每1.5小时调度一次 -->  
+	</bean> 
+	<!-- 配置调度工厂  -->
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">  
+		<property name="triggers">  
+			<list>  
+			   <ref bean="simpleTrigger" />  
+			</list>  
+	    </property>  
+    </bean>  
+</beans>

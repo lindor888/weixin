@@ -1,0 +1,46 @@
+.photolist img {margin: 0; padding: 0; float: left; clear: both;}
+.panel-body {border-style:none;}
+.widget-placeholder {border:2px dashed #FF99CC;padding: 0px;}
+.c5 div{width:9%;}
+.c5 img:hover{border:1px solid red;}
+.header{height:80px;width:80px;}
+.photoBox {width:770px;margin:0 auto}
+.photolist{list-style:none;width:auto;}
+.photolist li{float: left;padding: 2px 2px 2px 2px;position:relative;}
+.photolist .widget-placeholder {float: left;border:2px dashed #FF99CC;padding: 0px;}
+.photolist li:hover{border-color:red;border-width:2px;border-style: solid;padding: 0px;display:block;}
+.flg {background: url("/CMS/style/images/photo_flg.gif") no-repeat scroll;transparent;height:10px;width:10px;}
+.photolist .flg{right:2px;bottom:2px; overflow: hidden;display:none;position:absolute;}
+.del {background: url("/CMS/style/images/photo_del.gif") no-repeat scroll;transparent;height:7px;width:7px;cursor:pointer;}
+.photolist .del{top:5px;right:4px;overflow:hidden;display:block;position:absolute;}
+.photolist .sel{border-color:#33FF66;border-width:2px;border-style: solid;padding: 0px;display:block;}
+.cur .flg{display:block}
+.alt .flg{background: url("/CMS/style/images/photo_alt_flg.png") no-repeat scroll;transparent;height:38px;width:33px;display:block}
+.loding .flg{background: url("/CMS/style/easyui/images/tree_loading.gif") no-repeat scroll;transparent;height:20px;width:20px;display:block}
+.fail   .flg{background: url("/CMS/style/easyui/images/fail.png") no-repeat scroll;transparent;height:42px;width:42px;display:block}
+
+ .block12 .sel{position:relative;cursor:pointer;}
+ .block12 .sel .info{right:2px;bottom:50px;overflow:hidden;display:none;position:absolute;}
+ .block12 .sel:hover{z-index:10;border:2px solid red;filter:alpha(opacity=60);-moz-opacity:0.6;opacity: 0.5;background:red;}
+ .block12 .cur .info{display:block;font-weight:bold;font-family:"����";font-size:18px;color:red;}
+
+.showBigphoto{height:450px;width:600px;border:1px;border-style: solid;position:relative;background:blue;}
+.showBigphoto img{height:450px;width:600px;}
+.showAddPhoto{font-family:"����";font-size:18px;color:red;
+	filter:alpha(opacity=40);-moz-opacity:0.4;opacity: 0.4;background:white;position:absolute;right:290px;bottom:250px;cursor:pointer;display:none
+}
+.showPhotoDesc{height:100px;width:600px;z-index:10;filter:alpha(opacity=50);-moz-opacity:0.5;opacity: 0.5;background:gray;position:absolute;right:0px;bottom:0px;}
+.showPhotoDesc .photobrief{position:absolute;right:20px;bottom:5px;font-family:"����";font-size:18px;color:white;}
+.cur .showAddPhoto{display:block}
+.photoAlbumList{list-style:none;width:86%;margin: 0pt auto;}
+
+/* tooltip */
+#tooltip{
+	position:absolute;
+	border:1px solid #ccc;
+	background:#333;
+	padding:2px;
+	display:none;
+	color:#fff;
+	z-index:9100;/*��������9000*/
+}

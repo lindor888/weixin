@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="epg" namespace="/epg" extends="weixin">
+		<!-- EGP管理 -->
+		<action name="*Epg" class="com.ctvit.action.EpgAction" method="{1}">
+		<!-- 	<result name="rows" type="json"><param name="root">dataJson</param></result>-->
+			<result name="init">/epg/epglist.jsp</result>
+			<result name="add" type="json"><param name="root">map</param></result> 
+			<result name="list" type="json"><param name="root">map</param></result>
+			<result name="delete" type="json"><param name="root">map</param></result>
+			<result name="update" type="json"><param name="root">map</param></result>
+			<result name="query" type="json"><param name="root">map</param></result>
+			<result name="toupdate" >/epg/editepg.jsp</result>
+			<result name="audit"  type="json"><param name="root">map</param></result>
+	
+		</action>
+		
+		<!-- 图片上传工具 -->
+		<action name="*UploadAction" class="com.ctvit.action.UploadVideoAction" method="{1}">
+			<result type="json" name="dft"><param name="root">mapJson</param></result>
+		</action>
+		
+		<!-- 转码对外的接口工具 -->
+		<action name="*DemoAction" class="com.ctvit.action.DemoAction" method="{1}">
+			<result type="json" name="zhuanma"><param name="root">mapJson</param></result>
+		</action>
+		
+		
+		
+	</package>
+
+</struts>

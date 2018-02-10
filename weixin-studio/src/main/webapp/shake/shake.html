@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>摇一摇抽奖</title>
+<link rel="stylesheet" href="http://www.helloweba.com/demo/css/main.css" />
+ <script src="/weixin-studio/style/js/jquery-1.4.2.min.js" type="text/javascript"></script>
+<style type="text/css">
+.demo{width:320px; margin:40px auto 0 auto; }
+.hand { width: 190px; height: 300px; margin:0 auto; background: url(hand.png) no-repeat; }
+.hand-animate { -webkit-animation: hand_move infinite 2s; }
+.result { background: #393B3C; border: #2C2C2C 1px solid; box-shadow: inset #4D4F50 0 0 0 1px; border-radius: 10px; color: #fff; padding: 10px; width: 300px; opacity: 0;
+        -webkit-transition: all 1s;
+           -moz-transition: all 1s;
+            -ms-transition: all 1s;
+             -o-transition: all 1s;
+                transition: all 1s; }
+.result-show { opacity: 1; margin-top: 50px; }
+
+ @-webkit-keyframes hand_move {
+        0% {
+            -webkit-transform: rotate(0);
+               -moz-transform: rotate(0);
+                -ms-transform: rotate(0);
+                 -o-transform: rotate(0);
+                    transform: rotate(0); }
+        50% {
+            -webkit-transform: rotate(15deg);
+               -moz-transform: rotate(15deg);
+                -ms-transform: rotate(15deg);
+                 -o-transform: rotate(15deg);
+                    transform: rotate(15deg); }
+        100% {
+            -webkit-transform: rotate(0);
+               -moz-transform: rotate(0);
+                -ms-transform: rotate(0);
+                 -o-transform: rotate(0);
+                    transform: rotate(0); }
+    }
+</style>
+</head>
+
+<body>
+
+<div id="main">
+ 
+  
+   <div class="demo">
+		<div id="hand" class="hand hand-animate"></div>
+		<div id="result"></div>
+   </div>
+  
+  <br/>
+</div>
+<script src="shake.js"></script>
+<script>
+window.onload = function() {
+	var prizename = "";
+	var openId = "o8VcbwPAC9a24fGErCBCsm4UNd7I";
+	var pageUrl = window.location.href;
+	var waccountId="";
+	var qrcodeID ="Qrco1447208884294102";
+ 	 if (pageUrl.indexOf("openId=") != -1)
+	{
+		openId = pageUrl.substr(pageUrl.indexOf("openId=")+7,pageUrl.length);
+	}
+		if (pageUrl.indexOf("qrcodeID=") != -1)
+	{
+	    qrcodeID = pageUrl.split("qrcodeID=")[1].split("&openId")[0];
+	} 
+	//获取用户信息
+		$.ajax({
+				url:"http://10.3.1.32:8080/weixin-studio/interact/showUInteract?ids="+openId,
+				type:"get",
+				async:false,
+				success:function(data){
+					
+				    if(data != "" && data != null){
+				    waccountId = data.rows[0].waccountId;
+					//$("#waccountid").val(data.rows[0].waccountId);
+			        }
+				}
+			});
+	$.ajax({   
+	       url:'http://10.3.1.32:8080/weixin-studio/interact/getprizeallInteract?waccountId='+waccountId,
+	        type: 'get',   
+	        async: false,
+	        //data:  {'openId':openIdlist,'groupsId':id},
+	       dataType: 'json',  
+	       success:function(data){ 
+	    	   if(data.msg == "success"){
+	    	   prizename = data.restaraunts;
+	    	   }else{
+	    	   flag = 1;
+	    	   alert("活动未开始！");
+	    	   return;
+	    	   }
+	        }   
+		});
+    var myShakeEvent = new Shake({
+        threshold: 15
+    });
+
+    myShakeEvent.start();
+
+    window.addEventListener('shake', shakeEventDidOccur, false);
+
+    function shakeEventDidOccur () {
+    var item = "";
+    var result = document.getElementById("result");
+		result.className = "result";
+		var arr = prizename;
+    $.ajax({   
+	       url:'http://10.3.1.32:8080/weixin-studio/interact/getprizeoneInteract',
+	        type: 'get',   
+	        async: false,
+	        data:  {'openId':openId,'qrcodeID':qrcodeID,'waccountId':waccountId,},
+	       dataType: 'json',  
+	       success:function(data){ 
+	    	   if(data.item == undefined){
+	    	  item = prizename.length -1 ;
+			
+			result.innerHTML = "很遗憾！"+arr[item]+"！";
+			return;
+	    	   }else{
+			   item = data.item;
+			   // rotateFn(item, turnplate.restaraunts[item-1]);
+			   result.innerHTML = "恭喜，摇得"+arr[item]+"！";
+			   }
+	        }   
+		});
+		
+	
+		
+		
+		setTimeout(function(){
+            result.className = "result result-show";
+        }, 1000);
+    }
+};
+</script>
+</body>
+</html>

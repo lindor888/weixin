@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ctvit.dao.KeywordMapper">
+	<resultMap id="BaseResultMap" type="com.ctvit.bean.Keyword">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="keywordName" property="keywordName" jdbcType="VARCHAR" />
+		<result column="keywordRule" property="keywordRule" jdbcType="TINYINT" />
+		<result column="keywordWeight" property="keywordWeight"
+			jdbcType="TINYINT" />
+		<result column="materialId" property="materialId" jdbcType="VARCHAR" />
+		<result column="waccount_id" property="waccount_id" jdbcType="VARCHAR" />
+		<result column="createuser" property="createuser" jdbcType="VARCHAR" />
+		<result column="createuserid" property="createuserid" jdbcType="VARCHAR" />
+		<result column="createdate" property="createdate" jdbcType="TIMESTAMP" />
+		<result column="modifyuser" property="modifyuser" jdbcType="VARCHAR" />
+		<result column="modifyuserid" property="modifyuserid" jdbcType="VARCHAR" />
+		<result column="modifydate" property="modifydate" jdbcType="TIMESTAMP" />
+		<result column="status" property="status" jdbcType="TINYINT" />
+		<result column="type" property="type" jdbcType="TINYINT" />
+	</resultMap>
+	
+	<resultMap id="ResultMap" type="com.ctvit.bean.Keyword">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="keywordName" property="keywordName" jdbcType="VARCHAR" />
+		<result column="keywordRule" property="keywordRule" jdbcType="TINYINT" />
+		<result column="keywordWeight" property="keywordWeight"
+			jdbcType="TINYINT" />
+		<result column="materialId" property="materialId" jdbcType="VARCHAR" />
+		<result column="waccount_id" property="waccount_id" jdbcType="VARCHAR" />
+		<result column="createuser" property="createuser" jdbcType="VARCHAR" />
+		<result column="createuserid" property="createuserid" jdbcType="VARCHAR" />
+		<result column="createdate" property="createdate" jdbcType="TIMESTAMP" />
+		<result column="modifyuser" property="modifyuser" jdbcType="VARCHAR" />
+		<result column="modifyuserid" property="modifyuserid" jdbcType="VARCHAR" />
+		<result column="modifydate" property="modifydate" jdbcType="TIMESTAMP" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="TINYINT" />
+		<result column="type" property="type" jdbcType="TINYINT" />
+		<result column="catalogTitle" property="catalogTitle" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<select id="selectKeyWordCount" resultType="Integer"
+		parameterType="com.ctvit.bean.Keyword">
+		select count(*) from tab_waccount tw,tab_wx_Keyword twk 
+		 where twk.waccount_id=tw.waccount_id and twk.status !=-1
+		<if test="keywordName !=null">
+			and twk.keywordName like CONCAT('%',#{keywordName},'%')
+		</if>
+		<if test="keywordRule !=null">
+			and twk.keywordRule =#{keywordRule,jdbcType=VARCHAR}
+		</if>
+		<if test="status !=null">
+			and twk.status =#{status,jdbcType=VARCHAR}
+		</if>
+		<if test="type !=null">
+			and twk.type=#{type,jdbcType=VARCHAR}
+		</if>
+		<if test="waccount_id !=null">
+			and twk.waccount_id=#{waccount_id,jdbcType=VARCHAR}
+		</if>
+		<!-- <if test="waccountIds !=null"> and twk.waccount_id in <foreach collection="waccountIds" 
+			item="id" index="index" open="(" close=")" separator=","> #{id} </foreach> 
+			</if> -->
+	</select>
+	
+	<select id="selectkwdTextByTitle" resultMap="BaseResultMap"
+		parameterType="com.ctvit.bean.Keyword">
+		select * from tab_wx_Keyword twk,tab_wx_TextMaterial twt where
+		twk.materialId=twt.id and
+		twk.keywordName=#{keywordName,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="selectkwdTuWenByTitle" resultMap="BaseResultMap"
+		parameterType="com.ctvit.bean.Keyword">
+		select * from tab_wx_Keyword twk,tab_wx_GraphicMaterial twg where
+		twk.materialId=twg.id and
+		twk.keywordName=#{keywordName,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="selectKeyWordRule" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select * from tab_wx_Keyword where keywordRule=0 and status=1 and
+		waccount_id=#{waccount_id,jdbcType=VARCHAR}
+		order by keywordWeight desc,modifydate desc
+	</select>
+	
+	<select id="selectKeyWordList" resultMap="ResultMap"
+		parameterType="com.ctvit.bean.Keyword">
+		select twk.* ,tw.name from tab_waccount tw,tab_wx_Keyword twk
+		where twk.waccount_id=tw.waccount_id and twk.status !=-1
+		<if test="keywordName !=null">
+			and twk.keywordName like CONCAT('%',#{keywordName},'%')
+		</if>
+		<if test="keywordRule !=null">
+			and twk.keywordRule =#{keywordRule,jdbcType=VARCHAR}
+		</if>
+		<if test="status !=null">
+			and twk.status =#{status,jdbcType=VARCHAR}
+		</if>
+		<if test="type !=null">
+			and twk.type=#{type,jdbcType=VARCHAR}
+		</if>
+		<if test="waccount_id !=null">
+			and twk.waccount_id=#{waccount_id,jdbcType=VARCHAR}
+		</if>
+		<!-- <if test="waccountIds !=null"> and twk.waccount_id in <foreach collection="waccountIds" 
+			item="id" index="index" open="(" close=")" separator=","> #{id} </foreach> 
+			</if> -->
+		order by twk.modifydate desc 
+		limit #{start,jdbcType=VARCHAR},#{end,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="selectKeyWordById" resultMap="ResultMap"
+		parameterType="com.ctvit.bean.Keyword">
+		select txk.* from tab_wx_Keyword txk where txk.id=#{id,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="selectKeyWordText" resultMap="ResultMap"
+		parameterType="com.ctvit.bean.Keyword">
+		select txk.*,txt.catalogTitle from tab_wx_Keyword txk, tab_wx_TextMaterial
+		txt where
+		txk.materialId=txt.id and txk.id=#{id,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="selectKeyWordTuWen" resultMap="ResultMap"
+		parameterType="com.ctvit.bean.Keyword">
+		select txk.*,txg.catalogTitle from tab_wx_Keyword txk,
+		tab_wx_GraphicMaterial txg where
+		txk.materialId=txg.id and txk.id=#{id,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="selectwordByName" resultMap="BaseResultMap"
+		parameterType="com.ctvit.bean.Keyword">
+		select *from tab_wx_Keyword txk where binary
+		txk.keywordName=#{keywordName,jdbcType=VARCHAR} 
+		and txk.waccount_id=#{waccount_id,jdbcType=VARCHAR}
+		<if test="id !=null">
+			and txk.id !=#{id,jdbcType=VARCHAR}
+		</if>
+	</select>
+	
+	<select id="selectKeyWordListByMaterial" resultMap="BaseResultMap"
+		parameterType="com.ctvit.bean.Keyword">
+		select * from tab_wx_Keyword twk where twk.status !=-1 and
+		twk.materialId=#{materialId,jdbcType=VARCHAR}
+	</select>
+	
+	<delete id="deleteKeyWordByMaterial" parameterType="com.ctvit.bean.Keyword">
+		delete from tab_wx_Keyword where
+		materialId=#{materialId,jdbcType=VARCHAR}
+	</delete>
+	
+	<delete id="delete" parameterType="com.ctvit.bean.Keyword">
+		delete from tab_wx_Keyword where id=#{id,jdbcType=VARCHAR}
+	</delete>
+	
+	<insert id="insert" parameterType="com.ctvit.bean.Keyword">
+		insert into tab_wx_Keyword
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="keywordName != null">
+				keywordName,
+			</if>
+			<if test="keywordRule != null">
+				keywordRule,
+			</if>
+			<if test="keywordWeight != null">
+				keywordWeight,
+			</if>
+			<if test="materialId != null">
+				materialId,
+			</if>
+			<if test="waccount_id != null">
+				waccount_id,
+			</if>
+			<if test="createuser != null">
+				createuser,
+			</if>
+			<if test="createuserid != null">
+				createuserid,
+			</if>
+			<if test="createdate != null">
+				createdate,
+			</if>
+			<if test="modifyuser != null">
+				modifyuser,
+			</if>
+			<if test="modifyuserid != null">
+				modifyuserid,
+			</if>
+			<if test="modifydate != null">
+				modifydate,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="type != null">
+				type
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="keywordName != null">
+				#{keywordName,jdbcType=VARCHAR},
+			</if>
+			<if test="keywordRule != null">
+				#{keywordRule,jdbcType=TINYINT},
+			</if>
+			<if test="keywordWeight != null">
+				#{keywordWeight,jdbcType=TINYINT},
+			</if>
+			<if test="materialId != null">
+				#{materialId,jdbcType=VARCHAR},
+			</if>
+			<if test="waccount_id != null">
+				#{waccount_id,jdbcType=VARCHAR},
+			</if>
+			<if test="createuser != null">
+				#{createuser,jdbcType=VARCHAR},
+			</if>
+			<if test="createuserid != null">
+				#{createuserid,jdbcType=VARCHAR},
+			</if>
+			<if test="createdate != null">
+				#{createdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyuser != null">
+				#{modifyuser,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyuserid != null">
+				#{modifyuserid,jdbcType=VARCHAR},
+			</if>
+			<if test="modifydate != null">
+				#{modifydate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=TINYINT},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=TINYINT}
+			</if>
+		</trim>
+	</insert>
+	
+	<update id="update" parameterType="com.ctvit.bean.Keyword">
+		update tab_wx_Keyword
+		<set>
+			<if test="keywordName != null">
+				keywordName= #{keywordName,jdbcType=VARCHAR},
+			</if>
+			<if test="keywordRule != null">
+				keywordRule= #{keywordRule,jdbcType=VARCHAR},
+			</if>
+			<if test="keywordWeight != null">
+				keywordWeight=#{keywordWeight,jdbcType=VARCHAR},
+			</if>
+			<if test="materialId != null">
+				materialId=#{materialId,jdbcType=VARCHAR},
+			</if>
+			<if test="waccount_id != null">
+				waccount_id=#{waccount_id,jdbcType=VARCHAR},
+			</if>
+			<if test="createuser != null">
+				createuser=#{createuser,jdbcType=VARCHAR},
+			</if>
+			<if test="createuserid != null">
+				createuserid=#{createuserid,jdbcType=VARCHAR},
+			</if>
+			<if test="createdate != null">
+				createdate=#{createdate,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyuser != null">
+				modifyuser=#{modifyuser,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyuserid != null">
+				modifyuserid=#{modifyuserid,jdbcType=VARCHAR},
+			</if>
+			<if test="modifydate != null">
+				modifydate=#{modifydate,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				status=#{status,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				type=#{type,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where id= #{id,jdbcType=VARCHAR}
+	</update>
+	
+	<insert id="batchAddKeyWord" parameterType="ArrayList">
+		insert into tab_wx_Keyword
+		(id,keywordName,keywordRule,keywordWeight,materialId,waccount_id,createuser,createuserid,createdate,modifyuser,modifyuserid,modifydate,status,type)
+		values
+		<foreach collection="list" item="kwd" index="index" separator=",">
+			(#{kwd.id},#{kwd.keywordName},#{kwd.keywordRule},#{kwd.keywordWeight},#{kwd.materialId},#{kwd.waccount_id},#{kwd.createuser},#{kwd.createuserid},#{kwd.createdate},#{kwd.modifyuser},#{kwd.modifyuserid},#{kwd.modifydate},#{kwd.status},#{kwd.type})
+		</foreach>
+	</insert>
+
+	<select id="selectBothRuleByMaterial" parameterType="java.util.Map"
+		resultType="String">
+		select group_concat(k.keywordName) as keywordNames from tab_wx_Keyword k
+		where k.materialId=#{id} and k.keywordRule=#{keywordRule} and
+		k.status!=-1
+	</select>
+	
+	<select id="selectKwdListbyGraphic" parameterType="com.ctvit.bean.Keyword"
+		resultMap="BaseResultMap">
+		select * from tab_wx_Keyword twk where twk.status=1 and
+		twk.materialId=#{materialId}
+	</select>
+
+	<select id="countByNameAndWaccount" parameterType="java.util.Map"
+		resultType="Integer">
+		select count(1) from tab_wx_Keyword twk where twk.keywordName in
+		<foreach collection="kwds" item="kwd" index="idx" open="("
+			separator="," close=")">
+			#{kwd}
+		</foreach>
+		and twk.waccount_id = #{waccountId}
+	</select>
+	
+	<select id="countByNameNotMaterial" parameterType="java.util.Map"
+		resultType="Integer">
+		select count(1) from tab_wx_Keyword twk where twk.keywordName in
+		<foreach collection="kwds" item="kwd" index="idx" open="("
+			separator="," close=")">
+			#{kwd}
+		</foreach>
+		and twk.waccount_id = #{waccountId} and twk.materialId!=#{materialId}
+	</select>
+	
+</mapper>

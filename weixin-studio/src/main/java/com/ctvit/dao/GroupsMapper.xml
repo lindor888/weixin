@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ctvit.dao.GroupsMapper" >
+  <resultMap id="BaseResultMap" type="com.ctvit.bean.Groups" >
+    <id column="groupsId" property="groupsid" jdbcType="VARCHAR" />
+    <result column="waccountId" property="waccountid" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="count" property="count" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    groupsId, waccountId, name, count
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ctvit.bean.GroupsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tab_wx_groups
+    <if test="_parameter != null" >
+     where 1=1
+     <if test="waccountId != null  and waccountId!=''" >
+	and waccountId =#{waccountId}
+	 </if>
+      <!-- <include refid="Example_Where_Clause" /> -->
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tab_wx_groups
+    where groupsId = #{groupsid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tab_wx_groups
+    where groupsId = #{groupsid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ctvit.bean.GroupsExample" >
+    delete from tab_wx_groups
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ctvit.bean.Groups" >
+    insert into tab_wx_groups (groupsId, waccountId, name, 
+      count)
+    values (#{groupsid,jdbcType=VARCHAR}, #{waccountid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{count,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ctvit.bean.Groups" >
+    insert into tab_wx_groups
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="groupsid != null" >
+        groupsId,
+      </if>
+      <if test="waccountid != null" >
+        waccountId,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="count != null" >
+        count,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="groupsid != null" >
+        #{groupsid,jdbcType=VARCHAR},
+      </if>
+      <if test="waccountid != null" >
+        #{waccountid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null" >
+        #{count,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ctvit.bean.GroupsExample" resultType="java.lang.Integer" >
+    select count(*) from tab_wx_groups where waccountId =#{waccountId} 
+<!--     <if test="_parameter != null" >
+      where 1=1
+    	<if test="waccountid != null  and waccountid!=''" >
+		    and waccountId =#{waccountid} 
+		</if>
+      <include refid="Example_Where_Clause" />
+    </if> -->
+  </select>
+  
+  	<select id="countByName" parameterType="java.lang.String">
+		select count(groupsId) from tab_wx_groups 
+		<if test="name!=null or name!=''">
+		 where name = #{record.name,jdbcType=VARCHAR}
+		</if>
+	</select>
+
+<!--  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tab_wx_groups
+    where groupsId = #{groupsid,jdbcType=VARCHAR}
+  </delete> -->
+  
+  
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tab_wx_groups
+    <set >
+      <if test="record.groupsid != null" >
+        groupsId = #{record.groupsid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.waccountid != null" >
+        waccountId = #{record.waccountid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.count != null" >
+        count = #{record.count,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tab_wx_groups
+    set groupsId = #{record.groupsid,jdbcType=VARCHAR},
+      waccountId = #{record.waccountid,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      count = #{record.count,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ctvit.bean.Groups" >
+    update tab_wx_groups
+    <set >
+      <if test="waccountid != null" >
+        waccountId = #{waccountid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null" >
+        count = #{count,jdbcType=INTEGER},
+      </if>
+    </set>
+    where groupsId = #{groupsid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ctvit.bean.Groups" >
+    update tab_wx_groups
+    set waccountId = #{waccountid,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      count = #{count,jdbcType=INTEGER}
+    where groupsId = #{groupsid,jdbcType=VARCHAR}
+  </update>
+</mapper>

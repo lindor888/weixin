@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>节目单预约</title>
+<link href="resource/common_mobile.css" rel="stylesheet" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<style type="text/css">
+.body_bg{ position:fixed; left:0; right:0; top:0; bottom:0; z-index:-1}
+.body_bg img{ width:100%; height:100%}
+.cnt1{ margin:0 15px 0; min-height:130px; border:solid 2px #ed4b3c; border-radius:3px; background:#f2f2f2;}
+.cnt1 h2{ text-align:center; position:relative; top:-20px; margin-bottom:-10px;}
+.cnt1 h2 img{width:130px}
+.cnt1 .info{ margin-bottom:5px; padding:10px; clear:both; overflow:hidden;}
+.cnt1 .info dt{ display:table-cell; vertical-align:middle }
+.cnt1 .info dt img{ width:60px; height:60px;margin-right:10px;}
+.cnt1 .info dd{ display:table-cell; vertical-align:middle;}
+.cnt1 .info dd p{ font-size:18px}
+.cnt1 .desc{ margin:0 10px 5px 10px; padding-top:10px; border-top:solid 1px #d5d5d5;font-size:18px; color:#ed4b3c}
+.cnt1 .count_p{ background:#d5d5d5; padding:20px 0 19px; text-align:center; }
+.cnt1 .count_p strong{ position:relative; top:-2px; display:inline-block; overflow:hidden; vertical-align:middle}
+.cnt1 .count_p i{ display:inline-block; height:30px; padding-left:3px; margin-right:-4px; background:#000; background:url(../epg/resource/bg_num.png) repeat-x 0 center; background-size:auto 30px; font-size:30px; font-weight:normal; color:#fff; letter-spacing:9px; line-height:30px}
+.cnt1 .count_p span{font-size:18px;}
+
+.btn_share{ margin:16px 10px 0;}
+.btn_share li{ float:left; width:50%;}
+.btn_share li strong{ display:block; margin:0 5px; padding:10px 0;border-radius:5px; background:#576b95; border:solid 1px #949496; color:#e5e5e5; text-align:center;  font-size:18px; font-weight:normal; cursor:pointer}
+.btn_share li strong.invite{ background:#e04241; border:solid 1px #bd2625; color:#fff}
+
+.btn_share li strong:hover{opacity:.9}
+
+.tips2 {
+    background-color: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    z-index: 9999;
+    color: #FFF;
+    left: 0;
+    top: 0;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 14px;
+    display: none;
+    -webkit-transition: all 500ms ease-in-out;
+    height: 0;
+}
+.tips2 a{
+	color:#FFF;
+	font-size:14px;
+	line-height:30px;
+	float:right;
+	margin-right:20px;
+	text-decoration:none;
+}
+
+.cover_share{ position:fixed; z-index:99; background:rgba(0,0,0,.8) url(../epg/resource/share_line.png) no-repeat right 0;background-size:140px 133px; left:0; top:0; right:0; bottom:0}
+.cover_share p{ padding-top:150px; color:#fff; font-size:19px; text-align:center; line-height:33px}
+
+.bottom{
+	width:100%;
+	position:absolute;
+	bottom:15px;
+	text-align:center;
+	font-size:12px;
+	color:#FFFFFF;
+}
+
+
+
+.tips {
+	position:absolute; 
+	z-index:10000; 
+	display:none;  
+	top:30%; 
+	left:6%; 
+	width:85%; 
+	border-radius:10px;
+}
+.tips .tip{ margin-top:15px; padding:0 15px 0 15px; min-height:50px; background-size:75px 75px; font-size:17px; line-height:1.4em; color:#fff;}
+.tips .btn{ margin:20px 0; text-align:center}
+.tips .btn strong{ display:inline-block; margin:0 4%; width:37%; line-height:40px; background:#fff; background:-webkit-gradient(linear, left top, left bottom, from(#ebebeb), to(#d8d8d8)); border-radius:5px; font-size:18px; font-weight:normal; text-align:center; cursor:pointer; color:#666}
+.tips .btn strong.focus{ background:-webkit-gradient(linear, left top, left bottom, from(#9fceeb), to(#67b2df)); color:#fff}
+.tips .arrow{ position:absolute; width:14px; height:29px; background:url("http://iwmh.mtq.tvm.cn/tpl/static/images/arrow.png") no-repeat 0 0; background-size:14px 29px; right:-13px; bottom:15%;}
+@media all and (min-width:600px){
+    .tips{max-width:600px; left:50%; margin-left:-310px}
+}
+@media all and (max-width:320px){
+    .tips .tip{ font-size:14px; padding-left:15px;background-size:65px 65px;min-height:50px;}
+    .tips .btn strong{ font-size:15px; line-height:34px}
+}
+.cover_div{position:absolute; z-index:9999; display:none;width:100%;height:100%;background-color:#000000;opacity:0.8;}
+.pop_tip{ position:absolute; z-index:10001; display:none;  top:30%; left:6%; width:85%; background:#fff; border-radius:10px;}
+.pop_tip .tip{ margin-top:15px; padding:0 15px 0 110px; min-height:75px; background:url("http://iwmh.mtq.tvm.cn/tpl/static/images/ico.png") no-repeat 20px center; background-size:75px 75px; font-size:17px; line-height:1.4em; color:#888}
+.pop_tip .btn{ margin:20px 0; text-align:center}
+.pop_tip .btn strong{ display:inline-block; margin:0 4%; width:37%; line-height:40px; background:#fff; background:-webkit-gradient(linear, left top, left bottom, from(#ebebeb), to(#d8d8d8)); border-radius:5px; font-size:18px; font-weight:normal; text-align:center; cursor:pointer; color:#666}
+.pop_tip .btn strong.focus{ background:-webkit-gradient(linear, left top, left bottom, from(#9fceeb), to(#67b2df)); color:#fff}
+.pop_tip .arrow{ position:absolute; width:14px; height:29px; background:url("http://iwmh.mtq.tvm.cn/tpl/static/images/arrow.png") no-repeat 0 0; background-size:14px 29px; right:-13px; bottom:15%;}
+@media all and (min-width:600px){
+    .pop_tip{max-width:600px; left:50%; margin-left:-310px}
+}
+@media all and (max-width:320px){
+    .pop_tip .tip{ font-size:14px; padding-left:100px;background-size:65px 65px;min-height:65px;}
+    .pop_tip .btn strong{ font-size:15px; line-height:34px}
+}
+</style>
+<script type="text/javascript" charset="utf-8" src="resource/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="resource/jweixin-1.0.0.js" charset="UTF-8"></script>
+<script type="text/javascript" src="resource/weixin_share_new.js" charset="UTF-8"></script>
+</head>
+<body>
+<div class="cover_div"></div>
+
+<div class="tips2" id="tips2"></div>
+<div class="body_bg"><img src="../epg/resource/epg_default.jpg"></div>
+<div style="height:50px"></div>
+<div class="cnt1">
+	<h2><img src="../epg/resource/order1.png" title="预约成功"></h2>
+    <dl class="info">
+    <dt>
+    	    	<img src="../epg/resource/btv.jpg">    </dt>
+    <dd>
+    	<p id="livetime"></p>
+        <p class="epgName"></p>
+    </dd>
+    </dl>
+    <div class="desc"></div>
+    <div class="count_p">
+    	<span>您的虚拟座位是<strong><i id="lineNum"></i></strong> 排<strong><i id="columnNum"></i></strong>号<strong><i id="count"></i></strong>人和你一起"边看边聊"</span>
+    </div>
+</div>
+
+
+			<ul class="btn_share">
+		<li>
+		 <a href=""  id="tomenu"><strong>查看更多节目</strong></a>
+		</li>
+		<li><a href="javascript:alert('正在开发中，请继续关注我们！');"><strong style="background:#e04241;border:1px solid #bd2625;">节目直播</strong></a></li>
+		<!-- <li style="width:100%;"><strong class="invite" style="background:none;border:none;margin-top:20px;" btntype="invite">邀请好友使用</strong></li> -->
+		</ul>
+
+
+<div class="cover_share" id="cover_share" style="display: none;"><p>请点击右上角<br>点击【分享到朋友圈】<br>邀请好友一起使用预约~</p></div>
+
+<script>
+function getQueryString(name) { 
+	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
+	var r = window.location.search.substr(1).match(reg); 
+	if (r != null) return unescape(r[2]); return null; 
+} 
+var _epgName = "";
+var _epgday = "";
+var _push_time = "";
+var subid = getQueryString("subid");
+var _openid =  getQueryString("openid");
+var _epgid =  getQueryString("epgid");
+$("#lineNum").html(getQueryString("lineNum"));
+$("#columnNum").html(getQueryString("columnNum"));
+$.post(
+		"../showsub",
+		{"epgid":_epgid},
+		function(data){
+			_epgName = data.epgName;
+			_push_time = data.push_time;
+			_epgday = data.epgday;
+			 $("#livetime").html(data.livetime);
+			 $(".epgName").html(_epgName);
+			 $("#count").html(data.count);
+			 var url = "../epg/epg.html?openid="+_openid;
+			 $("#tomenu").attr("href",url);
+		},'json');
+
+var is_att = "1";
+var flowUrl = "http://mp.weixin.qq.com/s?__biz=MjM5ODM3NzI0NA==&mid=205254081&idx=1&sn=3eece0b971ba06b0d394144a3dfc55b1#rd";
+var _ismore = "0";
+//var _channel_id = "21497";
+var share_url = "http://mb.mtq.tvm.cn/oauth?wx_token=8e8cae5ba3d5&token=40fe533606&redirect_uri=http%3A%2F%2Fiwmh.mtq.tvm.cn%2Findex.php%3Fg%3DWap%26m%3DEpg%26a%3Dview%26token%3D8e8cae5ba3d5%26subid%3DjSqJt1%26epgid%3D2574630%26channel_id%3D21497";
+var _token = "8e8cae5ba3d5";
+var _mid = "CRTVF0NU9";
+var _sid = "150403200117214cf3a5342df57212733e_0";
+var _page_version = "1";
+
+$(function(){
+	var _inviteBtn = $('strong[btntype="invite"]');
+	var _cover_share = $('#cover_share');
+	
+	
+	 
+	_inviteBtn.click(function(){
+		_cover_share.show();
+	});
+	_cover_share.click(function(){
+		_cover_share.hide();
+	});
+	
+	$('strong[btntype="sub"]').click(function(){
+		if(parseInt(is_att) !== 1)
+		{
+			$('.cover_div').show();
+			$('.pop_tip').show();
+			return false;
+		}
+		
+		$.post(
+			"/index.php?g=Wap&m=Epg&a=dosubscribe",
+			{"openid":_openid,"epgid":_epgid,"epg_name":_epgName,"channel_id":_channel_id,"token":_token,"mid":_mid,"sid":_sid,"push_time":_push_time,"subid":subid,"subtype":1,"page_version":_page_version,"epgday":_epgday},
+			function(data){
+				if(data.result)
+				{
+					var moreStr = '';
+					if(parseInt(_ismore) == 0)
+					{
+						moreStr = '&channel_id='+_channel_id;
+					}
+					//跳转到预约后的页面l
+					window.location.href="/index.php?g=Wap&m=Epg&a=view&token="+_token+'&openid='+_openid+'&subid='+subid+'&epgid='+_epgid+moreStr;
+				}
+				else
+				{
+					
+				}
+			},
+			'json'
+		);
+	});
+});
+
+var times;
+function setTips(){
+    clearTimeout(times);
+    tips.style.display="block";
+    times = setTimeout(function(){
+        tips.style.display="none";
+        $('.cover_div').hide();
+    },5000);
+}
+
+var times2;
+function setTips2(value,hasUrl){
+	if(hasUrl)
+	{
+		var h = 30;
+	}
+	else
+	{
+		var h = 64;
+	}
+    tips2.innerHTML=value;
+    clearTimeout(times2);
+    tips2.style.display="block";
+    tips2.style.height=h+"px";
+    times2 = setTimeout(function(){
+        tips2.style.display="none";
+    },9000);
+}
+
+function concel(){
+    //pop_tip.style.display = "none";
+    $('.cover_div').hide();
+    $('.pop_tip').hide();
+    //return false;
+}
+</script>
+
+</body>
+</html>

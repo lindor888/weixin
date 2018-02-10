@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ctvit.dao.GraphicMaterialMapper">
+	<resultMap id="BaseResultMap" type="com.ctvit.bean.GraphicMaterial">
+		<result column="ID" jdbcType="VARCHAR" property="id" />
+		<result column="CATALOGTITLE" jdbcType="VARCHAR" property="catalogTitle" />
+		<result column="WACCOUNT_iD" jdbcType="VARCHAR" property="waccount_id" />
+		<result column="TUWENXML" jdbcType="VARCHAR" property="tuwenxml" />
+		<result column="CREATEUSER" jdbcType="VARCHAR" property="createuser" />
+		<result column="CREATEUSERID" jdbcType="VARCHAR" property="createuserid" />
+		<result column="CREATEDATE" jdbcType="TIMESTAMP" property="createdate" />
+		<result column="MODIFYUSER" jdbcType="VARCHAR" property="modifyuser" />
+		<result column="MODIFYUSERID" jdbcType="VARCHAR" property="modifyuserid" />
+		<result column="MODIFYDATE" jdbcType="TIMESTAMP" property="modifydate" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+	</resultMap>
+	
+	<resultMap id="ExtResultMap" extends="BaseResultMap" type="com.ctvit.bean.GraphicMaterial">
+		<result column="keyword0" jdbcType="VARCHAR" property="keyword0"/>
+		<result column="keyword1" jdbcType="VARCHAR" property="keyword1"/>
+	</resultMap>
+	
+	<select id="selectgraphicWithKeywordsById" resultMap="ExtResultMap" parameterType="Integer">
+		select tg.*,(select group_concat(twk.keywordName) from tab_wx_Keyword twk where twk.materialId = tg.id and twk.keywordRule=0) as keyword0,
+  		 (select group_concat(twk.keywordName) from tab_wx_Keyword twk where twk.materialId = tg.id and twk.keywordRule=1) as keyword1
+  		from tab_wx_GraphicMaterial tg  where tg.id=#{id,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="selectGraphicList" resultMap="BaseResultMap" parameterType="com.ctvit.bean.GraphicMaterial">
+		select * from tab_wx_GraphicMaterial where status =1 and 
+			<if test="catalogTitle !=null">
+			catalogTitle like  CONCAT('%',#{catalogTitle},'%') and
+			</if>
+		 waccount_id=#{waccount_id} order by modifydate limit #{start} ,#{end}
+	</select>
+	
+	
+	<select id="selectgraphicMaterial" resultMap="BaseResultMap"
+		parameterType="com.ctvit.bean.GraphicMaterial">
+		select tt.*  from tab_wx_GraphicMaterial tt
+		where tt.status != -1 
+  		<if test="catalogTitle !=null">
+			and  tt.catalogTitle like CONCAT('%',#{catalogTitle},'%')
+		</if>
+		<if test="status !=null">
+			and tt.status =#{status,jdbcType=VARCHAR}
+		</if>
+		<if test="keyword0 !=null and keyword0 != ''">
+			and tt.id in
+			(select twk.materialId from tab_wx_Keyword twk where keywordName like CONCAT('%',#{keyword0},'%')) 
+		</if>
+		<if test="waccount_id !=null and waccount_id != ''">
+			and tt.waccount_id=#{waccount_id,jdbcType=VARCHAR}
+		</if>
+		order by  modifydate desc limit #{start} ,#{end}
+	</select>
+	<select id="countgraphicMaterial" resultType="string"
+		parameterType="com.ctvit.bean.GraphicMaterial">
+		select count(*)  from tab_wx_GraphicMaterial tt
+		where tt.status != -1
+		<if test="catalogTitle !=null">
+			and tt.catalogTitle like CONCAT('%',#{catalogTitle},'%')
+		</if>
+		<if test="status !=null">
+			and tt.status = #{status,jdbcType=VARCHAR}
+		</if>
+		<if test="keyword0 !=null and keyword0 != ''">
+			and tt.id in
+			(select twk.materialId from tab_wx_Keyword twk where keywordName like CONCAT('%',#{keyword0},'%')) 
+		</if>
+		<if test="waccount_id !=null">
+			and tt.waccount_id=#{waccount_id,jdbcType=VARCHAR}
+		</if>
+		
+		
+	</select>
+
+	<select id="selectOneGraphicByTitle" resultMap="BaseResultMap"
+		parameterType="com.ctvit.bean.GraphicMaterial">
+		select * from tab_wx_GraphicMaterial where status!=-1 and catalogTitle=
+		#{catalogTitle} and waccount_id=#{waccount_id}
+		limit 0, 1
+	</select>
+	<select id="selectgraphicById" resultMap="BaseResultMap"
+		parameterType="com.ctvit.bean.GraphicMaterial">
+		select * from tab_wx_GraphicMaterial where status!=-1 and id= #{id} 
+	</select>
+
+
+	<insert id="insert" parameterType="com.ctvit.bean.GraphicMaterial">
+
+		insert into
+		tab_wx_GraphicMaterial(ID,CATALOGTITLE,WACCOUNT_ID,TUWENXML,CREATEUSER,CREATEUSERID,CREATEDATE,MODIFYUSER,
+		MODIFYUSERID,MODIFYDATE,STATUS)
+		values (#{id},
+		#{catalogTitle},#{waccount_id},#{tuwenxml},#{createuser},#{createuserid},#{createdate},#{modifyuser},#{modifyuserid},
+		#{modifydate},#{status} )
+	</insert>
+
+
+	<update id="updategraphic"  parameterType="com.ctvit.bean.GraphicMaterial">
+		update tab_wx_GraphicMaterial
+		<set >
+      <if test="catalogTitle != null" >
+        CATALOGTITLE = #{catalogTitle},
+      </if>
+      <if test="waccount_id != null" >
+        WACCOUNT_ID = #{waccount_id},
+      </if>
+      <if test="tuwenxml != null" >
+        TUWENXML = #{tuwenxml},
+      </if>
+      <if test="createuser != null" >
+        CREATEUSER = #{createuser,},
+      </if>
+       <if test="createuserid != null" >
+        CREATEUSERID = #{createuserid},
+      </if>
+      <if test="createdate != null" >
+        CREATEDATE = #{createdate,},
+      </if>
+       <if test="modifyuser != null" >
+        MODIFYUSER = #{modifyuser},
+      </if>
+      <if test="modifyuserid != null" >
+        MODIFYUSERID = #{modifyuserid,},
+      </if>
+       <if test="modifydate != null" >
+        MODIFYDATE = #{modifydate},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,},
+      </if>
+    </set>
+        where ID= #{id}
+  </update>
+   <update id="update"   parameterType="com.ctvit.bean.GraphicMaterial" >    
+  update tab_wx_GraphicMaterial  
+  	<set >
+      <if test="catalogTitle != null" >
+        CATALOGTITLE = #{catalogTitle},
+      </if>
+      <if test="waccount_id != null" >
+        WACCOUNT_ID = #{waccount_id},
+      </if>
+      <if test="tuwenxml != null" >
+        TUWENXML = #{tuwenxml},
+      </if>
+      <if test="createuser != null" >
+        CREATEUSER = #{createuser,},
+      </if>
+       <if test="createuserid != null" >
+        CREATEUSERID = #{createuserid},
+      </if>
+      <if test="createdate != null" >
+        CREATEDATE = #{createdate,},
+      </if>
+       <if test="modifyuser != null" >
+        MODIFYUSER = #{modifyuser},
+      </if>
+      <if test="modifyuserid != null" >
+        MODIFYUSERID = #{modifyuserid,},
+      </if>
+       <if test="modifydate != null" >
+        MODIFYDATE = #{modifydate},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,},
+      </if>
+    </set>
+        where ID=  #{id,jdbcType=VARCHAR}
+  </update>
+   <update id="updatedeault"   parameterType="com.ctvit.bean.GraphicMaterial" >    
+  update tab_wx_GraphicMaterial  
+  	<set >
+      <if test="status != null" >
+        STATUS = #{status,},
+      </if>
+    </set>
+        where ID=  #{id,jdbcType=VARCHAR}
+  </update>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

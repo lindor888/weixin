@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.objectFactory.spring.autoWire" value="auto" />
+	<constant name="struts.multipart.saveDir" value="/tmp" />
+	<constant name="struts.multipart.maxSize" value="524288000" />
+	<include file="struts-config/struts_account.xml"></include>
+	<include file="struts-config/struts_login.xml"></include>
+	<include file="struts-config/struts_keyword.xml"></include>
+	<include file="struts-config/struts_material.xml"></include>
+	<include file="struts-config/struts_menu.xml"></include>
+	<include file="struts-config/struts_upload.xml"></include>
+	<include file="struts-config/struts_followers.xml"></include>
+	<include file="struts-config/struts_groups.xml"></include>
+	<include file="struts-config/struts_interact.xml"></include>
+	<include file="struts-config/struts_words.xml"></include>
+	<include file="struts-config/struts_sso.xml"></include>
+	<include file="struts-config/struts_receivewords.xml"></include>
+	<include file="struts-config/struts_writewords.xml"></include>
+	<include file="struts-config/struts_graphicPush.xml"></include>
+	<include file="struts-config/struts_epg.xml"></include>
+	<include file="struts-config/struts_epgcomment.xml"></include>
+	<include file="struts-config/struts_goods.xml"></include>
+	<include file="struts-config/struts_question.xml"></include>
+	<include file="struts-config/struts_hudong.xml"></include>
+	<!-- 任务相关 -->
+	
+
+	<!-- 根包 -->
+	<package name="weixin" namespace="/" extends="json-default">
+	 	<interceptors>
+			<interceptor-stack name="mcStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="loginInterceptor"></interceptor-ref>
+				<interceptor-ref name="rightsInterceptor"></interceptor-ref>
+			</interceptor-stack>
+			<interceptor name="loginInterceptor" class="com.ctvit.interceptor.LoginHandlerInterceptor"></interceptor>
+			<interceptor name="rightsInterceptor" class="com.ctvit.interceptor.RightsHandlerInterceptor"></interceptor>
+		</interceptors>
+		<default-interceptor-ref name="mcStack"></default-interceptor-ref>
+		<global-results>
+			<result name="login">/login.jsp</result>
+			<result name="index">/index.jsp</result>
+			<result name="save_result">/save_result.jsp</result>
+			<result name="noperm">/style/error/forbidden.jsp</result>
+			<result name="error">/style/error/error.jsp</result>
+		</global-results>
+
+		<!-- strut2的500错处理 -->
+		<global-exception-mappings>
+			<exception-mapping result="error" exception="java.lang.Exception"></exception-mapping>
+			<exception-mapping result="error" exception="java.sql.SQLException"></exception-mapping>
+		</global-exception-mappings>
+	</package>
+	<!-- strut2的404错处理 -->
+	<package name="default" extends="struts-default">
+		<default-action-ref name="notFound" />
+		<action name="notFound">
+			<result>/style/error/404.jsp</result>
+		</action>
+	</package>
+	<package name="tiaodan" namespace="/tiaodan" extends="struts-default">
+		
+		<action name="tiaodanList" class="com.ctvit.action.InteractAction" method="tiaodanList">
+			<result name="tiaodan">/tiaodan.jsp</result>
+			<result name="error">/style/error/404.jsp</result>
+		</action>
+		
+	</package>
+	
+	
+</struts>
+

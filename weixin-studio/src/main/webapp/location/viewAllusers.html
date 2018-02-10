@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<script type="text/javascript" src="/weixin-studio/js/question/js/jquery.js"></script>
+	<style type="text/css">
+		body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+		#l-map{height:100%;width:78%;float:left;border-right:2px solid #bcbcbc;}
+		#r-result{height:100%;width:20%;float:left;}
+	</style>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=mOWkf21MK492qcvcZtGTtoxE"></script>
+	<title>添加多个标注点</title>
+</head>
+<body>
+	<div id="allmap"></div>
+</body>
+</html>
+<script type="text/javascript">
+var listData = "";
+var map = "";
+$(function(){
+         $.ajax({
+				url:"/weixin-studio/interact/selectALLLocationInteract",
+				dataType:"json",
+				type:"get",
+				error:function(){
+					console.log("getJSON  error方法");
+				},
+				success:function(data){
+					if (data.msg == "success")
+					{
+						listData = data.rows;
+						//alert(listData[0].longitude);
+						// 百度地图API功能
+	map = new BMap.Map("allmap");
+	 for(var i=0;i<listData.length;i++){
+	var point = new BMap.Point(listData[i].longitude, listData[i].latitude);
+	addMarker(point,listData[i].nickname+":"+listData[i].content);
+  map.centerAndZoom(point, 12);
+	} 
+	//var point2 = new BMap.Point(116.380967, 39.953285);
+	
+ // var point = new BMap.Point(listData[0].longitude, listData[0].latitude);
+  //alert(listData[0].nickname);
+  //listData[0].nickname;
+  //addMarker(point,listData[0].nickname);
+    //var point = new BMap.Point(116.175694, 39.925539);
+	//addMarker(point,"du");
+   // addMarker(point2,"qie");
+
+	
+	//map.centerAndZoom(point2, 15);
+	// 编写自定义函数,创建标注
+	
+					}else{
+						console.log("getJSON  获得数据异常");
+					}
+				}
+			});
+	
+	});
+	function addMarker(point,str){
+	  var marker = new BMap.Marker(point);
+	  map.addOverlay(marker);
+	 // marker.addEventListener("click",getAttr);
+	 
+	  //向标注上添加文字
+	  var label = new BMap.Label(str,{offset:new BMap.Size(20,-10)});
+	    label.setStyle({
+			 color : "red",
+			 fontSize : "12px",
+			 height : "20px",
+			 lineHeight : "20px",
+			// fontFamily:"微软雅黑"
+			 });
+	  // var labe2 = new BMap.Label("我是文字标注哦",{offset:new BMap.Size(20,-10)});
+	  marker.setLabel(label);
+	  // marker.setAnimation(BMAP_ANIMATION_BOUNCE); 标注跳动
+	 // marker.setLabel(labe2);
+	}
+	// 随机向地图添加25个标注
+	
+	function getAttr(){
+		      //获取marker的位置
+		alert("marker的位置是");   
+	}
+</script>

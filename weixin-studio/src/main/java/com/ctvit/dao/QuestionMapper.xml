@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ctvit.dao.QuestionMapper" >
+ 
+    <insert id="saveheadtitle" parameterType="com.ctvit.bean.HeadtitleBean">
+     insert into tab_headtitle(headtitleid,headtitlename,headtitletype,status,createtime,waccountId) values (#{headtitleid},#{headtitlename},#{headtitletype},#{status},#{createtime},#{waccountId}) 
+    </insert>
+     <insert id="savequestion" parameterType="com.ctvit.bean.QuestionBean">
+     insert into tab_question(questionid,headtitleid,questionname) values 
+      <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.questionid}, #{item.headtitleid}, #{item.questionname})
+    </foreach>
+    </insert>
+     <insert id="saveoption" parameterType="com.ctvit.bean.OptionBean">
+     insert into tab_option(questionid,opt,option_total) values
+       <foreach collection="list" item="item" index="index" separator=",">
+      ( #{item.questionid}, #{item.option}, 0)
+    </foreach>
+    </insert>
+    <select id="findList" resultType="com.ctvit.bean.HeadtitleBean">
+    select * from tab_headtitle
+    </select>
+     <select id="findquestion" resultType="com.ctvit.bean.QuestionBean">
+    select * from tab_question where headtitleid = #{headtitleid}
+    </select>
+    <select id="listoption" resultType="com.ctvit.bean.OptionBean">
+    select * from tab_option where questionid = #{questionid}
+    </select>
+    
+    <select id="getquestionStat" resultType="com.ctvit.bean.QuestionStat">
+    select * from tab_questionstate where questionid = #{questionid}
+    </select>
+     <select id="option" resultType="com.ctvit.bean.OptionBean" parameterType="map">
+    select * from tab_option where optionid = #{optionid}
+    </select>
+    <update id="update" parameterType="com.ctvit.bean.OptionBean">
+    update tab_option set opt = #{opt} where optionid = #{optionid}
+    </update>
+      <select id="getlist" resultType="com.ctvit.bean.HeadtitleBean" >
+     select * from tab_headtitle where status='1' order by createtime desc limit 0,1;
+    </select>
+    <update id="questionstate" parameterType="com.ctvit.bean.HeadtitleBean">
+    update tab_headtitle set status = #{status},createtime = #{createtime} where headtitleid = #{headtitleid}
+    </update>
+    <select id="updateoption" resultType="com.ctvit.bean.OptionBean" parameterType="com.ctvit.bean.OptionBean">
+    select * from tab_option where questionid = #{questionid} and opt = #{opt}
+    </select>
+     <update id="updatetotal"  parameterType="com.ctvit.bean.OptionBean">
+    update tab_option set option_total = #{option_total} where optionid = #{optionid}
+    </update>
+     <insert id="insertstat" parameterType="com.ctvit.bean.QuestionStat">
+     insert into tab_questionstate (questionstatid,openid,nickname,headimg,questionid,optid,optionname,createtime) values (#{questionstatid},#{openid},#{nickname},#{headimg},#{questionid},#{optid},#{optionname},#{createtime}) 
+    </insert>
+    
+</mapper>

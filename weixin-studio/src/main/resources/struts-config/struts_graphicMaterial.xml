@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="graphicMaterial" namespace="/graphicMaterial" extends="weixin">
+		<!-- 图文素材管理 -->
+		<action name="*GraphicMaterial" class="graphicMaterialAction" method="{1}">
+			<result type="json" name="selectAll"><param name="root">mapJson</param></result>
+			<result type="json" name="insert"><param name="root">mapJson</param></result>
+			<result type="json" name="update"><param name="root">mapJson</param></result>
+			<result type="json" name="delete"><param name="root">mapJson</param></result>
+		</action>
+	</package>
+</struts>

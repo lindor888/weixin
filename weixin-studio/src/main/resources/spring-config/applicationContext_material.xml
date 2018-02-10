@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+	
+
+	 <!-- 图文mapper -->
+ 	<bean id="graphicMaterialMapper" class="org.mybatis.spring.MapperFactoryBean">
+		<property name="mapperInterface" value="com.ctvit.dao.GraphicMaterialMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
+    </bean>
+    <!-- 文本mapper -->
+ 	<bean id="textMaterialMapper" class="org.mybatis.spring.MapperFactoryBean">
+		<property name="mapperInterface" value="com.ctvit.dao.TextMaterialMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
+    </bean>
+    
+    <bean id="keywordMapper" class="org.mybatis.spring.MapperFactoryBean">
+		<property name="mapperInterface" value="com.ctvit.dao.KeywordMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
+    </bean> 
+    <!-- 图文素材impl -->
+	<bean id="graphicMaterialService" class="com.ctvit.service.GraphicMaterialServiceImp">
+	  <property name="graphicMaterialMapper" ref="graphicMaterialMapper"/>
+     <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+      <property name="KeyGenerator" ref="KeyGenerator"/>  
+    </bean>
+    <!-- 文本素材impl -->
+    <bean id="textMaterialServiceImp" class="com.ctvit.service.TextMaterialServiceImp">
+    	 <property name="textMaterialMapper" ref="textMaterialMapper"/>
+     	 <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+     	 <property name="KeyGenerator" ref="KeyGenerator"/>  
+    </bean>
+    <bean id="keyWordService" class="com.ctvit.service.KeywordService">
+    	 <property name="keywordMapper" ref="keywordMapper"/>
+     	 <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+     	 <property name="KeyGenerator" ref="KeyGenerator"/>  
+    </bean>
+    
+	<!-- 图文素材action-->
+	<bean name="tuwenAction" class="com.ctvit.action.GraphicMaterialAction" scope="prototype">
+	<property name="graphicMaterialService" ref="graphicMaterialService"></property>
+	<property name="keyWordService" ref="keyWordService"></property>
+		<property name="loggerService" ref="loggerService" />
+		<property name="waccountService" ref="waccountService"></property>
+	</bean>
+	<!-- 文本素材action-->
+	<bean name="wenbenAction" class="com.ctvit.action.TextMaterialAction" scope="prototype">
+		<property name="textMaterialServiceImp" ref="textMaterialServiceImp"></property>
+		<property name="keyWordService" ref="keyWordService"></property>
+			<property name="loggerService" ref="loggerService" />
+			<property name="waccountService" ref="waccountService"></property>
+	</bean>
+	
+	<bean id="KeyGenerator" class="com.ctvit.util.KeyGenerator"></bean>
+	<bean id="waccountService" class="com.ctvit.service.WaccountServiceImpl">
+	  <property name="waccountmapper" ref="waccountmapper"/>
+     <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+      <property name="KeyGenerator" ref="KeyGenerator"/>  
+    </bean>
+     <bean id="waccountmapper" class="org.mybatis.spring.MapperFactoryBean">
+		<property name="mapperInterface" value="com.ctvit.dao.WaccountMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
+    </bean>
+	
+</beans>

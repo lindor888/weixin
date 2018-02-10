@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ctvit.dao.AccountRelationMapper" >
+  <resultMap id="BaseResultMap" type="com.ctvit.bean.AccountRelation" >
+    <id column="relation_id" property="relationId" jdbcType="VARCHAR" />
+    <result column="account_id" property="accountId" jdbcType="VARCHAR" />
+    <result column="waccount_id" property="waccountId" jdbcType="VARCHAR" />
+    <result column="operate_time" property="operateTime" jdbcType="TIMESTAMP" />
+    <result column="operate_account" property="operateAccount" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    
+  </resultMap>
+  <sql id="Base_Column_List" >
+    relation_id, account_id, waccount_id, operate_time, operate_account
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tab_account_relation
+    where relation_id = #{relationId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tab_account_relation
+    where relation_id = #{relationId,jdbcType=VARCHAR}
+  </delete>
+  
+   <delete id="deleteByaccount" parameterType="com.ctvit.bean.AccountRelation" >
+    delete from tab_account_relation  where 1=1  
+    <if test="accountId !=null and  accountId !='' ">
+     and  account_id = #{accountId,jdbcType=VARCHAR}
+    </if>
+    
+     <if test="waccountId !=null and  waccountId !='' ">
+     and  waccount_id = #{waccountId,jdbcType=VARCHAR}
+    </if>
+    
+    
+  </delete>
+  
+  <insert id="insert" parameterType="com.ctvit.bean.AccountRelation" >
+    insert into tab_account_relation (relation_id, account_id, waccount_id, 
+      operate_time, operate_account)
+    values (#{relationId,jdbcType=VARCHAR}, #{accountId,jdbcType=VARCHAR}, #{waccountId,jdbcType=VARCHAR}, 
+      #{operateTime,jdbcType=TIMESTAMP}, #{operateAccount,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ctvit.bean.AccountRelation" >
+    insert into tab_account_relation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="relationId != null" >
+        relation_id,
+      </if>
+      <if test="accountId != null" >
+        account_id,
+      </if>
+      <if test="waccountId != null" >
+        waccount_id,
+      </if>
+      <if test="operateTime != null" >
+        operate_time,
+      </if>
+      <if test="operateAccount != null" >
+        operate_account,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="relationId != null" >
+        #{relationId,jdbcType=VARCHAR},
+      </if>
+      <if test="accountId != null" >
+        #{accountId,jdbcType=VARCHAR},
+      </if>
+      <if test="waccountId != null" >
+        #{waccountId,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null" >
+        #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateAccount != null" >
+        #{operateAccount,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ctvit.bean.AccountRelation" >
+    update tab_account_relation
+    <set >
+      <if test="accountId != null" >
+        account_id = #{accountId,jdbcType=VARCHAR},
+      </if>
+      <if test="waccountId != null" >
+        waccount_id = #{waccountId,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null" >
+        operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateAccount != null" >
+        operate_account = #{operateAccount,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where relation_id = #{relationId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ctvit.bean.AccountRelation" >
+    update tab_account_relation
+    set account_id = #{accountId,jdbcType=VARCHAR},
+      waccount_id = #{waccountId,jdbcType=VARCHAR},
+      operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      operate_account = #{operateAccount,jdbcType=VARCHAR}
+    where relation_id = #{relationId,jdbcType=VARCHAR}
+  </update>
+  
+  
+  <select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.ctvit.bean.AccountRelation">
+		select * from tab_account_relation where 1=1 
+		<if test="accountId!= null and  accountId!=''">
+			and account_id = #{accountId}
+		</if>
+		<if test="waccountId!= null and  waccountId!=''">
+			and waccount_id = #{waccountId}
+		</if>
+		<if test="operateAccount!= null and  operateAccount!=''">
+			and operate_account = #{username}
+		</if>
+
+		<if test="operateTime != null  and  operateTime !=''">
+			and operate_time = #{operateTime}
+		</if>
+		order by operate_time desc
+	</select>
+	
+	<select id="selectBywaccount"  resultMap="BaseResultMap" parameterType="java.lang.String">
+	select  rela.* ,wac.name name from tab_account_relation rela join tab_waccount wac on rela.waccount_id=wac.waccount_id where account_id=#{id,jdbcType=VARCHAR}
+	</select>
+  
+</mapper>

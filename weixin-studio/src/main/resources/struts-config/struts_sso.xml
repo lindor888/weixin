@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="sso" namespace="/sso" extends="weixin">
+		<global-results>
+			<result type="json" name="toJson">
+				<param name="root">queryJson</param>
+			</result>
+		</global-results>
+
+		<!-- 单点登陆 -->
+		<action name="getTicket" class="ssoAction" method="getTicket">
+		<result name="success" type="redirect">${redirectURL}</result>
+		</action>
+		<action name="verify" class="ssoAction" method="verify">
+			<interceptor-ref name="defaultStack" />	  
+		</action>
+		
+	</package>
+</struts>

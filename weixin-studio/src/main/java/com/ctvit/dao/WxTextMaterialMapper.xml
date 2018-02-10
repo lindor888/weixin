@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ctvit.dao.WxTextMaterialMapper" >
+  <resultMap id="BaseResultMap" type="com.ctvit.bean.WxTextMaterial" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="catalogTitle" property="catalogTitle" jdbcType="VARCHAR" />
+    <result column="waccount_id" property="waccountId" jdbcType="VARCHAR" />
+     <result column="createuser" property="createuser" jdbcType="VARCHAR" />
+    <result column="createuserid" property="createuserid" jdbcType="VARCHAR" />
+    <result column="createdate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="modifyuser" property="modifyuser" jdbcType="VARCHAR" />
+    <result column="modifyuserid" property="modifyuserid" jdbcType="VARCHAR" />
+    <result column="modifydate" property="modifydate" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="BIT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.ctvit.bean.WxTextMaterial" extends="BaseResultMap" >
+    <result column="wenbenxml" property="wenbenxml" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id,catalogTitle, waccount_id, createuser, createuserid, createdate, modifyuser, modifyuserid, 
+    modifydate, status
+  </sql>
+  <sql id="Blob_Column_List" >
+    wenbenxml
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tab_wx_TextMaterial
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tab_wx_TextMaterial
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ctvit.bean.WxTextMaterial" >
+    insert into tab_wx_TextMaterial (id,catalogTitle, waccount_id, createuser, 
+      createuserid, createdate, modifyuser, 
+      modifyuserid, modifydate, status, 
+      wenbenxml)
+    values (#{id,jdbcType=VARCHAR}, #{catalogTitle,jdbcType=VARCHAR},#{waccountId,jdbcType=VARCHAR}, #{createuser,jdbcType=VARCHAR}, 
+      #{createuserid,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, #{modifyuser,jdbcType=VARCHAR}, 
+      #{modifyuserid,jdbcType=VARCHAR}, #{modifydate,jdbcType=TIMESTAMP}, #{status,jdbcType=BIT}, 
+      #{wenbenxml,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ctvit.bean.WxTextMaterial" >
+    insert into tab_wx_TextMaterial
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="catalogTitle != null" >
+        catalogTitle,
+      </if>
+      <if test="waccountId != null" >
+        waccount_id,
+      </if>
+      <if test="createuser != null" >
+        createuser,
+      </if>
+      <if test="createuserid != null" >
+        createuserid,
+      </if>
+      <if test="createdate != null" >
+        createdate,
+      </if>
+      <if test="modifyuser != null" >
+        modifyuser,
+      </if>
+      <if test="modifyuserid != null" >
+        modifyuserid,
+      </if>
+      <if test="modifydate != null" >
+        modifydate,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="wenbenxml != null" >
+        wenbenxml,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="waccountId != null" >
+        #{catalogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="waccountId != null" >
+        #{waccountId,jdbcType=VARCHAR},
+      </if>
+      <if test="createuser != null" >
+        #{createuser,jdbcType=VARCHAR},
+      </if>
+      <if test="createuserid != null" >
+        #{createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyuser != null" >
+        #{modifyuser,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyuserid != null" >
+        #{modifyuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="modifydate != null" >
+        #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="wenbenxml != null" >
+        #{wenbenxml,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ctvit.bean.WxTextMaterial" >
+    update tab_wx_TextMaterial
+    <set >
+    <if test="waccountId != null" >
+        catalogTitle = #{catalogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="waccountId != null" >
+        waccount_id = #{waccountId,jdbcType=VARCHAR},
+      </if>
+      <if test="createuser != null" >
+        createuser = #{createuser,jdbcType=VARCHAR},
+      </if>
+      <if test="createuserid != null" >
+        createuserid = #{createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        createdate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyuser != null" >
+        modifyuser = #{modifyuser,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyuserid != null" >
+        modifyuserid = #{modifyuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="modifydate != null" >
+        modifydate = #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="wenbenxml != null" >
+        wenbenxml = #{wenbenxml,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+ 
+  <update id="updateByPrimaryKey" parameterType="com.ctvit.bean.WxTextMaterial" >
+    update tab_wx_TextMaterial
+    set waccount_id = #{waccountId,jdbcType=VARCHAR},
+    catalogTitle = #{catalogTitle,jdbcType=VARCHAR},
+      createuser = #{createuser,jdbcType=VARCHAR},
+      createuserid = #{createuserid,jdbcType=VARCHAR},
+      createdate = #{createdate,jdbcType=TIMESTAMP},
+      modifyuser = #{modifyuser,jdbcType=VARCHAR},
+      modifyuserid = #{modifyuserid,jdbcType=VARCHAR},
+      modifydate = #{modifydate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=BIT}
+      where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  
+  
+   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ctvit.dao.QueryDataBean" >
+  select * from tab_wx_TextMaterial where 1=1 
+   <if test="catalogTitle != null  " >
+  and catalogTitle LIKE '%${catalogTitle}%'
+  </if>
+  order by createdate desc
+  </select>
+  
+  
+  <select id="selectByExamplepage" resultMap="BaseResultMap" parameterType="com.ctvit.dao.QueryDataBean" >
+  select * from tab_wx_TextMaterial where 1=1 
+  <if test="catalogTitle != null ">
+  and catalogTitle LIKE '%${catalogTitle}%'  
+  </if>
+  order by createdate desc  limit #{page} , #{rows} 
+   </select>
+</mapper>

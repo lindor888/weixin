@@ -1,0 +1,3 @@
+[longsys] 2015-07-27 11:24:42,296 INFO  (com.ctvit.util.MemcacheUtils:22) - memcache的client开始初始化.
+[longsys] 2015-07-27 11:44:00,080 INFO  (com.ctvit.util.MemcacheUtils:22) - memcache的client开始初始化.
+[longsys] 2015-07-27 12:23:30,928 INFO  (com.ctvit.util.MemcacheUtils:22) - memcache的client开始初始化.

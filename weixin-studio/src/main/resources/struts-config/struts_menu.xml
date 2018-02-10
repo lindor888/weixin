@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="menu" namespace="/menu" extends="weixin">
+		<!-- 菜单管理 -->
+		<action name="*Menu" class="menuAction" method="{1}">
+			<result name="listPage" type="json">
+				<param name="root">mapJson</param>
+			</result>
+			<result name="selectById" type="json">
+				<param name="root">mapJson</param>
+			</result>
+			<result name="save_result" type="json">
+				<param name="root">mapJson</param>
+			</result>
+			<result name="menus_info">menus_info.jsp</result>
+			<result name="addMenu">menus.jsp</result>
+			<result name="menus">menus.jsp</result>
+		</action>
+	</package>
+
+	<package name="depart" namespace="/depart" extends="weixin">
+		<!-- 部门管理 -->
+		<action name="*Depart" class="departAction" method="{1}">
+			<result name="listPage" type="json">
+				<param name="root">mapJson</param>
+			</result>
+			<result name="selectById" type="json">
+				<param name="root">mapJson</param>
+			</result>
+			<result name="depart_info">depart_info.jsp</result>
+			<result name="fenpei">fenpei.jsp</result>
+			<result name="addDepart">depart.jsp</result>
+			<result name="departs">depart.jsp</result>
+			<result name="dft" type="json"><param name="root">mapJson</param></result>
+		</action>
+		
+		<action name="*RelationAction" class="ReAction" method="{1}">
+		<result name="add" type="json"><param name="root">mapJson</param></result>
+		<result name="departsuccess" type="json"><param name="root">mapJson</param></result>
+        </action>
+	</package>
+
+	<package name="role" namespace="/role" extends="weixin">
+		<!-- 权限管理 -->
+		<action name="*Role" class="roleAction" method="{1}">
+			<result name="authorization">authorization.jsp</result>
+			<result name="roles">roles.jsp</result>
+			<result name="dft" type="json"><param name="root">mapJson</param></result>
+		</action>
+	</package>
+
+	<package name="log" namespace="/log" extends="weixin">
+		<!-- 日志 -->
+		<action name="*Log" class="loggerAction" method="{1}">
+		</action>
+	</package>
+
+</struts>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ctvit.dao.EpgCommentMapper">
+	<select id="getList" parameterType="com.ctvit.bean.FenyeBean" resultType="com.ctvit.bean.EpgComment">
+			SELECT comment_id, 
+				openid,
+				userhead,
+				nickname,
+				comment_time,
+				content,
+				reservation_id 
+			FROM tab_epg_comment 
+			ORDER BY comment_time DESC
+			limit #{currentPage},#{pageSize}
+	</select>
+	
+	<select id="getCount"  resultType="Integer">
+				SELECT count(comment_id)  FROM tab_epg_comment  ORDER BY comment_time DESC
+	</select>
+	
+	<select id="queryList" parameterType="java.util.Map"  resultType="com.ctvit.bean.EpgComment">
+		SELECT comment_id, 
+			openid,
+			userhead,
+			nickname,
+			comment_time,
+			content,
+			reservation_id 
+		FROM tab_epg_comment 
+		WHERE 1=1
+	  <if test="starttime != null" >
+       and comment_time BETWEEN #{starttime} AND #{endtime} 
+      </if>
+      ORDER BY comment_time DESC
+		limit #{currentPage},#{pageSize};
+	</select>
+	
+	<select id="queryCount" parameterType="java.util.Map" resultType="Integer">
+	SELECT count(comment_id)
+		FROM tab_epg_comment 
+		WHERE 1=1
+	  <if test="starttime != null" >
+        and comment_time BETWEEN #{starttime} AND #{endtime} 
+      </if>
+        ORDER BY comment_time DESC ;
+	</select>
+
+<!-- 	<select id="getListfenye" resultType="com.ctvit.bean.EpgComment" parameterType="com.ctvit.bean.FenyeBean">  
+      select * from tab_epg_comment ORDER BY comment_time DESC  limit #{currentPage},#{pageSize} 
+    </select> -->
+    
+</mapper>

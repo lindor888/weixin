@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<meta name="apple-touch-fullscreen" content="YES">
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no"/>
+<title>节目直播</title>
+<style type="text/css">
+ul,li,dl,dt,dd{list-style:none}
+fieldset,iframe,img {border:0;}
+i, cite, em, var, address{font-style:normal}
+caption,th { text-align: left; }
+table { border-collapse: collapse; border-spacing: 0; }
+article,aside,footer,header,hgroup,nav,section,figure,figcaption,video {display: block}
+html,body{height:100%;width:100%;margin:0;padding:0;font-family:微软雅黑;overflow:hidden;background:rgba(50,50,50,1.00)}
+.bodyWrap{position:relative;width:100%;height:100%;overflow:hidden}
+.bodyBox{position:relative;width:100%;height:100%;overflow:hidden;-webkit-transition:all 300ms ease;-webkit-transform-origin:100% 50%}
+
+.menuBox{position:absolute;color:#fff;background:#434343;right:0;top:0;height:100%;width:150px;-webkit-transform-origin:0% 50%;-webkit-transform:perspective(800px) translate(150px,0) rotateY(30deg);z-index:1;box-sizing:border-box;-webkit-transition:all 300ms ease;}
+.menuBox h3{border-top:none;text-align:center;margin:0 0 0px 0;padding: 0 0 0 10px;color:#fff}
+.menuItem{margin:0 0 0 0;height:40px;line-height:40px;font-weight:bold;font-size:1.2em;border-bottom:1px solid #000;border-top:1px rgba(100,100,100,1.00) solid;padding:0 0 0 24px ;border-top:1px rgba(110,110,110,1.00) solid; box-sizing:border-box}
+.menuBox p:last-child{border-bottom:none}
+.menuBox .isFocus{background:url() no-repeat 4px center;color:rgb(100, 100, 100);}
+.channelLogo{display:inline-block;overflow:hidden;height:100%}
+.tr{border-bottom:1px solid #f5f5f5;}
+.tabBox{position:relative;height:38px;background:#F7F7F7;overflow:auto;text-align:right;border-bottom:1px solid #B5B5B5}
+.tabBox table{min-width:100%;border:0}
+.tabBox td{text-align:center;height:34px}
+.channelName{font-size:1.2em;font-weight:bold;color:red}
+.channelLogo{overflow:hidden;text-align:center;display:block;border-bottom:2px solid transparent;}
+td.isFocus .channelLogo{border-bottom:2px solid red;}
+.channelLogo img{max-width:70%;margin:7px auto;height:22px;display:block}
+.lineTD{width:3px}
+.channelLine{width:0px;height:20px;border-left:1px solid rgba(130,130,130,1.00);border-right:1px solid rgba(255,255,255,1.00);margin:2px auto}
+
+.videoBox{position:relative;height:410px;overflow:hidden;background:#000;-webkit-transition:all 500ms ease}
+.videoBox img{width:100%;height:100%}
+.videoBox .on{display:block}
+.videoBox video{width:100%;height:100%}
+#infoStr{position:absolute;min-width:160px;height:40px;text-align:center;color:rgba(255,255,255,1.00);background:rgba(0,0,0,0.86);top:-100px;left:50%;-webkit-transform:translate(-50%,0);z-index:10;line-height:40px;border-radius:0 0 6px 6px;-webkit-transition:all 500ms ease;padding:0 10px}
+
+.tv_tab1{clear:both;border-bottom:solid 1px #dbdada;}
+.tv_tab1 li{float:left;width:50%;background:#d5d5d5;text-align:center;}
+.tv_tab1 li.on{background:#f2f2f2;cursor:default;overflow:hidden}
+
+.vflex{display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;-webkit-box-flex:1}
+.scrolling{-webkit-overflow-scrolling:touch;overflow:auto}
+.playButton{position:absolute;background:url(../img/playButton1.png);z-index:10;background-size:contain;width:72px;height:72px;top:50%;left:50%;-webkit-transform:translate(-50%,-50%);border:none}
+.playButton2{position:absolute;width:70px;height:70px;top:50%;left:50%;background:url(../img/playButton2.png) no-repeat center center;background-size:cover;margin:-35px}
+
+.msgInputBox{position:absolute;background:rgba(233,233,233,1.00);height:42px;width:100%;bottom:0;padding:6px;box-sizing:border-box;box-shadow:0 0 5px #000;z-index:2}
+.touxiang{width:30px;height:30px;vertical-align:top;}
+.msgInput{height:30px;/* margin:0 6px; */border:1px solid #BCBCBC;box-sizing:border-box;vertical-align:top;line-height:30px}
+.msgButton{display:inline-block;width:60px;height:30px;text-align:center;border-radius:4px;box-sizing:border-box;background:rgba(235,235,235,1.00);border:1px solid #BCBCBC;line-height:30px}
+
+.msgTab{font-size:12px;}
+.portraitBox{padding:0;color:rgba(108,108,108,1.00);width:56px;text-align:center}
+.portrait{width:33px;height:33px;display:inline-block;margin:3px auto;border:1px solid #fff;border-radius:50%;overflow:hidden;vertical-align:top;vertical-align:middle}
+.portrait img{width:100%;height:100%;border-radius:50%;vertical-align:middle}
+.nickNameBox{width:60px;word-wrap:break-word;}
+.pubContent{word-wrap:break-word;word-break:break-all;}
+.pubTime{width:50px;text-align:center}
+
+.conentBox{position:relative;width:100%;background:#fff;border-top:1px solid #F5F5F5}
+.loadingBox{position:absolute;width:100%;height:100%;left:0;top:0;background:rgba(0,0,0,0.9);z-index:10;-webkit-transition:all 650ms ease}
+
+@media (max-width:640px){
+	.videoBox{position:relative;height:220px;overflow:hidden}
+}
+@media (max-width:330px){
+	.videoBox{position:relative;height:200px;overflow:hidden}
+}
+
+#loading{position:absolute;top:50%;left:50%;height:130px;width:130px;-webkit-transform:translate(-50%,-50%);background:rgba(10,10,10,.6);border-radius:50%;-webkit-box-shadow:0 0 30px rgba(43, 96, 251, 0.8);-webkit-animation:boxShadow 3000ms linear .2s infinite}
+.loadinglist li #loading:hover{border-color:#444;}
+#loading1 #innerCircle,#loading4 #innerCircle{
+	display:block;
+	position:absolute;
+	margin:20px 0 0 20px;	
+	width:40px;
+	height:40px;
+	border-top:7px solid #06F;
+	border-bottom:7px solid #06F;
+	border-left:7px solid transparent;
+	border-right:7px solid transparent;	
+	border-radius:40px;
+	-moz-border-radius:40px;
+	-webkit-border-radius:40px;
+	-ms-border-radius:40px;
+	-o-border-radius:40px;	
+	box-shadow:0 0 20px #06F;
+	-webkit-box-shadow:0 0 20px #06F;
+	-moz-box-shadow:0 0 20px #06F;
+	-ms-box-shadow:0 0 20px #06F;
+	-o-box-shadow:0 0 20px #06F;	
+	-webkit-animation: ccwSpin .555s linear .2s infinite;
+	-moz-animation: ccwSpin .555s linear .2s infinite;
+	-o-animation: ccwSpin .555s linear .2s infinite;
+	-ms-animation: ccwSpin .555s linear .2s infinite;
+	animation: ccwSpin .555s linear .2s infinite;
+}
+#loading1 #innerCircle #center,#loading2 #outerCircle1 #center,#loading4 #outerCircle1 #center{
+	display:block;
+	margin:5px 0 0 5px;	
+	width:30px;
+	height:30px;	
+	background-color:#06F;	
+	border-radius:30px;
+	-moz-border-radius:30px;
+	-webkit-border-radius:30px;
+	-ms-border-radius:30px;
+	-o-border-radius:30px;
+}
+#loading1,#loading2,#loading4,#loading5,#loading8-1,#loading8-2,#loading8-3{margin:19px;display:block;width:80px;height:80px;}
+#loading4 #outerCircle1{
+	display:block;
+	position:absolute;
+	margin:0 auto;
+	width:80px;
+	height:80px;
+	border-top:7px solid #06F;
+	border-bottom:7px solid transparent;
+	border-left:7px solid transparent;
+	border-right:7px solid 06F;
+	
+	border-radius:80px;
+	-moz-border-radius:80px;
+	-webkit-border-radius:80px;
+	-ms-border-radius:80px;
+	-o-border-radius:80px;
+	
+	-webkit-animation: cwSpin 1s linear .2s infinite;
+	-moz-animation: cwSpin .666s linear .2s infinite;
+	-o-animation: cwSpin .666s linear .2s infinite;
+	-ms-animation: cwSpin .666s linear .2s infinite;
+	animation: cwSpin .666s linear .2s infinite;
+}
+#loading4 #innerCircle{
+	
+	border-top:7px solid transparent;
+	border-bottom:7px solid #06F;
+	border-left:7px solid #06F;
+	border-right:7px solid transparent;
+	
+	box-shadow:none;
+	-moz-box-shadow:none;
+	-ms-box-shadow:none;
+	-o-box-shadow:none;
+	-webkit-box-shadow:none;
+}
+@-webkit-keyframes boxShadow{
+	0%{-webkit-box-shadow:0 0 30px rgba(43, 96, 251, 0.8)}
+	50%{-webkit-box-shadow:0 0 0px rgba(43, 96, 251, 0.8)}
+	100%{-webkit-box-shadow:0 0 30px rgba(43, 96, 251, 0.8)}
+}
+@-webkit-keyframes cwSpin{
+	0%{-webkit-transform:rotate(0deg);}
+	100%{-webkit-transform:rotate(360deg);}
+}
+@-webkit-keyframes ccwSpin{
+	0%{-webkit-transform:rotate(0deg);}
+	100%{-webkit-transform:rotate(-360deg);}
+}
+#marquee{
+  width:100%;
+  color:#E1DEDE;
+  font-size:14px;
+  height:30px;
+  line-height:30px;
+  position:absolute;
+  z-index:200;
+  padding-top:40px;
+  }
+
+/*
+.videoxbox{ height:400px; position:relative;}
+#example-one{left:0px; top:0px; width:100%;}
+#example-one ul { margin:0;padding:0;}
+#example-one ul li{margin:0;padding:0;height:50px; line-height:50px; float:left; width:50%; text-align:center;}
+.videoxbox .list-wrap{ width:100%; text-align:center; height:350px;}
+.videoxbox .list-wrap ul{margin:0;padding:0; width:100%;}
+.videoxbox .list-wrap ul li{margin:0;padding:0; width:100%;}
+*/
+#example-one {clear:both; }
+#example-one ul { margin:0;padding:0; clear:both; width:100%; }
+#example-one ul li{ float:left;width:100%; text-align:center; background:#959290; cursor:pointer; padding:5px 0;}
+#example-one ul li.cur{ background:#d30000;}
+#example-one ul li a{ color:#fff; text-decoration:none;}
+.videoxbox{ position:relative;}
+.list-wrap ul{ margin:0;padding:0; clear:both; width:100%;}
+.list-wrap ul li{ text-align:center;width:100% !important;}
+#danmu{
+width:100%;
+height:250px;
+background-color:#fff;
+z-index:9999;
+background-color: rgba(000, 1, 000, 0.1); 
+}
+
+#textStyle{
+position:absolute;
+font-size:14px;
+color:#fff;
+}
+ /*shezhi*/ 
+ 		.setBtnwrap{position:fixed; width:66px;height:46px; right:10px; bottom:53px; z-index:99;} 
+       .setBtnwrap .sw_button{position:absolute;
+            z-index:1; width:66px; height:36px; bottom:0; border-radius:5px; background:rgba(67,67,67,0.8);
+            font-size:14px; line-height:36px; text-align:center; color:#FFF; cursor:pointer;-webkit-tap-highlight-color:rgba(67,67,67,0.8);-webkit-user-select:none;}
+       .setBtnwrap .sw_wrapper{position:absolute; width:46px; padding-bottom:46px;
+            background:rgba(67,67,67,0.8); bottom:0; border-radius:5px; opacity:0;
+            height:0px; -webkit-transform: scale(0.1); -moz-transform: scale(0.1);
+            -ms-transform: scale(0.1); transform: scale(0.1); -webkit-transition: all
+            .3s ease; -moz-transition: all .3s ease; transition: all .3s ease; }
+.postinfoctrls{
+	border-bottom:1px solid #dfdfdd;
+	background-color:#f8f8f8;
+	height:30px;
+	overflow:hidden;
+	margin:0px 6px 2px 6px;
+}
+.postinfoctrls a{
+	-webkit-user-select:none;
+	-webkit-touch-callout:none;
+	text-decoration:none;
+	line-height:30px;display:block;
+	width:33.1%;float:left;
+	text-align:center;
+}
+.postinfoctrls div{
+	background-color:#c1c1c1;width:1px;float:left;height:22px;margin-top:4px
+}
+.postinfo a,.link {
+	text-decoration: none;
+	color: #576b95;
+	-webkit-user-select: none;
+	-webkit-touch-callout: none;
+}
+.postinfo *{
+	margin: 0px;
+	padding: 0px;
+	font-size: 14px;
+	font-family: 微软雅黑,黑体;
+	color: #000000;
+} 
+.postinfo {
+	margin:0px 6px 0px 6px;
+	padding:6px 4px 6px 4px;
+/* 	max-width: 520px; */
+	min-width: 300px;
+	border:0px solid #dfdfdd;
+	position: relative;
+	background-color:#FFFFFF;
+}
+.postinfo .datetitle{
+	font-weight: bold;
+	font-size:24px;
+	display: block;
+	width: 60px;
+	height: 40px;
+	margin-left:-12px;
+}
+.postinfo .heada {
+	display: block;
+	float:left;
+	width: 40px;
+	height: 40px;
+}
+.postinfo .heada .headimg {
+	width: 40px;
+	height: 40px;
+}
+.postinfo .nickname {
+	 margin-left:8px;
+	 font-weight:bold;
+}
+.postinfo .jibie {
+	 margin-left:16px;
+	 color:#767676;
+}
+.postinfo .fontcontent{
+	margin:-20px 0px 0px 48px; 
+	line-height:18px;
+	overflow: hidden;
+	min-height: 20px;
+	word-break: break-all;
+}
+.postinfo .expcontenta{
+	margin:0px 0px 0px 48px; 
+	line-height:22px;
+	display: none;
+}
+.postinfo .mediacontent{
+	margin:6px 0px 0px 48px;  
+	min-height:50px;
+}
+.postinfo .linkcontent{
+	padding:6px 6px 3px 6px;
+	overflow:hidden;
+	background-color:#f0f1f3;
+	display: block;
+	word-break:break-all;
+	margin-right: 3px;
+}
+.postinfo .linkfontcontent{
+	padding-left:45px;
+	margin-top:-38px;
+	line-height: 18px;
+	height: 36px;
+	overflow: hidden;
+	word-break: break-all;
+}
+.postinfo .mediacontent .contenta {
+	width: 78px;
+	height: 78px;
+	border: 1px solid transparent;
+	background: #FAFAFA url('') no-repeat left top;
+	background-size: cover;
+	float: left;
+	position: relative;
+	margin:0px 3px 3px 0px
+}
+
+.postinfo .mediacontent .contentb {
+	width: 200px;
+	height: 150px;
+	background: #FAFAFA url('') no-repeat center top;
+}
+
+.postinfo .date {
+	color: #737373;
+	font-size: 12px;
+	margin: 6px 0px 0px 48px;
+	line-height:20px;
+	height: 20px;
+	overflow: hidden; 
+	float:left; 
+}
+.postinfo .checkbox{
+	margin: 6px 12px 0px 0px;
+	line-height:20px;
+	height: 20px;
+	overflow: hidden; 
+	float:right; 
+}
+.postinfo .controlimg {
+	float:right;
+	margin:9px 6px 0px 0px;
+}
+.postinfo .controlimg img{
+	max-height:14px;
+}
+
+.postinfo .topictitle{
+	margin: 6px 3px 0px 3px;padding-left:43px;
+}
+.postinfo .topictitle span{
+	margin-left:-36px;font-size:12px;color:#737373
+}
+.postinfo .topictitle a{
+	font-size:12px;
+}
+.postinfo .zancontent{
+	margin: 6px 3px 0px 3px;
+	background-color: #f1f1f3;
+	padding: 6px 0px 4px 26px;
+	position: relative;
+	display:none;
+}
+.postinfo .zancontent .zheadimg{
+	width:30px;height:30px;
+	margin:0px 2px 2px 0px;
+	float:left; 
+}
+.postinfo .zanicon{
+	position:absolute;left:6px;top:8px;max-width:14px;
+}
+.postinfo .zaninfo{
+	margin-left:8px;
+	line-height:30px;
+	font-size:12px;
+	color:#a7a7a7;
+	float:left;
+}
+.postinfo .talkcontent{
+	border-top:1px solid #ebebeb; 
+	margin:0px 3px 0px 3px;
+	background-color: #f1f1f3;
+	padding: 6px 0px 4px 26px;
+	position: relative;
+	display:none;
+}
+.postinfo .talkcontent .talkinfo {
+	margin: 0px 0px 3px 0px; 
+}
+.postinfo .talkcontent .talkinfo .theadimg{
+	float:left;width:30px;height:30px
+}
+.postinfo .talkcontent .talkinfo .talknc{
+	max-width:170px;
+	float:left;
+	overflow:hidden;
+	margin-left:6px;
+	font-size:14px;
+	color:#576b95;
+	height:16px;
+	line-height: 16px;
+	font-size:12px;
+}
+.postinfo .talkcontent .talkinfo .talkdelctrl{
+	float:right;
+	margin-right:6px;
+	height:16px;
+	line-height: 16px;
+	font-size:12px;
+}
+.postinfo .talkcontent .talkinfo .talfontcontent{
+	padding:0px 3px 0px 0px;
+	margin:-12px 0px 0px 38px;
+	text-align:left;
+	word-break: break-all;
+	font-size: 12px;
+}
+.postinfo .talkcontent .more {
+	border-top: 1px solid #ebebeb;
+	overflow: hidden;
+	line-height:30px;
+	height:30px;
+	text-align: left;
+	font-size: 12px;
+	color: #a7a7a7;
+	position: absolute;
+	bottom: 0px;
+	min-width: 210px;
+}
+.postinfo .talkcontent .talkicon{
+	position:absolute;top:8px;left:6px;max-width:14px;
+}
+.newinfo input[type="button"],.newinfo .button,.button1{
+	background: #ffffff url('../img/buttonbg.png') no-repeat center center;
+	width:280px;
+	height:40px;
+	background-size:100% 100%;
+	border:none;
+	color:white;
+	margin:10px;
+	display: block;
+	line-height: 40px;
+	text-decoration: none;
+	text-align: center;
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+  font-size: 14px;
+  font-family: 微软雅黑,黑体;
+  color: #000000;
+}
+@media screen and (max-width: 360px) {.demo {width:340px}}
+
+.front{width: 300px;margin: 5px 32px 45px 32px;background-color: #f0f0f0;	color: #666;text-align: center;padding: 3px;border-radius: 5px;}
+div.seatCharts-cell {color: #182C4E;height: 25px;width: 25px;line-height: 25px;margin: 3px;float: left;text-align: center;outline: none;font-size: 13px;}
+div.seatCharts-seat {color: #fff;cursor: pointer;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;}
+div.seatCharts-row {height: 35px;}
+div.seatCharts-seat.available {background-color: #B9DEA0;}
+div.seatCharts-seat.focused {background-color: #76B474;border: none;}
+div.seatCharts-seat.selected {background-color: #3CB1E7;}
+div.seatCharts-seat.unavailable {background-color: #E6CAC4 ;cursor: not-allowed;}
+div.seatCharts-container {padding: 20px;float: left;  min-width: 280px;   margin: 0 5%;}
+div.seatCharts-legend {padding-left: 0px;position: absolute;bottom: 16px;}
+ul.seatCharts-legendList {padding-left: 0px;}
+.seatCharts-legendItem{float:left; width:90px;margin-top: 10px;line-height: 2;}
+span.seatCharts-legendDescription {margin-left: 5px;line-height: 30px;}
+.checkout-button {display: block;width:80px; height:24px; line-height:20px;margin: 10px auto;border:1px solid #999;font-size: 14px; cursor:pointer}
+#selected-seats {max-height: 150px;overflow-y: auto;overflow-x: none;width: 200px;}
+#selected-seats li{float:left; width:72px; height:26px; line-height:26px; border:1px solid #d3d3d3; background:#f7f7f7; margin:6px; font-size:14px; font-weight:bold; text-align:center}
+
+
+</style></head>
+<script type='text/javascript' src='../jc/xdTools.js'></script>
+<script type='text/javascript' src='../js/jquery-1.7.2.js'></script>
+<script type='text/javascript' src='../js/jquery.seat-charts.min.js'></script>
+<script type="text/javascript">
+ 
+  </script>
+<body>
+<div id="infoStr">正在换台</div>
+<div class="bodyWrap">
+  <div class="bodyBox" id="bodyBox">
+    <div class="videoBox" id="videoBox" action="playerLive" style="display:none;"><img src="../img/pBG.jpg" id="videoBG"><button class="playButton"></button></div>
+	<div class="videoxbox">
+		<div id="example-one">
+			<ul class="nav ">
+				<li><a href="javascript:void(0)">视频</a></li>
+			</ul>
+		</div>
+		<div class="list-wrap" id="list-wrap">
+			
+			<ul>
+				<li><video src="http://localhost:8080/weixin-front/live/video/no3.mp4" id="video1"   controls="controls" width="100%" height="220px"></li>
+			</ul>
+			
+		</div>
+	</div>
+    <div class="tabBox" id="tabBox" style="display:none;"></div>
+    <div class="conentBox vflex scrolling highlight" id="conentBox">
+      <div class="vflex scrolling highlight"  >
+      	<!-- <div align="center" style="margin:0px 6px;background-color:#FFFFFF;height:40px;line-height:40px;" ><div>加载中...</div></div> -->
+      	
+  		 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="msgTab" id="msgTab">
+  		 <tr>
+  		 	<td id="dataloadingdiv">
+  		 			<div id="seat-map">
+					</div>
+  		 		<!-- <img id="seatingImg" src="../img/seating.png"/> -->
+  		 	</td>
+  		 </tr>
+		
+		</table>   
+      </div>
+      <div class="setBtnwrap">
+            <span class="sw_button" id="sw_button">
+                关闭弹幕
+            </span>
+      </div>
+    </div>
+       
+    <div class="msgInputBox" id="msgInputBox">
+      <form name="form" id="form2">
+        <img src="" class="touxiang" id="touxiang"/>
+	        <input type="text" class="msgInput" placeholder=" 请输入弹幕" id="msgInput" maxlength="70" >
+	        <label class="msgButton" id="msgButton" onClick="sub_danmu();" >发弹幕</label>
+      </form>
+    </div>
+    
+    
+  </div>
+  <div class="menuBox" id="menuBox"></div> 
+</div>
+<script type='text/javascript' src='../jc/sockjs-0.3.min.js'></script>
+<script type='text/javascript' src='../jc/xdEvent.js'></script>
+<script type="text/javascript">
+
+var search=getSearch()
+,token=search["token"]
+,openID=search["openId"]
+//,openID='oZaf2t7ZdNhrg-LBhwaEF-QZjR58'
+,waccountid=search["waccountid"]
+,reservationID=search["videoId"]
+,liveUrl=search["liveUrl"]
+,channelType=null
+,wxVar={
+appid:""
+,img:"http://h5.mtq.tvm.cn/live/img/live_bg.png"
+,url:""
+,title:"直播聊天"
+,desc:"边看边聊！"
+,fakeid:openID}
+;
+
+$('#video1').attr('src',liveUrl);
+var myVideo01 = document.getElementById('video1');
+
+
+$("#example-one ul li").eq(0).click(function(){
+	myVideo01.pause();
+	myVideo02.pause();
+	var windowurl = window.location.href;
+	windowurl = windowurl.replace('zhutiId=23','zhutiId=22');
+	window.location.href = windowurl;
+});
+
+$("#example-one ul li").eq(1).click(function(){
+	myVideo01.pause();
+	myVideo02.pause();
+	var windowurl = window.location.href;
+	windowurl = windowurl.replace('zhutiId=22','zhutiId=23');
+	window.location.href = windowurl;
+});
+
+(function(opt){
+	var winW=window.innerWidth,winH=window.innerHeight,H=videoBox.offsetHeight+tabBox.offsetHeight+msgInputBox.offsetHeight
+		,theIndex=5
+		,channels=[]
+		,theOpt		
+		,wrapH=(winH-H)
+		,fontH=42
+		,channelID
+		,channelName
+		,channelTag="live"
+		,liveToken=null
+		,password
+		,channelHost=""
+		,isMenu=0
+		,userInfo=0
+		,msgIndex=0
+		,pageCount=100
+		,msgObj=[]	
+		//,uinfo='http://mall.mtq.tvm.cn/pointMall/personal/queryUser?wxToken='+token+"&openId="+openID
+		,viewerHost="http://wtopic.mtq.tvm.cn/wtopic/sso/oauth?to=wechat2topic&go=grzx&token="+token
+		,getChannelUrl="http://iwmh.mtq.tvm.cn/rest/live/info?token="+token//"../data.json"//
+		,tHost="http://iwmh.mtq.tvm.cn/rest/live/accesstoken?user="
+		,ajax=setAjax("get")
+		//,ajax2=setAjax("get",uinfo)
+		,ajax3=setAjax("get")
+		,video,js
+		,uName="xindong"
+		,uHeadImg="http://wx.qlogo.cn/mmopen/Q3auHgzwzM76icCswGPhVeKbymp312DmZjqibJHItWey57IA7BROgxeriaYUdMSlVsGLa1mtCicibcwjk4yI3DelchA/96"
+		,socket
+		,isCreate=0
+		;	
+	conentBox.style.height=(winH-$(".videoxbox").height())+"px";
+	msgInput.style.width=(winW-115)+"px";
+	$("#seatingImg").css("width",(winW-15)+"px");
+var eventFun={listener:document};
+eventFun["eventClick"]=clickEvent;//('ontouchstart' in window)?"eventDown":
+var xdEvent=new xdEventFun(eventFun)
+function clickEvent(e,ele){
+		var attribute,argument,property,a1;
+			do{
+				if(ele.nodeType!==1)return false;
+				if(attribute=ele.getAttribute("action"))break;				
+			}while(ele=ele.parentNode);
+			if(!attribute)return false;
+			argument=attribute.split(".,");
+			property=argument[0];
+			a1=argument[1];
+			if(isCreate)return;
+			switch(property){
+				case "changeMenu":
+					setMenu();
+				break;
+				case "changeChannel":
+					changeChannel(ele,argument)
+				break;
+				case "playerLive":
+					playerLive(ele,argument)
+				break;
+				case "addItem":case "delItem":case "changeItem":
+					ddAction(ele,property)
+				break;	
+				case "viewer":
+					viewer(a1)
+				break;
+            }
+		};			
+
+var videoTag;	
+/* function getSocketUrl(){
+	var h="wtopic.mtq.tvm.cn",channelName=theOpt.eName;
+	return {h:"http://"+h+"/chatroom/records/"+channelName+"?page=0&pageSize="+pageCount,u:"http://"+h+"/chat",r:channelName}
+	} */
+function playerLive(){
+	var child=videoBox.firstChild,theVideo;
+	if(child.tagName==="VIDEO"){
+		if(child.paused)child.play()
+		else child.pause()
+		return false;
+		}else{
+			videoBox.innerHTML="";
+		};	
+	if(!liveToken){	
+		var ajax=setAjax("get",tHost+openID+"|"+sig+"&passwd="+password+"&format=json")
+		ajax.callBack=function($data){
+			var data=typeof($data)!=="object"?eval("("+$data+")"):$data
+			liveToken=data.data.token;
+			}
+		ajax.send();		
+		}
+	createVideoEle();
+}
+function createVideoEle(){
+	theVideo=document.createElement("video");			
+	theVideo.src=spliceUrl().videoHost;		
+	theVideo.setAttribute("x-webkit-airplay","allow") 
+	theVideo.setAttribute("webkit-playsinline","yes")
+	videoBox.appendChild(theVideo);	
+	theVideo.play();	
+}	
+function viewer(id){
+	top.location=viewerHost+"&token&f_openid="+id
+	}	
+/* function setCM($data){	
+	var data=$data.channels,index=0,channel,css="",tabStyle="",tdStyle="",c_name,e_name,url,tab,td=""
+	,line='<td class="lineTD"><div class="channelLine"></div></td>',shareInfo=$data.shareinfo;	
+	for(i in data){
+		channel=data[i];
+		if(channel.livetype!=="2")continue
+		c_name=channel.chinese_name
+		e_name=channel.english_name
+		url=channel.live_url;
+		channels.push({id:i,eName:e_name,name:c_name,tag:e_name,url:url,logo:data.icon,capture:channel.picture})
+		if(index===theIndex){
+			css='class="isFocus"'
+		}else{
+			css=""
+		}
+	action=e_name+".,"+url+".,"+index;
+		td+=line;	
+		td+='<td action="changeChannel.,'+action+'" '+css+' aaa ><label class="channelLogo"><img src="'+channel.icon+'"></label></td>'
+		index++
+	}
+	
+	if(index>3){
+		var minW=112
+		tabStyle="style=\"width:"+(minW*index)+"px\""
+		tdStyle="style=\"width:"+minW+"px\""
+	}else if(index===2){
+			var minW=winW-3>>1
+			tdStyle="style=\"min-width:"+minW+"px\""
+	}	
+	tab='<table width="100%" cellspacing="0" cellpadding="0" '+tabStyle+'><tbody><tr>'	
+	// 赋值：tabBox
+	//tabBox.innerHTML=tab+td.substr(line.length).replace(/aaa/g,tdStyle)+'</tr></tbody></table>';
+	password=$data.passwd;
+	theOpt=channels[theIndex];
+	ajax3.action=getSocketUrl().h;
+	//ajax2.send();
+	ajax3.send();
+	getToken(password)
+	capture();
+	if(shareInfo!=""){		
+			var d=shareInfo["key_2"]
+			if(d){
+				wxVar.img=d.pic
+				wxVar.title=d.title
+				wxVar.desc=d.info
+			}
+
+	}
+	wxVar.appid=$data.appid;	
+	setShare();	
+//createEPG(channel_n)
+} */
+
+function setJsp(url){
+	var js=document.createElement("script");
+	js.src=url;
+	jsp.appendChild(js)
+	}	
+function loadingHidden(){
+	var loadingBox = document.getElementById("loadingBox");
+	loadingBox.style.background="rgba(0,0,0,0)";
+	var loading = document.getElementById("loading");
+	loading.style.cssText="opacity:0;-webkit-transition:all 600ms ease;top:120%";
+	setTimeout(function(){$("#loadingBox").remove();},800)
+}
+function setUrl(channel,token){
+	return "http://live.stream.tvmcloud.com/approve/live?type=ipad&channel="+channel+"&access_token="+token+"&suffix=m3u8"
+	}		
+function setData(){
+	setJsp("http://t4.dev.tvm.cn/interface/getZhiboToken?user=ieditor&callback=getToken1&passwd=btvlive#cache="+new Date())
+	}
+function spliceUrl(){
+		var channel="?type=ipad&channel="+theOpt.id,random=Math.random()
+		,captureHost=theOpt.capture+"&sj="+random,videoHost=theOpt.url+channel+"&access_token="+liveToken+"&suffix=m3u8&sj="+random
+		;
+		return {captureHost:captureHost,videoHost:videoHost,title:theOpt.name,logo:theOpt.logo};
+	}	
+window.getTokens=function($data){
+		var chs=$data.channel,ch
+		if(typeof(chs)==="object"){
+			for(var i in chs){
+				ch=i
+				}
+			}		
+		setVideoURL()
+	}	
+var timer;				
+function setVideoURL(){
+	var theVideo=document.createElement("video");
+	videoBox.innerHTML="";		
+	theVideo.src=spliceUrl().videoHost;
+	theVideo.setAttribute("x-webkit-airplay","allow") 
+	theVideo.setAttribute("webkit-playsinline","yes")
+	videoBox.appendChild(theVideo);	
+	theVideo.play();
+	}	
+function getToken(pas){
+	var ajax=setAjax("get",tHost+openID+"|"+sig+"&passwd="+pas+"&format=json")
+	ajax.callBack=function($data){
+	var data=typeof($data)!=="object"?eval("("+$data+")"):$data
+		liveToken=data.data.token;
+	}
+	ajax.send();
+	}	
+function playAction(){
+	videoBox.getElementsByTagName("video")[0].play();
+ }	
+function joinVideoURL(token,data){
+	return data[4]+"?type="+token[data[1]].stream_type.substr(0,4)+"&channel="+data[1]+"&access_token="+data[3]+"&suffix=m3u8";
+	}	 
+function changeChannel(ele,arg){
+	channgeMenu(ele,arg[3])	
+ }	
+	 
+
+ function tishi(str,fun,time){
+	clearTimeout(timer);
+	infoStr.innerHTML=str;
+	infoStr.style.top="0px";	 
+	timer=setTimeout(function(){
+		infoStr.style.top="-100px";
+		typeof fun==="function"&&fun()
+		},time||1000)	 
+	 }	 
+
+/* ajax.callBack=function($data){
+	var data=typeof($data)!=="object"?eval("("+$data+")"):$data;	
+	if(data.result){	
+	setCM(data.data);		
+	}else{
+		//alert("配制错误")
+		}
+} */
+ajax.action=getChannelUrl;	
+ajax.send();
+function capture(){
+	var timer=setInterval(function(){
+	var img=document.getElementById("videoBG");
+		if(img){
+			getVideoBG(img);
+		}else{
+			clearInterval(timer)
+			}
+		},3000)	
+}
+function getVideoBG(img){
+	if(img){
+	var img1=new Image();
+	img1.src=spliceUrl().captureHost
+	img1.onload=function(){
+		img.src=img1.src;
+	}
+	}
+}		
+function setMenu(){
+	var ts="-webkit-perspective-origin:right;-webkit-transform:perspective(800px) translate3D(-144px,0,30px) rotateY(-15deg)",bs="-webkit-transform:perspective(800px) translate(0px,0) rotateY(0deg)"	
+	if(isMenu){
+		isMenu=0;
+		ts=""
+		bs=""
+		}else{
+		isMenu=1;		
+		setTimeout(function(){
+			bodyBox.style.webkitFilter="grayscale(1) opacity(.3)"
+			bodyBox.style.webkitTransition="all 3000ms ease";
+			},400)
+		}
+	bodyBox.style.cssText=ts;
+	menuBox.style.cssText=bs;
+	}	
+function getMsg($data){
+	var str=$data,data=JSON.parse(str);
+	createMsg(data);
+	localStorage.setItem("msg"+msgIndex,str);
+	}	
+function createMsg($data){	
+	if(typeof $data==="object"){	
+	}
+}
+function parseData($data){
+	if(typeof $data==="object")
+	for(var d=$data,a;a=d.shift();){
+		createMsg(a)
+	}
+	setTimeout(function(){isCreate=0},100)
+}
+	
+function getD(num){
+	var str=num
+	if(+num<10)str="0"+num
+	return str
+}	
+function createSocket(){
+	var sockjs_url=getSocketUrl().u,room=getSocketUrl().r;
+	alert(sockjs_url);
+	socket=new SockJS(sockjs_url);
+	socket.onopen=function(){
+	socket.send(JSON.stringify({'channel':room,'uuid':'','data':{message:'',sender:{nickName:uName,avast:uHeadImg,openId:openID},time:"",utc:""},'event':'sockjs:joinChannel'}));
+	};
+	socket.onmessage = function(e){getMsg(e.data)};
+	socket.onclose   = function(){console.log('[*] close');};		
+}
+
+ajax3.callBack=function($data){
+	var data=JSON.parse($data);
+ 		msgInit(data)
+	}
+function msgInit($data){
+	/*msgTab.innerHTML="";
+	if($data.length>0){
+		msgObj=[];
+		parseData($data.reverse());
+		isCreate=1;
+		}	*/
+	loadingHidden();
+	if(socket){
+		socket.close()
+	}else loadingHidden();	
+	setTimeout(function(){		
+		createSocket()
+	},300);
+}	
+
+
+//文字滚动
+;function createEPG(channel_n){
+var gunUrl="http://iwmh.mtq.tvm.cn//index.php?g=Wap&m=Epg&a=getepg&token=tvmty&channel="+channel_n
+,conTime=Date.parse(new Date())/1000
+,ajax4=setAjax("get",gunUrl)
+;
+var marquee=document.createElement("marquee");
+marquee.id="marquee";
+marquee.setAttribute("scrollamount","2");
+ajax4.send();
+ajax4.callBack=function(response){
+	 var $data=JSON.parse(response);
+     if($data.status==1){
+		var data=$data.data;
+		if(data){
+		gun(data);
+       setInterval(function(){gun(data)},10000);
+       var infoStr=document.body.firstElementChild;
+	   document.body.insertBefore(marquee,infoStr);
+		}
+	}
+}
+function gun(data){
+	conTime=Date.parse(new Date())/1000;
+	for(i=0;i<data.length;i++){
+		 var start=Number(data[i].start_time);
+		var end=Number(data[i].end_time);
+		var con=Number(conTime);
+		if(con>start&&con<end){
+			marquee.innerHTML=data[i].title;
+			}
+		};
+	}
+};
+
+}(channelType));
+function imgLoad(t){
+	t.src="../img/wx.png"
+	}
+</script>
+<script type="text/javascript" src="../js/path.js"></script>
+<script type="text/javascript">
+	var  danmuFlag=true;  // 弹幕是否开启
+	//var  subType = "danmu"; // comment: 评论 ；  danmu: 弹幕 
+	
+	// 弹幕的websocket
+	var danmuSocket =  new WebSocket(danmuURL);
+	danmuSocket.onerror = function(event) {
+		danmuError(event)
+	};
+	danmuSocket.onopen = function(event) {
+		danmuOpen(event)
+	};
+	danmuSocket.onmessage = function(event) {
+		if(danmuFlag){
+			danmuMessage(event)
+		}
+	};
+		//接收 弹幕
+	function danmuMessage(event) {
+		var json =  JSON.parse(event.data);
+		if(json.flag == 'success'){
+			var marquee=document.createElement("marquee");
+			marquee.id="marquee";
+			marquee.innerHTML=json.content;
+			marquee.setAttribute("loop","1");
+			//marquee.setAttribute("scrollamount","1");
+			var infoStr=document.body.firstElementChild;
+			 document.body.insertBefore(marquee,infoStr);
+		}else{
+			alert(json.content);
+		}
+	
+	}
+	function danmuOpen(event) {
+	   //alert('连接成功');
+	   var msg='{"flag":"on","reservation_id":"'+reservationID+'"}';
+	   danmuSocket.send(msg);
+	}
+	function danmuError(event) {
+	  alert(event.data);
+	}
+	// 发送弹幕
+	function sub_danmu(){
+		var danMu = $("#msgInput").val();
+		if(danMu!=''){
+			var msg='{"flag":"off","reservation_id":"'+reservationID+'","danmu":"'+ danMu+'"}';
+		     danmuSocket.send(msg);
+		     $("#msgInput").val('');
+		}else{
+			alert('请输入弹幕！');
+		}
+		
+	}
+
+	var nickName = "",userhead = "";
+	var reg=new RegExp("/","g"); //创建正则RegExp对象 
+	var reg2 = new RegExp("&","g");
+	var reg3 = new RegExp("&amp;","g");
+	// 0、获得用户信息
+	var getUserInfo = function(){
+			$.ajax({
+				url:"/weixin-studio/interact/showUInteract?ids="+openID,
+				type:"get",
+				async:false,
+				success:function(data){
+					// 赋值：用户头像
+					
+					nickName = data.rows[0].nickname;
+					userhead = data.rows[0].headimgurl;
+					console.log("userhead--"+userhead)
+					$(".touxiang").attr("src",userhead);
+				}
+			});
+		}
+	// 获取座位席信息
+	function getVirualseat(){
+		$.ajax({
+			url:"../../virtualSeat?virtualseatId="+waccountid+reservationID,
+			type:"post",
+			async:false,
+			success:function(data){
+				// 赋值：用户头像
+				data = eval("("+data+")");
+				var $cart = $('#selected-seats');//座位区
+				var sc = $('#seat-map').seatCharts({
+					map: [ 'aaaaaaaa',
+					       		'aaaaaaaa',
+					       		'aaaaaaaa',
+					       		'aaaaaaaa',
+					       		'aaaaaaaa',
+					       		'aaaaaaaa',
+					       		'aaaaaaaa',
+					       		'aaaaaaaa',
+					       ],
+					naming : {
+						top : false,
+						getLabel : function (character, row, column) {
+							return column;
+						}
+					},
+					click: function () { //点击事件
+						if (this.status() == 'available') { //可选座
+							return 'selected';
+						} else if (this.status() == 'selected') { //已选中
+							//删除已预订座位
+							$('#cart-item-'+this.settings.id).remove();
+							//可选座
+							return 'available';
+						} else if (this.status() == 'unavailable') { //已售出
+							return 'unavailable';
+						} else {
+							return this.style();
+						}
+					}
+				});
+				//已售出的座位
+				sc.get(data.choseSeat).status('unavailable');
+			}
+		});
+	}
+	$(function(){
+		getUserInfo();
+		getVirualseat();
+	});
+
+	function dateToStr(datetime){ 
+		var year = datetime.getFullYear();
+		var month = datetime.getMonth()+1;//js从0开始取 
+		var date = datetime.getDate(); 
+		var hour = datetime.getHours(); 
+		var minutes = datetime.getMinutes(); 
+		var second = datetime.getSeconds();
+		
+		if(hour <10){
+		hour = "0" + hour;
+		}
+		if(minutes <10){
+		minutes = "0" + minutes;
+		}
+		
+		var time = hour+":"+minutes; //2009-06-12 17:18:05
+		return time;
+	}
+	  //关闭开启弹幕
+    $('#sw_button').live("click",
+    function(event) {
+    	if(danmuFlag){
+    		document.getElementById('sw_button').innerText='开启弹幕';
+    		danmuFlag = false;
+    	}else{
+    		document.getElementById('sw_button').innerText='关闭弹幕';
+    		danmuFlag = true;
+    	}
+    });
+	  function focusInput(obj){
+		 $('#msgButton').attr('style','display:none');
+		 $('#subButton').attr('style','display:inline-block');
+	  }
+	  function onblurInput(){
+		  if($('#msgInput').val()==''){
+			  $('#subButton').attr('style','display:none');
+			  $('#msgButton').attr('style','display:inline-block');
+		  }
+	  }
+	  function doSub(){
+		  if(subType=='comment'){
+			  sub_danmu();
+		  }else if( subType=='danmu'){
+			  sub_comment();
+		  }
+	  }
+	  
+	
+		function parseinfoJSONObj(id){;
+			$(".controlimg").each(function(){
+				$(this).click(function(){
+					showReplyZanWin($(this));
+				});
+			});
+		}
+
+</script>
+<div style="display:none" id="jsp"></div>
+</body>
+
+</html>

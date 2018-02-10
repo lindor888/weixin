@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<package name="groups" namespace="/groups" extends="weixin">
+	<action name="*Group" class="groupsAction" method="{1}">
+		<result name="index">/groups/group.jsp</result>
+		<result name="selectAll" type="json"><param name="root">mapJson</param></result>
+		<result name="updateAll" type="json"><param name="root">mapJson</param></result>
+	</action>
+</package>
+</struts>

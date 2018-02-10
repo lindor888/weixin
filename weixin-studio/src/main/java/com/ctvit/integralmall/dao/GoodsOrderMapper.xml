@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ctvit.integralmall.dao.GoodsOrderMapper">
+	<select id="getOrderList" parameterType="java.util.Map" resultType="com.ctvit.integralmall.entity.GoodsOrder">
+		SELECT ExchangeRecordID,record.Count,record.CreateTime,record.Point,
+			 record.UserName,record.Waccount,
+			 register.Address,register.BirthDay,register.MobilePhone,register.ReciveAddress,register.Sex,register.Telephone,
+			 record.GoodsID,goods.GoodsName
+		FROM tab_exchangerecord record
+		JOIN tab_goods goods
+		ON record.GoodsID = goods.GoodsID 
+		LEFT JOIN tab_userregister register
+		ON record.UserName = register.UserName
+		WHERE record.Waccount = #{app_id}
+		ORDER BY CreateTime DESC
+		limit #{currentPage},#{pageSize}
+	</select>
+	<select id="getCount" resultType="Integer" parameterType="String"> 
+		SELECT COUNT(ExchangeRecordID) 
+		FROM tab_exchangerecord
+		WHERE Waccount = #{appid}
+	</select>
+	<select id="selectone" parameterType="java.util.Map" resultType="com.ctvit.integralmall.entity.GoodsOrder">
+		SELECT ExchangeRecordID,record.Count,record.CreateTime,record.Point,
+			 record.UserName,record.Waccount,
+			 register.Address,register.BirthDay,register.MobilePhone,register.ReciveAddress,register.Sex,register.Telephone,
+			 record.GoodsID,goods.GoodsName
+		FROM tab_exchangerecord record
+		JOIN tab_goods goods
+		ON record.GoodsID = goods.GoodsID 
+		LEFT JOIN tab_userregister register
+		ON record.UserName = register.UserName
+		WHERE record.UserName = #{name}
+		
+	</select>
+</mapper>

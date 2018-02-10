@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ctvit.dao.roleMapper">
+
+	<resultMap type="com.ctvit.bean.role" id="roleResultMap">
+		<id column="role_id" property="roleId"/>
+		<result column="role_name" property="roleName"/>
+		<result column="rights" property="rights"/>
+	</resultMap>
+	
+	<select id="listAllRoles" resultMap="roleResultMap">
+		select * from tb_role
+	</select>
+	
+	
+	<select id="selectAllrole" resultMap="roleResultMap">
+		select * from tb_role
+		limit #{start} ,#{end}
+	</select>
+	
+	
+	<select id="getRoleById" parameterType="string" resultMap="roleResultMap">
+		select * from tb_role where role_id=#{roleId}
+	</select>
+	<select id="getCountByName" parameterType="com.ctvit.bean.role" resultType="int">
+		select count(role_id) from tb_role where role_name=#{roleName}
+		<if test="roleId!=null or roleId>0">
+		 and role_id!=#{roleId}
+		</if>
+	</select>
+	
+	<select id="countAllrole" parameterType="com.ctvit.bean.role" resultType="String">
+		select count(*) from tb_role 
+	</select>
+	<select id="selectUserByrole" parameterType="com.ctvit.bean.role" resultMap="roleResultMap">
+		select * from tab_account ta where ta.role_id=#{roleId}
+	</select>
+	
+	<insert id="insertRole" parameterType="com.ctvit.bean.role" useGeneratedKeys="true" keyProperty="roleId">
+		insert into tb_role (role_id,role_name) values (#{roleId},#{roleName})
+	</insert>
+	
+	<update id="updateRoleBaseInfo" parameterType="com.ctvit.bean.role">
+		update tb_role set role_name=#{roleName} where role_id=#{roleId}
+	</update>
+	<update id="updateRoleRights" parameterType="com.ctvit.bean.role">
+		update tb_role set rights=#{rights} where role_id=#{roleId}
+	</update>
+	<delete id="deleteRoleById" parameterType="string">
+		delete from tb_role where role_id=#{roleId}
+	</delete>
+</mapper>

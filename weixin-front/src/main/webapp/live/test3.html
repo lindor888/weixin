@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Testing websockets</title>
+<script type="text/javascript" src="js/jquery-1.7.2.js"></script>
+</head>
+<body>
+  <div>
+  	<input type="text"  id="info" />
+    <input type="submit" value="Start" onclick="start()" />
+  </div>
+  <div id="messages"></div>
+  <script type="text/javascript">
+    var webSocket =
+      new WebSocket('ws://localhost:8080/jsupload/test3');
+ 
+    webSocket.onerror = function(event) {
+      onError(event)
+    };
+ 
+    webSocket.onopen = function(event) {
+      onOpen(event)
+    };
+ 
+    webSocket.onmessage = function(event) {
+      onMessage(event)
+    };
+ 
+    function onMessage(event) {
+      document.getElementById('messages').innerHTML
+        += '<br />' + event.data;
+    }
+ 
+    function onOpen(event) {
+      document.getElementById('messages').innerHTML
+        = 'Connection established';
+    }
+ 
+    function onError(event) {
+      alert(event.data);
+    }
+ 
+    function start() {
+    	var info = $('#info').val();
+      webSocket.send(info);
+      return false;
+    }
+  </script>
+</body>
+</html>

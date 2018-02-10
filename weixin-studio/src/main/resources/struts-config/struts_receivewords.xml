@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="receivewords" namespace="/receivewords" extends="weixin">
+		<action name="*ReceiveWords" class="com.ctvit.action.ReceiveWordsAction" method="{1}">
+			<result type="json" name="start">
+				<param name="root">queryJson</param>
+				<param name="callbackParameter">callback</param>
+			</result>
+			
+		</action>
+	</package>
+</struts>
